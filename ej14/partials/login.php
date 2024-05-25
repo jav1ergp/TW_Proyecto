@@ -5,7 +5,7 @@
     if (isset($_POST['cerrar-sesion'])){
         $fecha = date('Y-m-d H:i:s');
         $accion = "El usuario {$_SESSION['usuario']['email']} ha cerrado sesión.";
-        $insercionLog = mysqli_query($db, "INSERT INTO Logs (fecha, accion) VALUES ('$fecha', '$accion')");
+        #$insercionLog = mysqli_query($db, "INSERT INTO Logs (fecha, accion) VALUES ('$fecha', '$accion')");
         $_SESSION = array(); // Limpiar todas las variables de sesión
         session_destroy(); // Destruir la sesión actual
         header("Location: index.php");
@@ -23,7 +23,7 @@
                 $_SESSION["usuario"] = $user;
                 $fecha = date('Y-m-d H:i:s');
                 $accion = "El usuario {$_SESSION['usuario']['email']} ha iniciado sesión.";
-                $insercionLog = mysqli_query($db, "INSERT INTO Logs (fecha, accion) VALUES ('$fecha', '$accion')");
+                #$insercionLog = mysqli_query($db, "INSERT INTO Logs (fecha, accion) VALUES ('$fecha', '$accion')");
             } else {
                 $errorUsuarioClave = true;
             }

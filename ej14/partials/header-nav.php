@@ -17,6 +17,7 @@
             <li><a href="servicios.php">SERVICIOS</a></li>
             <li><a href="registro.php">REGISTRO</a></li>
             <li><a href="reservas.php">RESERVAS</a></li>
+            <li><a href="listado.php">LISTADO</a></li>
         </ul>
     </nav>
 </header>

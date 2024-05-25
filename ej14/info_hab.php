@@ -19,15 +19,15 @@ include ("partials/head-html.php");
   <div class="contenedor">
     <div class="fotos">
       <div class="foto">
-        <img src="habitacion.jpg">
+        <img src="fotos/habitacion.jpg">
         <div class="texto">Estandar</div>
       </div>
       <div class="foto">
-        <img src="suite.jpg">
+        <img src="fotos/suite.jpg">
         <div class="texto">Suite</div>
       </div>
       <div class="foto">
-        <img src="villa.jpg">
+        <img src="fotos/villa.jpg">
         <div class="texto">Villa</div>
       </div>
     </div>

@@ -172,6 +172,6 @@ function inicializarTodasVarSesion() {
     inicializarVarSesion("apellidos");
     inicializarVarSesion("dni");
     inicializarVarSesion("clave");
-    inicializarTodasVarSesion("tarjeta");
+    inicializarVarSesion("tarjeta");
 }
 ?>

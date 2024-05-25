@@ -21,7 +21,7 @@ include ("partials/head-html.php");
     
     <div class="foto">
       <h2>Nadar con tiburones</h2>
-      <img src="tiburones.jpg">
+      <img src="fotos/tiburones.jpg">
       <div class="texto">¡Experimenta la emoción denadar junto a estos fascinantes depredadores
         marinos ! Nuestro equipo de expertos te
         llevará en una emocionanteexcursión para observar de cerca a los
@@ -32,7 +32,7 @@ include ("partials/head-html.php");
         respetar la vida marina.</div>
         <p> Precio 49.99€</p>
       <h2>Motos de Agua</h2>
-      <img src="motos.jpg">
+      <img src="fotos/motos.jpg">
       <div class="texto">¡Experimenta la emoción de montar sobre lasolas junto a nuestrasveloces motos de agua
         !Disfruta de lavelocidad y la adrenalina mientras recorres las aguas cristalinas que rodean nuestra isla. 
         Nuestros guías expertos te llevarán en un emocionante recorrido, mostrándote los lugares más impresionantes y asegurándose 

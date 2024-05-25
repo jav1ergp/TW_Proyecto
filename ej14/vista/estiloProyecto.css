@@ -58,16 +58,7 @@
   margin-right: 20%;
 }
 
-.navi a {
-  font-size: large;
-  color: black;
-  
-  text-decoration: none;
-}
 
-.navi a:hover {
-  color: rgb(175, 175, 175);
-}
 main {
   flex-grow: 1; /* Permite que el elemento principal (main) crezca y ocupe todo el espacio disponible */
   padding: 20px; /* Agrega un espacio de relleno para evitar que el contenido se ajuste al borde */
@@ -289,4 +280,58 @@ form.registros_pag input[type='submit'] {
   color: blue;
   font-size: small;
   margin:0;
+}
+
+.autores {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  padding-bottom: 10px;
+}
+
+.autores a:hover{
+  background-color: moccasin;
+}
+
+.fotos{
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.foto .texto{
+  text-align: left;
+  font-size: large;
+  margin: 3% 20% 1% 20%;
+}
+
+.foto p{
+  text-align: left;
+  font-size: large;
+  margin: 1% 20%;
+  font-weight: bold
+}
+
+.foto h2{
+  text-align: center;
+}
+
+.foto img{
+  display: block;
+  margin: 0 auto;
+}
+
+.reservas {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.res-card {
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+  margin: 10px;
+  padding: 10px;
+  border-radius: 5px;
+  width: calc(33% - 20px);
 }

@@ -1,34 +1,23 @@
 <!DOCTYPE html>
 <html>
-
-<head>
-  <meta charset="UTF-8">
-  <title>Pagina Reservas</title>
-  <link rel="stylesheet" type="text/css" href="reservas.css">
-</head>
+<?php
+session_start();
+include ("partials/head-html.php");
+?>
 
 <body>
-  <header>
-    <div class="top-header">
-      <div class="telefono">
-        <span class="simbolo"></span>
-        <span class="numero">(+34) 666 111 111</span>
-      </div>
-      <p><input type="submit" id="enviar" value="Reserva ahora" /></p>
-    </div>
-    <nav class="header">
-      <ul>
-        <li><a href="index.html">INICIO</a></li>
-        <li><a href="info_hab.html">HABITACIONES</a></li>
-        <li><a href="serv_hotel.html">SERVICIOS</a></li>
-        <li><a href="registro.html">REGISTRO</a></li>
-        <li><a href="reservas.html">RESERVAS</a></li>
-      </ul>
-    </nav>
-  </header>
 
-  <main>
-    <h1>Reservas</h1>
+  <!---Conexión con la base de datos -->
+  <?php include ("partials/db_connection.php"); ?>
+
+
+  <!-- Header de la web -->
+  <?php include ("partials/header-nav.php"); ?>
+
+  <!-- Configuración del login -->
+  <?php include ("partials/login.php"); ?>
+
+  <div class="contenedor">
     <div class="reservas">
       <div class="res-card">
         <h2>Reserva #12345</h2>
@@ -79,10 +68,10 @@
         <p><strong>Estado:</strong> Confirmada</p>
       </div>
     </div>
-  </main>
-  <footer>
-    <a href="listado.html">CSS Adaptable</a>
-  </footer>
+    <?php include ("partials/side-menu.php");?>
+  </div>
+  <!-- Footer de la web -->
+  <?php include ("partials/footer.php"); ?>
 </body>
 
 </html>

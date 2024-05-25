@@ -7,6 +7,6 @@
     </div>
 
     <div class="asignatura">
-        <p>&copy; Tecnologías Web 2023</p>
+        <p>&copy; Tecnologías Web 2024</p>
     </div>
 </footer>

@@ -1,36 +1,26 @@
 <!DOCTYPE html>
 <html>
-
-<head>
-  <meta charset= "UTF-8">
-  <title>Pagina Servicios</title>
-  <link rel="stylesheet" type="text/css" href="servicios.css">
-</head>
+<?php
+session_start();
+include ("partials/head-html.php");
+?>
 
 <body>
-  <header>
-    <div class="top-header">
-        <div class="telefono">
-            <span class="simbolo"></span>
-            <span class="numero">(+34) 666 111 111</span>
-        </div>
-        <p><input type="submit" id="enviar" value="Reserva ahora" /></p>
-    </div>
-    <nav class="header">
-      <ul>
-        <li><a href="index.php">INICIO</a></li>
-        <li><a href="info_hab.html">HABITACIONES</a></li>
-        <li><a href="serv_hotel.html">SERVICIOS</a></li>
-        <li><a href="registro.html">REGISTRO</a></li>
-        <li><a href="reservas.html">RESERVAS</a></li>
-      </ul>
-    </nav>
-  </header>
+  <!---Conexión con la base de datos -->
+  <?php include ("partials/db_connection.php"); ?>
 
-  <main>
-    <h1>Tours y Actividades </h1>
-    <h2>Nadar con tiburones</h2>
+
+  <!-- Header de la web -->
+  <?php include ("partials/header-nav.php"); ?>
+
+  <!-- Configuración del login -->
+  <?php include ("partials/login.php"); ?>
+
+
+  <div class="contenedor">
+    
     <div class="foto">
+      <h2>Nadar con tiburones</h2>
       <img src="tiburones.jpg">
       <div class="texto">¡Experimenta la emoción denadar junto a estos fascinantes depredadores
         marinos ! Nuestro equipo de expertos te
@@ -49,9 +39,9 @@
         de que tengas una experiencia segura y divertida</div>
         <p> Precio 29.99€</p>
     </div>
+    <?php include ("partials/side-menu.php");?>
+  </div>
 
-
-  <footer>
-    <a href="listado.html">CSS Adaptable</a>
-  </footer>
+  <!-- Footer de la web -->
+  <?php include ("partials/footer.php"); ?>
 </body>

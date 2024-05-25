@@ -12,11 +12,11 @@
     </h1>
     <nav class="navi">
         <ul>
-            <li><a href="index.html">INICIO</a></li>
-            <li><a href="info_hab.html">HABITACIONES</a></li>
-            <li><a href="serv_hotel.html">SERVICIOS</a></li>
-            <li><a href="registro.html">REGISTRO</a></li>
-            <li><a href="reservas.html">RESERVAS</a></li>
+            <li><a href="index.php">INICIO</a></li>
+            <li><a href="info_hab.php">HABITACIONES</a></li>
+            <li><a href="servicios.php">SERVICIOS</a></li>
+            <li><a href="registro.php">REGISTRO</a></li>
+            <li><a href="reservas.php">RESERVAS</a></li>
         </ul>
     </nav>
 </header>

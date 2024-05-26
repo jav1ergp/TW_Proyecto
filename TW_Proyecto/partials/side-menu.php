@@ -74,7 +74,7 @@ if (true) {
                 <h3>Habitaciones libres</h3>
                 <?php
                 $query = "SELECT COUNT(*) AS habitaciones_libres FROM habitaciones 
-                WHERE id NOT IN (SELECT habitacion_id FROM ocupacion WHERE CURDATE() BETWEEN fecha_entrada AND fecha_salida)";
+                WHERE id NOT IN (SELECT habitacion_id FROM reservas WHERE CURDATE() BETWEEN fecha_entrada AND fecha_salida)";
                 $resultado = mysqli_query($db, $query);
 
                 if ($resultado) {
@@ -108,7 +108,7 @@ if (true) {
         <div class="numero-habitaciones">
                 <h3>Número de huéspedes alojados</h3>
                 <?php
-                $query = "SELECT SUM(num_huespedes) AS huespedes_alojados FROM ocupacion WHERE CURDATE() BETWEEN fecha_entrada AND fecha_salida";
+                $query = "SELECT SUM(num_huespedes) AS huespedes_alojados FROM reservas WHERE CURDATE() BETWEEN fecha_entrada AND fecha_salida";
                 $resultado = mysqli_query($db, $query);
 
                 if ($resultado) {

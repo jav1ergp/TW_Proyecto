@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 26-05-2024 a las 16:51:54
+-- Tiempo de generación: 26-05-2024 a las 21:31:02
 -- Versión del servidor: 8.4.0
 -- Versión de PHP: 8.2.12
 
@@ -52,15 +52,19 @@ CREATE TABLE `habitaciones` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `ocupacion`
+-- Estructura de tabla para la tabla `reservas`
 --
 
-CREATE TABLE `ocupacion` (
+CREATE TABLE `reservas` (
   `id` int NOT NULL,
+  `email` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `habitacion_id` int NOT NULL,
   `num_huespedes` int NOT NULL,
+  `comentarios` text,
   `fecha_entrada` date NOT NULL,
-  `fecha_salida` date NOT NULL
+  `fecha_salida` date NOT NULL,
+  `estado` enum('Pendiente','Confirmada') DEFAULT 'Pendiente',
+  `marca_de_tiempo` timestamp NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
@@ -116,10 +120,11 @@ ALTER TABLE `habitaciones`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indices de la tabla `ocupacion`
+-- Indices de la tabla `reservas`
 --
-ALTER TABLE `ocupacion`
+ALTER TABLE `reservas`
   ADD PRIMARY KEY (`id`),
+  ADD KEY `cliente_id` (`email`),
   ADD KEY `habitacion_id` (`habitacion_id`);
 
 --
@@ -145,10 +150,10 @@ ALTER TABLE `habitaciones`
   MODIFY `id` int NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT de la tabla `ocupacion`
+-- AUTO_INCREMENT de la tabla `reservas`
 --
-ALTER TABLE `ocupacion`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+ALTER TABLE `reservas`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT;
 
 --
 -- Restricciones para tablas volcadas
@@ -161,10 +166,11 @@ ALTER TABLE `fotografias`
   ADD CONSTRAINT `fotografias_ibfk_1` FOREIGN KEY (`habitacion_id`) REFERENCES `habitaciones` (`id`) ON DELETE CASCADE;
 
 --
--- Filtros para la tabla `ocupacion`
+-- Filtros para la tabla `reservas`
 --
-ALTER TABLE `ocupacion`
-  ADD CONSTRAINT `ocupacion_ibfk_1` FOREIGN KEY (`habitacion_id`) REFERENCES `habitaciones` (`id`);
+ALTER TABLE `reservas`
+  ADD CONSTRAINT `reservas_ibfk_1` FOREIGN KEY (`email`) REFERENCES `usuarios` (`email`),
+  ADD CONSTRAINT `reservas_ibfk_2` FOREIGN KEY (`habitacion_id`) REFERENCES `habitaciones` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

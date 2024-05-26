@@ -82,7 +82,7 @@ include ("partials/head-html.php");
                         </div>
 
                         <div class="editar-usuario">
-                            <form method="GET" action="editar-perfil.php">
+                            <form method="GET" action="reservas.php">
                                 <input type="hidden" name="email" value="<?php echo $fila['email']; ?>">
                                 <input type="submit" value="Editar">
                             </form>
@@ -99,9 +99,10 @@ include ("partials/head-html.php");
             } else {
                 echo 'No hay registros para mostrar.';
             }
-            ?>
+            
 
-            <!-- Barra de navegación para avanzar o retroceder entre las páginas -->
+            //Barra de navegación para avanzar o retroceder entre las páginas
+            ?>
             <div class="paginacion">
                 <?php if ($total_paginas > 1): ?>
                     <?php if ($pagina_actual > 1): ?>

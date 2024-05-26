@@ -123,7 +123,8 @@ include ("partials/head-html.php");
     include ("partials/side-menu.php");
     ?>
     </div>
-    
+    <!-- Footer de la web -->
+  <?php include ("partials/footer.php"); ?>
 </body>
 
 </html>

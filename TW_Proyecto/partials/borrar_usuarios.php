@@ -87,9 +87,13 @@ if (!$db) {
                 </label>
 
                 <label>Tarjeta de crédito:
-                    <input type="text" name="tarjeta" value="<?php echo isset($_POST['tarjeta']) ? $_POST['tarjeta'] : "";?>" disabled>
+                    <input type="text" name="tarjeta" value="<?php echo $_SESSION['usuario_borrar']['tarjeta']; ?>" disabled>
                 </label>
                 
+                <label>Rol:
+                    <input type='text' name='rol' value='<?php echo $_SESSION["usuario"]["rol"];?>' disabled/>
+                </label>
+
                 <?php
                 
                     if (!$enviadoCorrectamente && !$datosConfirmados){?>

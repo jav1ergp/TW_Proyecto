@@ -4,20 +4,20 @@ require_once 'db_connection.php';
 //Funcion que se encarga de validar todos los campos
 function validarTodosLosCampos()
 {
-    $emailValido = campoEsValido2("email");
-
-    return $emailValido && validarTodosLosCampos2();
+    
+    $nombreValido = campoEsValido("nombre");
+    $apellidosValidos = campoEsValido("apellidos");
+    $dniValido = campoEsValido("dni");
+    return $nombreValido && $apellidosValidos && $dniValido && validarTodosLosCampos2();
 }
 
 function validarTodosLosCampos2()
 {
-    $nombreValido = campoEsValido("nombre");
-    $apellidosValidos = campoEsValido("apellidos");
-    $dniValido = campoEsValido("dni");
+    $emailValido = campoEsValido2("email");
     $claveValida = campoEsValido("clave");
     $tarjetaValida = campoEsValido("tarjeta");
 
-    return $nombreValido && $apellidosValidos && $dniValido && $claveValida &&$tarjetaValida;
+    return  $emailValido && $claveValida && $tarjetaValida;
 }
 
 function campoEsValido($campo)
@@ -99,23 +99,26 @@ function insertarEnBD()
     $dni = $_SESSION["dni"];
     $clave = $_SESSION["clave"];
     $tarjeta = $_SESSION["tarjeta"];
+    $rol = $_SESSION["rol"];
 
-    mysqli_query($db, "INSERT INTO usuarios (nombre, apellidos, email, dni, clave, tarjeta) 
-        VALUES ('$nombre', '$apellidos', '$email', '$dni', '$clave', '$tarjeta')");
+    mysqli_query($db, "INSERT INTO usuarios (nombre, apellidos, email, dni, clave, tarjeta, rol) 
+        VALUES ('$nombre', '$apellidos', '$email', '$dni', '$clave', '$tarjeta', '$rol')");
 }
 
 //Actualización de variables de sesión con saneamiento de datos
 function actualizarVarSesion()
 {
-    $_SESSION['email'] = htmlentities(strip_tags($_POST['email']));
+    $_SESSION['nombre'] = htmlentities(strip_tags($_POST['nombre']));
+    $_SESSION['apellidos'] = htmlentities(strip_tags($_POST['apellidos']));
+    $_SESSION['dni'] = htmlentities(strip_tags($_POST['dni']));
+    
     actualizarVarSesion2();
 }
 function actualizarVarSesion2()
 {
-    $_SESSION['nombre'] = htmlentities(strip_tags($_POST['nombre']));
-    $_SESSION['apellidos'] = htmlentities(strip_tags($_POST['apellidos']));
-    $_SESSION['dni'] = htmlentities(strip_tags($_POST['dni']));
+    $_SESSION['email'] = htmlentities(strip_tags($_POST['email']));
     $_SESSION['tarjeta'] = htmlentities(strip_tags($_POST['tarjeta']));
+    $_SESSION['rol'] = htmlentities(strip_tags($_POST['rol']));
     if (!empty($_POST['clave-nueva'])) {
         $hash = password_hash(htmlentities(strip_tags($_POST['clave-nueva'])), PASSWORD_DEFAULT);
         $_SESSION['clave'] = $hash;
@@ -152,9 +155,7 @@ function actualizar($campo) {
 }
 
 function actualizarEnBD() {
-    actualizar("nombre");
-    actualizar("apellidos");
-    actualizar("dni");
+    actualizar("email");
     actualizar("clave");
     actualizar("tarjeta");
 }
@@ -168,10 +169,9 @@ function inicializarVarSesion($campo) {
 }
 
 function inicializarTodasVarSesion() {
-    inicializarVarSesion("nombre");
-    inicializarVarSesion("apellidos");
-    inicializarVarSesion("dni");
+    inicializarVarSesion("email");
     inicializarVarSesion("clave");
     inicializarVarSesion("tarjeta");
+    inicializarVarSesion("rol");
 }
 ?>

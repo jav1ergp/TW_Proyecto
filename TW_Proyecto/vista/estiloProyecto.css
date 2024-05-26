@@ -269,7 +269,7 @@ form.registros_pag input[type='submit'] {
 .botones-editar-logout{
   display: flex;
   justify-content: center;
-  margin-top: 10px;
+  margin: 10px;
 }
 
 .boton-editar{

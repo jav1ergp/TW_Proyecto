@@ -72,34 +72,20 @@ if (isset($_GET['email'])) {
         <div class="formulario-editar">
             <form action="" method="POST">
                 <label>Nombre:
-                    <input type="text" name="nombre" value="<?php echo isset($_POST['nombre']) ? $_SESSION['nombre'] : $_SESSION['usuario']['nombre']; ?>"
-                    <?php if ($enviadoCorrectamente || $datosConfirmados) echo "disabled"; ?>>
+                    <input type="text" name="nombre" value="<?php echo isset($_POST['nombre']) ? $_POST['nombre'] : $_SESSION['usuario']['nombre']; ?>" disabled>
                 </label>
-                <?php if (hayErrores("nombre")) { ?>
-                    <p class='error-formulario'>Debe escribir su nombre.</p>
-                <?php } ?>
-
 
                 <label>Apellidos:
-                    <input type="text" name="apellidos" value="<?php echo isset($_POST['apellidos']) && !empty($_POST['apellidos']) ? $_SESSION['apellidos'] : $_SESSION['usuario']['apellidos']; ?>"
-                    <?php if ($enviadoCorrectamente || $datosConfirmados) echo "disabled"; ?>>
+                    <input type="text" name="apellidos" value="<?php echo isset($_POST['apellidos']) && !empty($_POST['apellidos']) ? $_SESSION['apellidos'] : $_SESSION['usuario']['apellidos']; ?>" disabled>
                 </label>
-                <?php if (hayErrores("apellidos")) { ?>
-                    <p class='error-formulario'>Debe escribir sus apellidos.</p>
-                <?php } ?>
-
 
                 <label>Dni:
-                    <input type="text" name="dni" value="<?php echo isset($_POST['dni']) && !empty($_POST['dni']) ? $_SESSION['dni'] : $_SESSION['usuario']['dni']; ?>"
-                    <?php if ($enviadoCorrectamente || $datosConfirmados) echo "disabled"; ?>>
+                    <input type="text" name="dni" value="<?php echo isset($_POST['dni']) && !empty($_POST['dni']) ? $_SESSION['dni'] : $_SESSION['usuario']['dni']; ?>" disabled>
                 </label>
-                <?php if (hayErrores("dni")) { ?>
-                    <p class='error-formulario'>El DNI no es valido.</p>
-                <?php } ?>
-
 
                 <label>Email:
-                    <input type="email" name="email" value="<?php echo isset($_POST['email']) && !empty($_POST['email']) ? $_SESSION['email'] : $_SESSION['usuario']['email']; ?>" disabled>
+                    <input type="email" name="email" value="<?php echo isset($_POST['email']) && !empty($_POST['email']) ? $_SESSION['email'] : $_SESSION['usuario']['email']; ?>" 
+                    <?php if ($enviadoCorrectamente || $datosConfirmados) echo "disabled"; ?>>
                 </label>
                 <?php if (!$enviadoCorrectamente && !$datosConfirmados) { ?>
                     <div class="clave">
@@ -122,6 +108,9 @@ if (isset($_GET['email'])) {
                     <p class='error-formulario'>El número de tarjeta no es válido.</p>
                 <?php } ?>
                 
+                <label>Rol:
+                    <input type='text' name='rol' value='<?php echo isset($_POST['rol']) ? $_POST['rol'] : $_SESSION["usuario"]["rol"];?>' disabled/>
+                </label>
 
                 <?php if (!$enviadoCorrectamente && !$datosConfirmados) { ?>
                     <label>

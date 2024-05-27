@@ -127,7 +127,7 @@ function insertarEnBD3()
     $fecha_entrada = $_SESSION["fecha_entrada"];
     $fecha_salida = $_SESSION["fecha_salida"];
 
-    mysqli_query($db, "INSERT INTO reservas (email, num_huespedes, comentarios, fecha_entrada, fecha_salida, tarjeta, rol) 
+    mysqli_query($db, "INSERT INTO reservas (email, num_huespedes, comentarios, fecha_entrada, fecha_salida) 
         VALUES ('$email', '$num_huespedes', '$comentarios', '$fecha_entrada', '$fecha_salida'");
 }
 

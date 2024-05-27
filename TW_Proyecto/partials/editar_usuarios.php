@@ -84,8 +84,7 @@ if (isset($_GET['email'])) {
                 </label>
 
                 <label>Email:
-                    <input type="email" name="email" value="<?php echo isset($_POST['email']) && !empty($_POST['email']) ? $_SESSION['email'] : $_SESSION['usuario']['email']; ?>" 
-                    <?php if ($enviadoCorrectamente || $datosConfirmados) echo "disabled"; ?>>
+                    <input type="email" name="email" value="<?php echo isset($_POST['email']) && !empty($_POST['email']) ? $_SESSION['email'] : $_SESSION['usuario']['email']; ?>" disabled>
                 </label>
                 <?php if (!$enviadoCorrectamente && !$datosConfirmados) { ?>
                     <div class="clave">

@@ -64,9 +64,14 @@ include ("partials/head-html.php");
                 header("Location: " . $_SERVER['PHP_SELF']);
             }
 
-            // Consultar los registros de la página actual
-            $resultado = mysqli_query($db, "SELECT * FROM usuarios LIMIT $indice_inicial, $registros_pag");
-
+            if (isset($_SESSION["usuario"]["rol"]) && ($_SESSION["usuario"]["rol"] === "recepcionista")) {
+                // Consultar los registros de la página actual
+                $resultado = mysqli_query($db, "SELECT * FROM usuarios WHERE rol = 'cliente' LIMIT $indice_inicial, $registros_pag");
+            } elseif (isset($_SESSION["usuario"]["rol"]) && ($_SESSION["usuario"]["rol"] === "administrador")) {
+                // Consultar todos los registros de la página actual
+                $resultado = mysqli_query($db, "SELECT * FROM usuarios LIMIT $indice_inicial, $registros_pag");
+            }
+            
             // Verificar si se obtuvieron resultados
             if ($resultado && mysqli_num_rows($resultado) > 0) {
                 // Iterar sobre los registros y mostrar la información
@@ -82,11 +87,19 @@ include ("partials/head-html.php");
                         </div>
 
                         <div class="editar-usuario">
-                            <form method="GET" action="reservas.php">
-                                <input type="hidden" name="email" value="<?php echo $fila['email']; ?>">
-                                <input type="submit" value="Editar">
-                            </form>
+                            <?php if (isset($_SESSION["usuario"]["rol"]) && (($_SESSION["usuario"]["rol"] === "recepcionista") || ($_SESSION["usuario"]["rol"] === "administrador"))) { ?>
+                                <form method="GET" action="editar-perfil_admin.php">
+                                    <input type="hidden" name="email" value="<?php echo $fila['email']; ?>">
+                                    <input type="submit" value="Editar">
+                                </form>
+                            <?php } else { ?>
+                                <form method="GET" action="editar-perfil.php">
+                                    <input type="hidden" name="email" value="<?php echo $fila['email']; ?>">
+                                    <input type="submit" value="Editar">
+                                </form>
+                            <?php } ?>
                         </div>
+
 
                         <div class="editar-usuario">
                             <form method="GET" action="borrar-perfil.php">

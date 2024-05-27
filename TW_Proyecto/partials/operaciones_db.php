@@ -8,16 +8,17 @@ function validarTodosLosCampos()
     $nombreValido = campoEsValido("nombre");
     $apellidosValidos = campoEsValido("apellidos");
     $dniValido = campoEsValido("dni");
-    return $nombreValido && $apellidosValidos && $dniValido && validarTodosLosCampos2();
+    $emailValido = campoEsValido2("email");
+    return $nombreValido && $apellidosValidos && $dniValido && $emailValido && validarTodosLosCampos2();
 }
 
 function validarTodosLosCampos2()
 {
-    $emailValido = campoEsValido2("email");
+    
     $claveValida = campoEsValido("clave");
     $tarjetaValida = campoEsValido("tarjeta");
 
-    return  $emailValido && $claveValida && $tarjetaValida;
+    return  $claveValida && $tarjetaValida;
 }
 
 function campoEsValido($campo)
@@ -95,14 +96,14 @@ function insertarEnBD()
     //Insertar todos los datos del usuario en la tabla
     $nombre = $_SESSION["nombre"];
     $apellidos = $_SESSION["apellidos"];
-    $email = $_SESSION["email"];
+    //$email = $_SESSION["email"];
     $dni = $_SESSION["dni"];
     $clave = $_SESSION["clave"];
     $tarjeta = $_SESSION["tarjeta"];
     $rol = $_SESSION["rol"];
 
     mysqli_query($db, "INSERT INTO usuarios (nombre, apellidos, email, dni, clave, tarjeta, rol) 
-        VALUES ('$nombre', '$apellidos', '$email', '$dni', '$clave', '$tarjeta', '$rol')");
+        VALUES ('$nombre', '$apellidos', '$dni', '$clave', '$tarjeta', '$rol')");
 }
 
 //Actualización de variables de sesión con saneamiento de datos
@@ -118,7 +119,9 @@ function actualizarVarSesion2()
 {
     $_SESSION['email'] = htmlentities(strip_tags($_POST['email']));
     $_SESSION['tarjeta'] = htmlentities(strip_tags($_POST['tarjeta']));
-    $_SESSION['rol'] = htmlentities(strip_tags($_POST['rol']));
+    if (isset($_SESSION["usuario"]["rol"]) && ($_SESSION["usuario"]["rol"] === "recepcionista") || ($_SESSION["usuario"]["rol"] === "administrador")) {
+        $_SESSION['rol'] = htmlentities(strip_tags($_POST['rol']));
+    }
     if (!empty($_POST['clave-nueva'])) {
         $hash = password_hash(htmlentities(strip_tags($_POST['clave-nueva'])), PASSWORD_DEFAULT);
         $_SESSION['clave'] = $hash;

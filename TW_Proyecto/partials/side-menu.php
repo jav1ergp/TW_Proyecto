@@ -34,17 +34,21 @@ if (true) {
                 <div class='rol'> <?php echo $_SESSION['usuario']['rol']; ?>.</div>
 
                 <div class='botones-editar-logout'>
+                <?php if (isset($_SESSION["usuario"]["rol"]) && (($_SESSION["usuario"]["rol"] === "recepcionista") || ($_SESSION["usuario"]["rol"] === "administrador"))) { ?>
                         <div class="editar-usuario">
-                            <?php
-                                $resultado = mysqli_query($db, "SELECT * FROM usuarios");
-                                $fila = mysqli_fetch_assoc($resultado);
-                            ?>
-                            <form method="GET" action="editar-perfil.php">
-                                <input type="hidden" name="email" value="<?php echo $fila['email']; ?>">
+                            <form method="GET" action="editar-perfil_admin.php">
+                                <input type="hidden" name="email" value="<?php echo $_SESSION['usuario']['email']; ?>">
                                 <input type="submit" value="Editar">
                             </form>
                         </div>
-
+                <?php } else { ?>
+                    <div class="editar-usuario">
+                            <form method="GET" action="editar-perfil.php">
+                                <input type="hidden" name="email" value="<?php echo $_SESSION['usuario']['email']; ?>">
+                                <input type="submit" value="Editar">
+                            </form>
+                    </div>
+                <?php } ?>
                     <form action='#' method='POST'>
                         <div class=boton-logout>
                             <input type='submit' name='cerrar-sesion' value='Logout'>

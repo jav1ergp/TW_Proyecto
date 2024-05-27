@@ -2,25 +2,25 @@
     <h1 class="top-header">
         <img src="logo.png" height="50" width="50">
         <p>Zooweb</p>
-
+        <?php include("partials/login.php");?>
         <?php
-        $resultado = mysqli_query($db, "SELECT * FROM usuarios");
-
-        // Verificar si se obtuvieron resultados
-        if ($resultado && mysqli_num_rows($resultado) > 0) {
-            
-            $fila = mysqli_fetch_assoc($resultado);
-        }
+        
         ?>
         <div class="telefono">
             <span class="simbolo"></span>
             <span class="numero">(+34) 666 111 111</span>
             <div class="separador"></div>
-            <form method="GET" action="reservas.php">
-                <input type="hidden" name="email" value="<?php echo $fila['email']; ?>">
-                <p><input type="submit" id="enviar" value="Reserva ahora" /></p>
-            </form>
-            
+            <?php if (isset($_SESSION["usuario"]["email"]) && !empty($_SESSION["usuario"]["email"])): ?>
+                <form method="GET" action="reservas.php">
+                    <input type="hidden" name="email" value="<?php echo $_SESSION["usuario"]["email"]; ?>">
+                    <p><input type="submit" id="enviar" value="Reserva ahora" /></p>
+                </form>
+                
+            <?php else: ?>
+                <form method="GET" action="registro.php">
+                    <p><input type="submit" id="enviar" value="Reserva ahora" /></p>
+                </form>
+            <?php endif; ?>
         </div>
     </h1>
     <nav class="navi">
@@ -29,8 +29,14 @@
             <li><a href="info_hab.php">HABITACIONES</a></li>
             <li><a href="servicios.php">SERVICIOS</a></li>
             <li><a href="registro.php">REGISTRO</a></li>
-            <li><a href="reservas.php?email=<?php echo urlencode($fila['email']); ?>">RESERVAS</a></li>
-            <li><a href="listado.php">LISTADO</a></li>
+            <?php if (isset($_SESSION["usuario"]["email"]) && !empty($_SESSION["usuario"]["email"])): ?>
+                <li><a href="reservas.php?email=<?php echo urlencode($_SESSION["usuario"]["email"]); ?>">RESERVAS</a></li>
+            <?php else: ?>
+                <li><a href="registro.php">RESERVAS</a></li>
+            <?php endif; ?>
+            <?php if (isset($_SESSION["usuario"]["rol"]) && ($_SESSION["usuario"]["rol"] === "recepcionista" || $_SESSION["usuario"]["rol"] === "administrador")): ?>
+                <li><a href="listado.php">LISTADO</a></li>
+            <?php endif; ?>
         </ul>
     </nav>
 </header>

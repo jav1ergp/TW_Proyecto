@@ -124,13 +124,22 @@ if (!$db) {
                     <p class='error-formulario'>La tarjeta de crédito no es válida.</p>
                 <?php } ?>
 
-                <label>Rol:
-                    <select name="rol" <?php if ($enviadoCorrectamente || $datosConfirmados) echo "disabled"; ?>>
-                        <option value="cliente" <?php if (isset($_POST['rol']) && $_POST['rol'] == 'cliente') echo 'selected'; ?>>Cliente</option>
-                        <option value="recepcionista" <?php if (isset($_POST['rol']) && $_POST['rol'] == 'recepcionista') echo 'selected'; ?>>Recepcionista</option>
-                        <option value="administrador" <?php if (isset($_POST['rol']) && $_POST['rol'] == 'administrador') echo 'selected'; ?>>Administrador</option>
-                    </select>
-                </label>
+                <?php if (isset($_SESSION["usuario"]["rol"]) && ($_SESSION["usuario"]["rol"] === "recepcionista")) { ?>
+                    <label>Rol:
+                        <select name="rol" <?php if ($enviadoCorrectamente || $datosConfirmados) echo "disabled"; ?>>
+                            <option value="cliente" <?php if (isset($_POST['rol']) && $_POST['rol'] == 'cliente') echo 'selected'; ?>>Cliente</option>
+                        </select>
+                    </label>
+                <?php } else { ?>
+                    <label>Rol:
+                        <select name="rol" <?php if ($enviadoCorrectamente || $datosConfirmados) echo "disabled"; ?>>
+                            <option value="cliente" <?php if (isset($_POST['rol']) && $_POST['rol'] == 'cliente') echo 'selected'; ?>>Cliente</option>
+                            <option value="recepcionista" <?php if (isset($_POST['rol']) && $_POST['rol'] == 'recepcionista') echo 'selected'; ?>>Recepcionista</option>
+                            <option value="administrador" <?php if (isset($_POST['rol']) && $_POST['rol'] == 'administrador') echo 'selected'; ?>>Administrador</option>
+                        </select>
+                    </label>
+                <?php } ?>
+
 
                 <?php
                 //Si no se han enviado los datos ni se han confirmado, aparecerá el botón de añadir usuario

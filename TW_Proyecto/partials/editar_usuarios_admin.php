@@ -201,12 +201,13 @@ function validarTodosLosCampos_admin()
                 <?php } ?>
                 
                 <label>Rol:
-                    <select name="rol" <?php if ($enviadoCorrectamente || $datosConfirmados) echo "disabled"; ?>>
-                        <option value="cliente" <?php echo (isset($_POST['rol']) ? $_SESSION['rol'] : $_SESSION['usuario_editar']['rol']) == 'cliente' ? 'selected' : ''; ?>>Cliente</option>
-                        <option value="recepcionista" <?php echo (isset($_POST['rol']) ? $_SESSION['rol'] : $_SESSION['usuario_editar']['rol']) == 'recepcionista' ? 'selected' : ''; ?>>Recepcionista</option>
-                        <option value="administrador" <?php echo (isset($_POST['rol']) ? $_SESSION['rol'] : $_SESSION['usuario_editar']['rol']) == 'administrador' ? 'selected' : ''; ?>>Administrador</option>
+                    <select name="rol" <?php if ($enviadoCorrectamente || $datosConfirmados || (isset($_SESSION["usuario"]["rol"]) && $_SESSION["usuario"]["rol"] === "recepcionista")) echo "disabled"; ?>>
+                        <option value="cliente" <?php echo (isset($_POST['rol']) ? $_POST['rol'] : ($_SESSION['usuario_editar']['rol'] ?? '')) == 'cliente' ? 'selected' : ''; ?>>Cliente</option>
+                        <option value="recepcionista" <?php echo (isset($_POST['rol']) ? $_POST['rol'] : ($_SESSION['usuario_editar']['rol'] ?? '')) == 'recepcionista' ? 'selected' : ''; ?>>Recepcionista</option>
+                        <option value="administrador" <?php echo (isset($_POST['rol']) ? $_POST['rol'] : ($_SESSION['usuario_editar']['rol'] ?? '')) == 'administrador' ? 'selected' : ''; ?>>Administrador</option>
                     </select>
                 </label>
+
 
                 <?php if (!$enviadoCorrectamente && !$datosConfirmados) { ?>
                     <label>

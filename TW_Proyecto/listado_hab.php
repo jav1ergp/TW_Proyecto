@@ -21,8 +21,8 @@ include ("partials/head-html.php");
     <div class="contenedor">
         <main>
             <div class='listado'>
-                <h3>Gestión de usuarios</h3>
-                <h4>Listado de usuarios</h4>
+                <h3>Gestión de habitaciones</h3>
+                <h4>Listado de habitaciones</h4>
             </div>
 
             <div class='accion-a-realizar'>
@@ -32,7 +32,7 @@ include ("partials/head-html.php");
                     <?php if (isset($_SESSION["usuario"]["rol"]) && ($_SESSION["usuario"]["rol"] === "recepcionista")) { ?>
                         <li><a href="add-habitacion.php">Añadir nueva habitacion</a></li>
                     <?php } ?>
-                    <li><a href="listado_hab.php">Listado habitaciones</a></li>
+                    <li><a href="listado.php">Listado usuarios</a></li>
                 </ul>
             </div>
             <?php
@@ -40,7 +40,7 @@ include ("partials/head-html.php");
             $registros_pag = isset($_SESSION['registros_pag']) ? $_SESSION['registros_pag'] : 10;
 
             // Obtener el número total de registros
-            $total_registros_query = mysqli_query($db, 'SELECT COUNT(*) as total FROM usuarios');
+            $total_registros_query = mysqli_query($db, 'SELECT COUNT(*) as total FROM habitacion');
             $total_registros = mysqli_fetch_assoc($total_registros_query)['total'];
 
             // Calcular el número total de páginas
@@ -67,14 +67,9 @@ include ("partials/head-html.php");
                 $_SESSION['registros_pag'] = $_POST['registros_pag'];
                 header("Location: " . $_SERVER['PHP_SELF']);
             }
-
-            if (isset($_SESSION["usuario"]["rol"]) && ($_SESSION["usuario"]["rol"] === "recepcionista")) {
                 // Consultar los registros de la página actual
-                $resultado = mysqli_query($db, "SELECT * FROM usuarios WHERE rol = 'cliente' LIMIT $indice_inicial, $registros_pag");
-            } elseif (isset($_SESSION["usuario"]["rol"]) && ($_SESSION["usuario"]["rol"] === "administrador")) {
-                // Consultar todos los registros de la página actual
-                $resultado = mysqli_query($db, "SELECT * FROM usuarios LIMIT $indice_inicial, $registros_pag");
-            }
+            $resultado = mysqli_query($db, "SELECT * FROM habitacion LIMIT $indice_inicial, $registros_pag");
+            
             
             // Verificar si se obtuvieron resultados
             if ($resultado && mysqli_num_rows($resultado) > 0) {
@@ -84,32 +79,36 @@ include ("partials/head-html.php");
                         <div class="datos-cada-usuario">
                             <?php
                             echo '<ul>';
-                            echo '<li>Usuario: ' . $fila['nombre'] . " " . $fila['apellidos'] . '</li>';
-                            echo '<li>Dni: ' . $fila['dni'] . '</li>';
-                            echo '<li>Email: ' . $fila['email'] . '</li>';
+                            echo '<li>Numero: ' . $fila['numero'] . '</li>';
+                            echo '<li>Capacidad: ' . $fila['capacidad'] . '</li>';
+                            echo '<li>Precio: ' . $fila['precio'] . '</li>';
+                            echo '<li>Descripcion: ' . $fila['descripcion'] . '</li>';
                             echo '</ul>'; ?>
                         </div>
 
                         <div class="editar-usuario">
-                            <?php if (isset($_SESSION["usuario"]["rol"]) && (($_SESSION["usuario"]["rol"] === "recepcionista") || ($_SESSION["usuario"]["rol"] === "administrador"))) { ?>
-                                <form method="GET" action="editar-perfil_admin.php">
-                                    <input type="hidden" name="email" value="<?php echo $fila['email']; ?>">
-                                    <input type="submit" value="Editar">
-                                </form>
-                            <?php } else { ?>
-                                <form method="GET" action="editar-perfil.php">
-                                    <input type="hidden" name="email" value="<?php echo $fila['email']; ?>">
+                            <form method="GET" action="datos-hab.php">
+                                <input type="hidden" name="numero" value="<?php echo $fila['numero']; ?>">
+                                <input type="submit" value="Ver Datos">
+                            </form>
+                        </div>
+
+                        <div class="editar-usuario">
+                            <?php if (isset($_SESSION["usuario"]["rol"]) && ($_SESSION["usuario"]["rol"] === "recepcionista")) { ?>
+                                <form method="GET" action="editar-hab.php">
+                                    <input type="hidden" name="numero" value="<?php echo $fila['numero']; ?>">
                                     <input type="submit" value="Editar">
                                 </form>
                             <?php } ?>
                         </div>
 
-
                         <div class="editar-usuario">
-                            <form method="GET" action="borrar-perfil.php">
-                                <input type="hidden" name="email" value="<?php echo $fila['email']; ?>">
-                                <input type="submit" value="Borrar">
-                            </form>
+                            <?php if (isset($_SESSION["usuario"]["rol"]) && ($_SESSION["usuario"]["rol"] === "recepcionista")) { ?>
+                                <form method="GET" action="borrar-hab.php">
+                                    <input type="hidden" name="numero" value="<?php echo $fila['numero']; ?>">
+                                    <input type="submit" value="Borrar">
+                                </form>
+                            <?php } ?>
                         </div>
                     </div>
                 <?php }

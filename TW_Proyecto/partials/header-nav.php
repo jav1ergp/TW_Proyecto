@@ -26,7 +26,7 @@
     <nav class="navi">
         <ul>
             <li><a href="index.php">INICIO</a></li>
-            <li><a href="info_hab.php">HABITACIONES</a></li>
+            <li><a href="listado_hab.php">HABITACIONES</a></li>
             <li><a href="servicios.php">SERVICIOS</a></li>
             <li><a href="registro.php">REGISTRO</a></li>
             <?php if (isset($_SESSION["usuario"]["email"]) && !empty($_SESSION["usuario"]["email"])): ?>

@@ -70,15 +70,6 @@ if (!$db) {
                     <textarea name="descripcion" disabled><?php echo $_SESSION['habitacion_borrar']['descripcion']; ?></textarea>
                 </label>
 
-                    
-                <?php
-                //Si se han confirmado los datos de un usuario, aparecerá un boton para limpiar el formulario
-                if ($datosConfirmados) { ?>
-                <label>
-                    <input type='submit' value="Limpiar" formaction="index.php">
-                </label>
-                <?php } ?>
-
                 <label>
                     <input type="submit" value="Ver Listado" formaction="listado_hab.php">
                 </label>

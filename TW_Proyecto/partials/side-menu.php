@@ -33,7 +33,15 @@ if (true) {
                 <p>Bienvenido/a <?php echo $_SESSION['usuario']['nombre']; ?>.</p>
                 <div class='rol'> <?php echo $_SESSION['usuario']['rol']; ?>.</div>
 
+                
+
                 <div class='botones-editar-logout'>
+                <div class="editar-usuario">
+                    <form method="GET" action="datos-usuarios.php">
+                        <input type="hidden" name="email" value="<?php echo $_SESSION['usuario']['email']; ?>">
+                        <input type="submit" value="Ver Datos">
+                    </form>
+                </div>
                 <?php if (isset($_SESSION["usuario"]["rol"]) && (($_SESSION["usuario"]["rol"] === "recepcionista") || ($_SESSION["usuario"]["rol"] === "administrador"))) { ?>
                         <div class="editar-usuario">
                             <form method="GET" action="editar-perfil_admin.php">
@@ -42,12 +50,12 @@ if (true) {
                             </form>
                         </div>
                 <?php } else { ?>
-                    <div class="editar-usuario">
+                        <div class="editar-usuario">
                             <form method="GET" action="editar-perfil.php">
                                 <input type="hidden" name="email" value="<?php echo $_SESSION['usuario']['email']; ?>">
                                 <input type="submit" value="Editar">
                             </form>
-                    </div>
+                        </div>
                 <?php } ?>
                     <form action='#' method='POST'>
                         <div class=boton-logout>
@@ -55,44 +63,44 @@ if (true) {
                         </div>
                     </form>
                 </div>
-        <?php
+            <?php
         } ?>
         <div class="numero-habitaciones-total">
-                <h3>Número de Habitaciones</h3>
-                <?php
-                $query = "SELECT COUNT(*) AS total_habitaciones FROM habitacion";
-                $resultado = mysqli_query($db, $query);
+            <h3>Número de Habitaciones</h3>
+            <?php
+            $query = "SELECT COUNT(*) AS total_habitaciones FROM habitacion";
+            $resultado = mysqli_query($db, $query);
 
-                if ($resultado) {
-                    $fila = mysqli_fetch_assoc($resultado);
-                    $total_habitaciones = $fila['total_habitaciones'];
-                } else {
-                    echo "Error al ejecutar la consulta: " . mysqli_error($db);
-                }
+            if ($resultado) {
+                $fila = mysqli_fetch_assoc($resultado);
+                $total_habitaciones = $fila['total_habitaciones'];
+            } else {
+                echo "Error al ejecutar la consulta: " . mysqli_error($db);
+            }
 
-                echo "<p class='fondo-estadisticas'>El número total de habitaciones es $total_habitaciones.</p>";
-                ?>
+            echo "<p class='fondo-estadisticas'>El número total de habitaciones es $total_habitaciones.</p>";
+            ?>
         </div>
 
         <div class="numero-habitaciones">
-                <h3>Capacidad total</h3>
-                <?php
-                $query = "SELECT SUM(capacidad) AS capacidad_total FROM habitacion";
-                $resultado = mysqli_query($db, $query);
+            <h3>Capacidad total</h3>
+            <?php
+            $query = "SELECT SUM(capacidad) AS capacidad_total FROM habitacion";
+            $resultado = mysqli_query($db, $query);
 
-                if ($resultado) {
-                    $fila = mysqli_fetch_assoc($resultado);
-                    $capacidad_total  = $fila['capacidad_total'];
-                } else {
-                    echo "Error al ejecutar la consulta: " . mysqli_error($db);
-                }
+            if ($resultado) {
+                $fila = mysqli_fetch_assoc($resultado);
+                $capacidad_total = $fila['capacidad_total'];
+            } else {
+                echo "Error al ejecutar la consulta: " . mysqli_error($db);
+            }
 
-                //echo "<p class='fondo-estadisticas'>El número de habitaciones libres es $habitaciones_libres.</p>";
-                ?>
+            //echo "<p class='fondo-estadisticas'>El número de habitaciones libres es $habitaciones_libres.</p>";
+            ?>
         </div>
 
     </aside>
     </div>
-<?php
+    <?php
 }
 ?>

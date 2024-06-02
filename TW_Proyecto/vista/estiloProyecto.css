@@ -336,3 +336,14 @@ form.registros_pag input[type='submit'] {
   border-radius: 5px;
   width: calc(33% - 20px);
 }
+
+.imagenes-incidencia{
+  background-color: moccasin;
+  display: flex;
+  flex-direction: column;
+}
+
+.cada-imagen-incidencia{
+  width: 30%;
+  margin-bottom: 10px;
+}

@@ -90,6 +90,14 @@ include ("partials/head-html.php");
                             echo '</ul>'; ?>
                         </div>
 
+                        <?php if (isset($_SESSION["usuario"]["rol"]) && (($_SESSION["usuario"]["rol"] === "recepcionista") || ($_SESSION["usuario"]["rol"] === "administrador"))) { ?>
+                        <div class="editar-usuario">
+                            <form method="GET" action="datos-usuarios.php">
+                                <input type="hidden" name="email" value="<?php echo $fila['email']; ?>">
+                                <input type="submit" value="Ver Datos">
+                            </form>
+                        </div>
+                        <?php } ?>
                         <div class="editar-usuario">
                             <?php if (isset($_SESSION["usuario"]["rol"]) && (($_SESSION["usuario"]["rol"] === "recepcionista") || ($_SESSION["usuario"]["rol"] === "administrador"))) { ?>
                                 <form method="GET" action="editar-perfil_admin.php">

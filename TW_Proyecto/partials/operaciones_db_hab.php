@@ -62,6 +62,8 @@ function campoEsValido2($campo)
 function hayErrores($campo)
 {
     switch ($campo) {
+        case "numero":
+            return (isset($_POST['add-habitacion']) || isset($_POST['modificar-habitacion'])) && !campoEsValido2($campo);
         default:
             return (isset($_POST['add-habitacion']) || isset($_POST['modificar-habitacion'])) && !campoEsValido($campo);
     }
@@ -140,5 +142,31 @@ function inicializarTodasVarSesion() {
     inicializarVarSesion("capacidad");
     inicializarVarSesion("precio");
     inicializarVarSesion("descripcion");
+}
+
+function obtenerFotografias($numero_hab) {
+    global $db;
+    $stmt = $db->prepare("SELECT id FROM fotografias WHERE numero_hab = ?");
+    $stmt->bind_param('i', $numero_hab);
+    $stmt->execute();
+    return $stmt->get_result();
+}
+
+function subirFotografia($numero, $file) {
+    if ($file['error'] == UPLOAD_ERR_OK && getimagesize($file['tmp_name']) !== false) {
+        $foto = file_get_contents($file['tmp_name']);
+        global $db;
+        $stmt = $db->prepare("INSERT INTO fotografias (numero_hab, foto) VALUES (?, ?)");
+        $stmt->bind_param('ib', $numero_hab, $foto);
+        $stmt->send_long_data(1, $foto);
+        $stmt->execute();
+    }
+}
+
+function eliminarFotografia($foto_id) {
+    global $db;
+    $stmt = $db->prepare("DELETE FROM fotografias WHERE id = ?");
+    $stmt->bind_param('i', $foto_id);
+    $stmt->execute();
 }
 ?>

@@ -59,7 +59,7 @@ if (!$db) {
 
                 <?php
                 if (hayErrores("numero")) { ?>
-                    <p class='error-formulario'>Debe escribir el numero de la habitacion.</p>
+                    <p class='error-formulario'>Debe escribir la capacidad de la habitacion o ya hay alguna habitacion registrada con ese numero.</p>
                 <?php } ?>
 
 

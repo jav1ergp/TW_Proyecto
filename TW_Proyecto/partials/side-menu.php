@@ -33,15 +33,15 @@ if (true) {
                 <p>Bienvenido/a <?php echo $_SESSION['usuario']['nombre']; ?>.</p>
                 <div class='rol'> <?php echo $_SESSION['usuario']['rol']; ?>.</div>
 
-                
+
 
                 <div class='botones-editar-logout'>
-                <div class="editar-usuario">
-                    <form method="GET" action="datos-usuarios.php">
-                        <input type="hidden" name="email" value="<?php echo $_SESSION['usuario']['email']; ?>">
-                        <input type="submit" value="Ver Datos">
-                    </form>
-                </div>
+                    <div class="editar-usuario">
+                        <form method="GET" action="datos-usuarios.php">
+                            <input type="hidden" name="email" value="<?php echo $_SESSION['usuario']['email']; ?>">
+                            <input type="submit" value="Ver Datos">
+                        </form>
+                    </div>
                 <?php if (isset($_SESSION["usuario"]["rol"]) && (($_SESSION["usuario"]["rol"] === "recepcionista") || ($_SESSION["usuario"]["rol"] === "administrador"))) { ?>
                         <div class="editar-usuario">
                             <form method="GET" action="editar-perfil_admin.php">
@@ -57,8 +57,9 @@ if (true) {
                             </form>
                         </div>
                 <?php } ?>
-                    <form action='#' method='POST'>
+                    <form action="index.php" method='POST'>
                         <div class=boton-logout>
+                            <input type="hidden" name="email" value="<?php echo $_SESSION['usuario']['email']; ?>">
                             <input type='submit' name='cerrar-sesion' value='Logout'>
                         </div>
                     </form>

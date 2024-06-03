@@ -15,11 +15,13 @@ if (!$db) {
 
 <!DOCTYPE html>
 <html>
+
 <head>
-	<meta charset="utf-8">
-	<title>Ejercicio 15</title>
+    <meta charset="utf-8">
+    <title>Ejercicio 15</title>
     <link rel="stylesheet" href="vista/estiloProyecto.css">
 </head>
+
 <body>
     <main>
         <div class='listado'>
@@ -27,32 +29,35 @@ if (!$db) {
             <h4>Borrar usuario</h4>
         </div>
 
-    <?php
+        <?php
 
         // Verificar si se ha proporcionado el parámetro de email de usuario en la URL
         if (isset($_GET['email'])) {
             $email_borrar = $_GET['email'];
-        } else {?>
-            <p class='error-formulario'>ERROR: No se pudo extraer el usuario a 
+        } else { ?>
+            <p class='error-formulario'>ERROR: No se pudo extraer el usuario a
                 editar de la BBDD.</p>
         <?php }
 
-        
+
 
         $enviadoCorrectamente = false;
-        if (isset($_POST["borrar-usuario"])){
+        if (isset($_POST["borrar-usuario"])) {
             $enviadoCorrectamente = true;
         }
 
         $datosConfirmados = false;
 
-        if (isset($_POST['confirmar-borrado'])){?>
-            <span class = "confirmacion-datos">Se han borrado los datos del usuario.</span>
+        if (isset($_POST['confirmar-borrado'])) { ?>
+            <span class="confirmacion-datos">Se han borrado los datos del usuario.</span>
             <?php
-                $datosConfirmados = true;
-                borrar();
+            $datosConfirmados = true;
+            borrar();
+            $fecha = date('Y-m-d H:i:s');
+            $accion = "Se ha borrado un usuario.";
+            $log = mysqli_query($db, "INSERT INTO log (fecha, descripcion) VALUES ($fecha, $accion)");
             ?>
-        <?php 
+        <?php
         }
 
         //Hacemos una consulta en la tabla de usuarios que tenga el mismo email evitando inyeccion SQL aunque no deberia tener
@@ -60,10 +65,10 @@ if (!$db) {
 
         //array de datos a borrar
         $datosUsuarioABorrar = mysqli_fetch_assoc($datosUsuarioABorrarDB);
-        
+
         //Si se ha encontrado, se guardarán los datos del usuario en una variable de sesión, que la usaremos para obtener los datos en el formulario de la BBDD
-        if ($datosUsuarioABorrarDB && mysqli_num_rows($datosUsuarioABorrarDB) > 0){
-                $_SESSION["usuario_borrar"] = $datosUsuarioABorrar;
+        if ($datosUsuarioABorrarDB && mysqli_num_rows($datosUsuarioABorrarDB) > 0) {
+            $_SESSION["usuario_borrar"] = $datosUsuarioABorrar;
         }
 
         ?>
@@ -71,11 +76,13 @@ if (!$db) {
         <div class="formulario-editar">
             <form action="" method="POST">
                 <label>Nombre:
-                    <input type="text" name="nombre" value="<?php echo $_SESSION['usuario_borrar']['nombre']; ?>" disabled>
+                    <input type="text" name="nombre" value="<?php echo $_SESSION['usuario_borrar']['nombre']; ?>"
+                        disabled>
                 </label>
 
                 <label>Apellidos:
-                    <input type="text" name="apellidos" value="<?php echo $_SESSION['usuario_borrar']['apellidos']; ?>" disabled>
+                    <input type="text" name="apellidos" value="<?php echo $_SESSION['usuario_borrar']['apellidos']; ?>"
+                        disabled>
                 </label>
 
                 <label>Dni:
@@ -83,37 +90,39 @@ if (!$db) {
                 </label>
 
                 <label>Email:
-                    <input type="email" name="email" value="<?php echo $_SESSION['usuario_borrar']['email']; ?>" disabled>
+                    <input type="email" name="email" value="<?php echo $_SESSION['usuario_borrar']['email']; ?>"
+                        disabled>
                 </label>
 
                 <label>Tarjeta de crédito:
-                    <input type="text" name="tarjeta" value="<?php echo $_SESSION['usuario_borrar']['tarjeta']; ?>" disabled>
+                    <input type="text" name="tarjeta" value="<?php echo $_SESSION['usuario_borrar']['tarjeta']; ?>"
+                        disabled>
                 </label>
-                
+
                 <label>Rol:
-                    <input type='text' name='rol' value='<?php echo $_SESSION["usuario"]["rol"];?>' disabled/>
+                    <input type='text' name='rol' value='<?php echo $_SESSION["usuario"]["rol"]; ?>' disabled />
                 </label>
 
                 <?php
-                
-                    if (!$enviadoCorrectamente && !$datosConfirmados){?>
-                        <label>
-                            <input type='submit' name='borrar-usuario' value='Borrar usuario'>
-                        </label>
+
+                if (!$enviadoCorrectamente && !$datosConfirmados) { ?>
+                    <label>
+                        <input type='submit' name='borrar-usuario' value='Borrar usuario'>
+                    </label>
                     <?php
-                    } else if (!$datosConfirmados){
-                        ?>
+                } else if (!$datosConfirmados) {
+                    ?>
                         <label>
-                            <input type='submit' name='confirmar-borrado' value='Confirmar borrado'/>
+                            <input type='submit' name='confirmar-borrado' value='Confirmar borrado' />
                         </label>
-                    <?php } ?>
-                    
-                    <?php
+                <?php } ?>
+
+                <?php
                 //Si se han confirmado los datos de un usuario, aparecerá un boton para limpiar el formulario
                 if ($datosConfirmados) { ?>
-                <label>
-                    <input type='submit' value="Limpiar" formaction="index.php">
-                </label>
+                    <label>
+                        <input type='submit' value="Limpiar" formaction="index.php">
+                    </label>
                 <?php } ?>
 
                 <label>
@@ -124,4 +133,5 @@ if (!$db) {
         </div>
     </main>
 </body>
+
 </html>

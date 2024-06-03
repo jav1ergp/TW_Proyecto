@@ -15,7 +15,7 @@
 
     <!-- Configuración del login -->   
     <?php include("partials/login.php");?>
-        
+
     <!-- Página de bienvenida -->    
     <div class="contenedor">
         <?php

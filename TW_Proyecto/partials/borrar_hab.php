@@ -15,11 +15,13 @@ if (!$db) {
 
 <!DOCTYPE html>
 <html>
+
 <head>
-	<meta charset="utf-8">
-	<title>Ejercicio 15</title>
+    <meta charset="utf-8">
+    <title>Ejercicio 15</title>
     <link rel="stylesheet" href="vista/estiloProyecto.css">
 </head>
+
 <body>
     <main>
         <div class='listado'>
@@ -27,32 +29,35 @@ if (!$db) {
             <h4>Borrar habitaciones</h4>
         </div>
 
-    <?php
+        <?php
 
         // Verificar si se ha proporcionado el parámetro de numero de usuario en la URL
         if (isset($_GET['numero'])) {
             $num_borrar = $_GET['numero'];
-        } else {?>
-            <p class='error-formulario'>ERROR: No se pudo extraer la habitacion a 
+        } else { ?>
+            <p class='error-formulario'>ERROR: No se pudo extraer la habitacion a
                 borrar de la BBDD.</p>
         <?php }
 
-        
+
 
         $enviadoCorrectamente = false;
-        if (isset($_POST["borrar-habitacion"])){
+        if (isset($_POST["borrar-habitacion"])) {
             $enviadoCorrectamente = true;
         }
 
         $datosConfirmados = false;
 
-        if (isset($_POST['confirmar-borrado'])){?>
-            <span class = "confirmacion-datos">Se han borrado los datos de la habitacion.</span>
+        if (isset($_POST['confirmar-borrado'])) { ?>
+            <span class="confirmacion-datos">Se han borrado los datos de la habitacion.</span>
             <?php
-                $datosConfirmados = true;
-                borrar();
+            $datosConfirmados = true;
+            borrar();
+            $fecha = date('Y-m-d H:i:s');
+            $accion = "Se ha borrado una habitación";
+            $log = mysqli_query($db, "INSERT INTO log (fecha, descripcion) VALUES ($fecha, $accion)");
             ?>
-        <?php 
+        <?php
         }
 
         //Hacemos una consulta en la tabla de usuarios que tenga el mismo email evitando inyeccion SQL aunque no deberia tener
@@ -60,10 +65,10 @@ if (!$db) {
 
         //array de datos a borrar
         $datoshabitacionABorrar = mysqli_fetch_assoc($datosHabitacionABorrarDB);
-        
+
         //Si se ha encontrado, se guardarán los datos del usuario en una variable de sesión, que la usaremos para obtener los datos en el formulario de la BBDD
-        if ($datosHabitacionABorrarDB && mysqli_num_rows($datosHabitacionABorrarDB) > 0){
-                $_SESSION["habitacion_borrar"] = $datoshabitacionABorrar;
+        if ($datosHabitacionABorrarDB && mysqli_num_rows($datosHabitacionABorrarDB) > 0) {
+            $_SESSION["habitacion_borrar"] = $datoshabitacionABorrar;
         }
 
         ?>
@@ -71,41 +76,45 @@ if (!$db) {
         <div class="formulario-editar">
             <form action="" method="POST">
                 <label>Numero:
-                    <input type="text" name="numero" value="<?php echo $_SESSION['habitacion_borrar']['numero']; ?>" disabled>
+                    <input type="text" name="numero" value="<?php echo $_SESSION['habitacion_borrar']['numero']; ?>"
+                        disabled>
                 </label>
 
                 <label>Capacidad:
-                    <input type="text" name="capacidad" value="<?php echo $_SESSION['habitacion_borrar']['capacidad']; ?>" disabled>
+                    <input type="text" name="capacidad"
+                        value="<?php echo $_SESSION['habitacion_borrar']['capacidad']; ?>" disabled>
                 </label>
 
                 <label>Precio:
-                    <input type="text" name="precio" value="<?php echo $_SESSION['habitacion_borrar']['precio']; ?>" disabled>
+                    <input type="text" name="precio" value="<?php echo $_SESSION['habitacion_borrar']['precio']; ?>"
+                        disabled>
                 </label>
 
                 <label>Descripción:
-                    <textarea name="descripcion" disabled><?php echo $_SESSION['habitacion_borrar']['descripcion']; ?></textarea>
+                    <textarea name="descripcion"
+                        disabled><?php echo $_SESSION['habitacion_borrar']['descripcion']; ?></textarea>
                 </label>
 
                 <?php
-                
-                    if (!$enviadoCorrectamente && !$datosConfirmados){?>
-                        <label>
-                            <input type='submit' name='borrar-habitacion' value='Borrar habitacion'>
-                        </label>
+
+                if (!$enviadoCorrectamente && !$datosConfirmados) { ?>
+                    <label>
+                        <input type='submit' name='borrar-habitacion' value='Borrar habitacion'>
+                    </label>
                     <?php
-                    } else if (!$datosConfirmados){
-                        ?>
+                } else if (!$datosConfirmados) {
+                    ?>
                         <label>
-                            <input type='submit' name='confirmar-borrado' value='Confirmar borrado'/>
+                            <input type='submit' name='confirmar-borrado' value='Confirmar borrado' />
                         </label>
-                    <?php } ?>
-                    
-                    <?php
+                <?php } ?>
+
+                <?php
                 //Si se han confirmado los datos de un usuario, aparecerá un boton para limpiar el formulario
                 if ($datosConfirmados) { ?>
-                <label>
-                    <input type='submit' value="Limpiar" formaction="index.php">
-                </label>
+                    <label>
+                        <input type='submit' value="Limpiar" formaction="index.php">
+                    </label>
                 <?php } ?>
 
                 <label>
@@ -116,4 +125,5 @@ if (!$db) {
         </div>
     </main>
 </body>
+
 </html>

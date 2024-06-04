@@ -19,7 +19,7 @@
     <!-- Página de bienvenida -->    
     <div class="contenedor">
         <?php
-            include("partials/bienvenida.php");
+            include("partials/editar_reserva.php");
             include("partials/side-menu.php");
         ?>
     </div>

@@ -17,7 +17,7 @@ if (!$db) {
 if (isset($_GET['numero'])) {
     $numero_habitacion = mysqli_real_escape_string($db, $_GET['numero']);
 
-    // Consultar la información del usuario utilizando el email
+    // Consultar la información de la habitacion utilizando el numero
     $consulta = "SELECT * FROM habitacion WHERE numero = '$numero_habitacion'";
     $resultado = mysqli_query($db, $consulta);
 
@@ -103,7 +103,8 @@ if (isset($_GET['numero'])) {
 
 
                 <label>Descripción:
-                    <textarea name="descripcion" <?php if ($enviadoCorrectamente || $datosConfirmados)
+                    <textarea name="descripcion" rows="4"cols="50"
+                    <?php if ($enviadoCorrectamente || $datosConfirmados)
                         echo "disabled"; ?>>
                     <?php echo isset($_POST['descripcion']) ? $_SESSION['descripcion'] : $_SESSION['habitacion']['descripcion']; ?></textarea>
                 </label>

@@ -1,5 +1,7 @@
 <?php
 require_once 'db_connection.php';
+require_once 'operaciones_db_hab.php';
+
 
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
@@ -49,7 +51,7 @@ function campoEsValido3($campo)
 
     switch ($campo) {
         case "num_huespedes":
-            if (isset($_POST[$campo]) && is_numeric($_POST[$campo]) && $_POST[$campo] > 0) {
+            if (isset($_POST[$campo]) && is_numeric($_POST[$campo]) && $_POST[$campo] > 0 && AsignarHabitacion($_POST[$campo]) !== null) {
                 return true;
             }
         break;
@@ -58,7 +60,7 @@ function campoEsValido3($campo)
             if (isset($_POST[$campo])) {
                 $fechaEntrada = strtotime($_POST[$campo]);
                 $hoy = strtotime(date("Y-m-d"));
-                if ($fechaEntrada > $hoy) {
+                if ($fechaEntrada >= $hoy) {
                     return true;
                 }
             }
@@ -94,41 +96,81 @@ function hayErrores3($campo)
 
 function actualizarVarSesion3()
 {
+    global $db;
+    $num_huespedes = $_POST['num_huespedes'];
+    $numero = AsignarHabitacion($num_huespedes);
+    $_SESSION['numero'] = $numero;
+    $numero_habitacion = mysqli_real_escape_string($db, $numero);
+
+    // Consultar la información de la habitacion utilizando el numero
+    $consulta = "SELECT * FROM habitacion WHERE numero = '$numero_habitacion'";
+    $resultado = mysqli_query($db, $consulta);
+
+    if ($resultado && mysqli_num_rows($resultado) > 0) {
+        // El usuario existe, array para obtener sus datos
+        $habitacion = mysqli_fetch_assoc($resultado);
+
+        // Guardar los datos del usuario en la sesión
+        $_SESSION['habitacion'] = $habitacion; //esto es para que actualizar() de operaciones_db_hab cambie el estado
+    }
     $_SESSION['num_huespedes'] = htmlentities(strip_tags($_POST['num_huespedes']));
     $_SESSION['comentarios'] = htmlentities(strip_tags($_POST['comentarios']));
     $_SESSION['fecha_entrada'] = htmlentities(strip_tags($_POST['fecha_entrada']));
     $_SESSION['fecha_salida'] = htmlentities(strip_tags($_POST['fecha_salida']));
-    
-}
-
-function inicializarVarSesion3($campo) {
-    global $enviadoCorrectamente;
-    global $datosConfirmados;
-    if (!$datosConfirmados && !$enviadoCorrectamente) {
-        $_SESSION[$campo] = $_SESSION["reserva"][$campo];
-    }
-}
-
-function inicializarTodasVarSesion3() {
-    inicializarVarSesion3("email");
-    inicializarVarSesion3("num_huespedes");
-    inicializarVarSesion3("comentarios");
-    inicializarVarSesion3("fecha_entrada");
-    inicializarVarSesion3("fecha_salida");
+    $_SESSION['estado'] = 'Pendiente';
 }
 
 function insertarEnBD3()
 {
     global $db;
-    //Insertar todos los datos en la tabla FALTA AÑADIR AQUI BUSCAR HABITACION
-    $email = $_SESSION["email"];
+    $email = $_SESSION['reserva']['email'];
+    $numero = $_SESSION['numero'];
     $num_huespedes = $_SESSION["num_huespedes"];
     $comentarios = $_SESSION["comentarios"];
     $fecha_entrada = $_SESSION["fecha_entrada"];
     $fecha_salida = $_SESSION["fecha_salida"];
+    $_SESSION['estado'] = 'Confirmada';
+    $estado = 'Confirmada';
+    mysqli_query($db, "INSERT INTO reserva (email, numero, capacidad, comentarios, dia_entrada, dia_salida, estado) 
+        VALUES ('$email', '$numero', '$num_huespedes', '$comentarios', '$fecha_entrada', '$fecha_salida', '$estado')");
+}
 
-    mysqli_query($db, "INSERT INTO reservas (email, num_huespedes, comentarios, fecha_entrada, fecha_salida) 
-        VALUES ('$email', '$num_huespedes', '$comentarios', '$fecha_entrada', '$fecha_salida'");
+function actualizar3($campo) {
+    global $db;
+    // Escapar el campo y el valor para la consulta SQL
+    $campo_escapado = mysqli_real_escape_string($db, $campo);
+    $valor_escapado = mysqli_real_escape_string($db, $_SESSION[$campo]);
+
+    if ($_SESSION["reserva"][$campo] != $_SESSION[$campo]) {
+        $query = "UPDATE reserva SET $campo_escapado = '$valor_escapado' WHERE numero = '" . mysqli_real_escape_string($db, $_SESSION["reserva"]["numero"]) . "'";
+        $result = mysqli_query($db, $query);
+        if ($result && mysqli_affected_rows($db) > 0) {
+            $_SESSION["reserva"][$campo] = $_SESSION[$campo];
+        }
+    }
+}
+
+function AsignarHabitacion($capacidad) {
+    global $db;
+    // Consulta para encontrar una habitación operativa con capacidad mayor o igual a la demandada
+    $stmt = $db->prepare("
+        SELECT h.numero
+        FROM habitacion h
+        WHERE h.capacidad >= ? AND h.estado = 'operativa'
+        ORDER BY h.capacidad ASC
+        LIMIT 1
+    ");
+    
+    // Ejecutar la consulta pasando la capacidad como parámetro
+    $stmt->bind_param("i", $capacidad);
+    $stmt->execute();
+
+    // Obtener el resultado de la consulta
+    $resultado = $stmt->get_result();
+    $habitacion = $resultado->fetch_assoc();
+
+    // Devolver el número de la habitación si se encuentra una disponible, de lo contrario devolver null
+    return $habitacion ? $habitacion['numero'] : null;
 }
 
 ?>
@@ -149,6 +191,8 @@ function insertarEnBD3()
         if (isset($_POST["añadir-reserva"]) && validarTodosLosCampos3()) {
             $enviadoCorrectamente = true;
             actualizarVarSesion3(); //Se guardan en variables de sesion y se comprueba saneamiento de datos
+            inicializarVarSesion($_SESSION['estado']);
+            actualizar('estado');
         }
 
         $datosConfirmados = false;
@@ -157,9 +201,8 @@ function insertarEnBD3()
             echo "<span class='confirmacion-datos'>Se ha confirmado la reserva del usuario.</span>";
             $datosConfirmados = true;
             insertarEnBD3();
+            actualizar('estado');
         }
-
-        inicializarVarSesion3("email");
 
         ?>
 
@@ -171,21 +214,34 @@ function insertarEnBD3()
                         disabled>
                 </label>
 
+                <?php if ($enviadoCorrectamente || $datosConfirmados) {
+                    echo "<label>Habitación:
+                            <input type='text' name='numero' value='" . $_SESSION['numero'] . "' disabled>
+                        </label>";
+                } ?>
+                
+                
                 <label>Número de personas:
-                    <input type="number" name="num_huespedes" value="<?php echo isset($_POST['num_huespedes']) ? $_POST['num_huespedes'] : ''; ?>" required>
+                    <input type="number" name="num_huespedes" value="<?php echo isset($_POST['num_huespedes']) ? $_POST['num_huespedes'] :  $_SESSION["num_huespedes"]; ?>"
+                    <?php if ($enviadoCorrectamente || $datosConfirmados)
+                            echo "disabled"; ?>>
                 </label>
                 <?php if (hayErrores3("num_huespedes")) { ?>
-                    <p class='error-formulario'>Por favor, introduce un número válido de personas.</p>
+                    <p class='error-formulario'>No hay Habitaciones disponibles.</p>
                 <?php } ?>
 
                 <label>Comentarios del cliente:
                     <textarea name="comentarios" rows="4"
-                        cols="50"><?php echo isset($_POST['comentarios']) ? $_POST['comentarios'] : ''; ?></textarea>
+                        cols="50"><?php echo isset($_POST['comentarios']) ? $_POST['comentarios'] : $_SESSION["comentarios"]; ?>
+                        <?php if ($enviadoCorrectamente || $datosConfirmados)
+                            echo "disabled"; ?></textarea>
                 </label>
 
                 <label>Día de entrada:
                     <input type="date" name="fecha_entrada"
-                        value="<?php echo isset($_POST['fecha_entrada']) ? $_POST['fecha_entrada'] : ''; ?>" required>
+                        value="<?php echo isset($_POST['fecha_entrada']) ? $_POST['fecha_entrada'] : $_SESSION["fecha_entrada"]; ?>"
+                        <?php if ($enviadoCorrectamente || $datosConfirmados)
+                            echo "disabled"; ?>>
                 </label>
                 <?php if (hayErrores3("fecha_entrada")) { ?>
                     <p class='error-formulario'>Por favor, selecciona una fecha de entrada válida.</p>
@@ -193,7 +249,9 @@ function insertarEnBD3()
 
                 <label>Día de salida:
                     <input type="date" name="fecha_salida"
-                        value="<?php echo isset($_POST['fecha_salida']) ? $_POST['fecha_salida'] : ''; ?>" required>
+                        value="<?php echo isset($_POST['fecha_salida']) ? $_POST['fecha_salida'] : $_SESSION["fecha_salida"]; ?>" 
+                        <?php if ($enviadoCorrectamente || $datosConfirmados)
+                            echo "disabled"; ?>>
                 </label>
                 <?php if (hayErrores3("fecha_salida")) { ?>
                     <p class='error-formulario'>Por favor, selecciona una fecha de salida válida.</p>

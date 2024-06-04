@@ -33,6 +33,7 @@ include ("partials/head-html.php");
                         <li><a href="add-habitacion.php">Añadir nueva habitacion</a></li>
                     <?php } ?>
                     <li><a href="listado.php">Listado usuarios</a></li>
+                    <li><a href="listado_res.php">Listado reservas</a></li>
                 </ul>
             </div>
             <?php

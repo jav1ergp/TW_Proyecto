@@ -17,7 +17,7 @@ function validarTodosLosCampos2()
     
     $claveValida = campoEsValido("clave");
     $tarjetaValida = campoEsValido("tarjeta");
-
+    
     return  $claveValida && $tarjetaValida;
 }
 
@@ -96,34 +96,34 @@ function insertarEnBD()
     //Insertar todos los datos del usuario en la tabla
     $nombre = $_SESSION["nombre"];
     $apellidos = $_SESSION["apellidos"];
-    //$email = $_SESSION["email"];
+    $email = $_SESSION["email"];
     $dni = $_SESSION["dni"];
     $clave = $_SESSION["clave"];
     $tarjeta = $_SESSION["tarjeta"];
     $rol = $_SESSION["rol"];
 
-    mysqli_query($db, "INSERT INTO usuarios (nombre, apellidos, email, dni, clave, tarjeta, rol) 
-        VALUES ('$nombre', '$apellidos', '$dni', '$clave', '$tarjeta', '$rol')");
+    mysqli_query($db, "INSERT INTO usuarios (nombre, apellidos, dni, email, clave, tarjeta, rol) 
+        VALUES ('$nombre', '$apellidos', '$dni', '$email', '$clave', '$tarjeta', '$rol')");
 }
 
 //Actualización de variables de sesión con saneamiento de datos
 function actualizarVarSesion()
 {
-    $_SESSION['nombre'] = htmlentities(strip_tags($_POST['nombre']));
-    $_SESSION['apellidos'] = htmlentities(strip_tags($_POST['apellidos']));
-    $_SESSION['dni'] = htmlentities(strip_tags($_POST['dni']));
+    $_SESSION['nombre'] = htmlentities($_POST['nombre']);
+    $_SESSION['apellidos'] = htmlentities($_POST['apellidos']);
+    $_SESSION['dni'] = htmlentities($_POST['dni']);
     
     actualizarVarSesion2();
 }
 function actualizarVarSesion2()
 {
-    $_SESSION['email'] = htmlentities(strip_tags($_POST['email']));
-    $_SESSION['tarjeta'] = htmlentities(strip_tags($_POST['tarjeta']));
+    $_SESSION['email'] = htmlentities($_POST['email']);
+    $_SESSION['tarjeta'] = htmlentities($_POST['tarjeta']);
     if (isset($_SESSION["usuario"]["rol"]) && ($_SESSION["usuario"]["rol"] === "recepcionista") || ($_SESSION["usuario"]["rol"] === "administrador")) {
-        $_SESSION['rol'] = htmlentities(strip_tags($_POST['rol']));
+        $_SESSION['rol'] = htmlentities($_POST['rol']);
     }
     if (!empty($_POST['clave-nueva'])) {
-        $hash = password_hash(htmlentities(strip_tags($_POST['clave-nueva'])), PASSWORD_DEFAULT);
+        $hash = password_hash(htmlentities($_POST['clave-nueva']), PASSWORD_DEFAULT);
         $_SESSION['clave'] = $hash;
     }
 }

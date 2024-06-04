@@ -41,9 +41,6 @@ if (!$db) {
             <?php
             $datosConfirmados = true;
             insertarEnBD();
-            $fecha = date('Y-m-d H:i:s');
-            $accion = "Se ha añadido nueva habitación.";
-            $log = mysqli_query($db, "INSERT INTO log (fecha, descripcion) VALUES ($fecha, $accion)");
         }
 
         // Si se ha presionado el botón de limpiar, limpia los campos del formulario.
@@ -90,8 +87,10 @@ if (!$db) {
                 <?php } ?>
 
 
+                
                 <label>Descripción:
-                    <textarea name="descripcion" <?php if ($enviadoCorrectamente || $datosConfirmados) echo "disabled"; ?>>
+                    <textarea name="descripcion" rows="4" cols="50"
+                        <?php if ($enviadoCorrectamente || $datosConfirmados) echo "disabled"; ?>>
                     <?php echo isset($_POST['descripcion']) ? $_POST['descripcion'] : ""; ?></textarea>
                 </label>
 

@@ -86,14 +86,14 @@ function insertarEnBD()
 //Actualización de variables de sesión con saneamiento de datos
 function actualizarVarSesion()
 {
-    $_SESSION['numero'] = htmlentities(strip_tags($_POST['numero']));
+    $_SESSION['numero'] = htmlentities($_POST['numero']);
     actualizarVarSesion2();
 }
 function actualizarVarSesion2()
 {
-    $_SESSION['capacidad'] = htmlentities(strip_tags($_POST['capacidad']));
-    $_SESSION['precio'] = htmlentities(strip_tags($_POST['precio']));
-    $_SESSION['descripcion'] = htmlentities(strip_tags($_POST['descripcion']));
+    $_SESSION['capacidad'] = htmlentities($_POST['capacidad']);
+    $_SESSION['precio'] = htmlentities($_POST['precio']);
+    $_SESSION['descripcion'] = htmlentities($_POST['descripcion']);
 }
 
 
@@ -142,31 +142,5 @@ function inicializarTodasVarSesion() {
     inicializarVarSesion("capacidad");
     inicializarVarSesion("precio");
     inicializarVarSesion("descripcion");
-}
-
-function obtenerFotografias($numero_hab) {
-    global $db;
-    $stmt = $db->prepare("SELECT id FROM fotografias WHERE numero_hab = ?");
-    $stmt->bind_param('i', $numero_hab);
-    $stmt->execute();
-    return $stmt->get_result();
-}
-
-function subirFotografia($numero, $file) {
-    if ($file['error'] == UPLOAD_ERR_OK && getimagesize($file['tmp_name']) !== false) {
-        $foto = file_get_contents($file['tmp_name']);
-        global $db;
-        $stmt = $db->prepare("INSERT INTO fotografias (numero_hab, foto) VALUES (?, ?)");
-        $stmt->bind_param('ib', $numero_hab, $foto);
-        $stmt->send_long_data(1, $foto);
-        $stmt->execute();
-    }
-}
-
-function eliminarFotografia($foto_id) {
-    global $db;
-    $stmt = $db->prepare("DELETE FROM fotografias WHERE id = ?");
-    $stmt->bind_param('i', $foto_id);
-    $stmt->execute();
 }
 ?>

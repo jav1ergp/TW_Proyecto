@@ -30,12 +30,12 @@
             <li><a href="servicios.php">SERVICIOS</a></li>
             <li><a href="registro.php">REGISTRO</a></li>
             <?php if (isset($_SESSION["usuario"]["email"]) && !empty($_SESSION["usuario"]["email"])): ?>
-                <li><a href="reservas.php?email=<?php echo urlencode($_SESSION["usuario"]["email"]); ?>">RESERVAS</a></li>
-            <?php else: ?>
-                <li><a href="registro.php">RESERVAS</a></li>
+                <?php if (isset($_SESSION["usuario"]["rol"]) && ($_SESSION["usuario"]["rol"] !== "administrador")): ?>
+                    <li><a href="reservas.php?email=<?php echo urlencode($_SESSION["usuario"]["email"]); ?>">RESERVAS</a></li>
+                    <?php endif; ?>
             <?php endif; ?>
             <?php if (isset($_SESSION["usuario"]["rol"]) && ($_SESSION["usuario"]["rol"] === "recepcionista" || $_SESSION["usuario"]["rol"] === "administrador")): ?>
-                <li><a href="listado.php">LISTADO</a></li>
+                <li><a href="listado.php">USUARIOS</a></li>
             <?php endif; ?>
         </ul>
     </nav>

@@ -55,7 +55,7 @@ if (!$db) {
             borrar();
             $fecha = date('Y-m-d H:i:s');
             $accion = "Se ha borrado un usuario.";
-            $log = mysqli_query($db, "INSERT INTO log (fecha, descripcion) VALUES ($fecha, $accion)");
+            $log = mysqli_query($db, "INSERT INTO log (fecha, descripcion) VALUES ('$fecha', '$accion')");
             ?>
         <?php
         }
@@ -100,7 +100,7 @@ if (!$db) {
                 </label>
 
                 <label>Rol:
-                    <input type='text' name='rol' value='<?php echo $_SESSION["usuario"]["rol"]; ?>' disabled />
+                    <input type='text' name='rol' value='<?php echo $_SESSION["usuario_borrar"]["rol"]; ?>' disabled />
                 </label>
 
                 <?php

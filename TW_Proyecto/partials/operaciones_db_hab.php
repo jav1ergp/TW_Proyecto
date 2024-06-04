@@ -101,12 +101,21 @@ function borrar(){
     global $db;
     global $num_borrar;
       // Ejecutar la consulta DELETE
+    $query2 = mysqli_query($db, "DELETE FROM reserva WHERE numero = '" . mysqli_real_escape_string($db, $num_borrar) . "'");
     $query = mysqli_query($db, "DELETE FROM habitacion WHERE numero = '" . mysqli_real_escape_string($db, $num_borrar) . "'");
     
+    
+    if (!($query2 && mysqli_affected_rows($db) > 0)) {
+        // La consulta falló o no se eliminó ninguna fila?>
+        <p class='error-formulario'>ERROR: No se pudo borrar la reserva de la BBDD.</p> <?php
+    }
+
     if (!($query && mysqli_affected_rows($db) > 0)) {
         // La consulta falló o no se eliminó ninguna fila?>
         <p class='error-formulario'>ERROR: No se pudo borrar la habitacion de la BBDD.</p> <?php
     }
+    
+
 }
 
 function actualizar($campo) {

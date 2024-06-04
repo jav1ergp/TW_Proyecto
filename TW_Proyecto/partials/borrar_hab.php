@@ -55,7 +55,7 @@ if (!$db) {
             borrar();
             $fecha = date('Y-m-d H:i:s');
             $accion = "Se ha borrado una habitación";
-            $log = mysqli_query($db, "INSERT INTO log (fecha, descripcion) VALUES ($fecha, $accion)");
+            $log = mysqli_query($db, "INSERT INTO logs (fecha, descripcion) VALUES ('$fecha', '$accion')");
             ?>
         <?php
         }

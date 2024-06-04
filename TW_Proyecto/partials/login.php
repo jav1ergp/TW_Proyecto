@@ -3,9 +3,10 @@
 $errorUsuarioClave = false;
 
 if (isset($_POST['cerrar-sesion'])) {
+    global $db;
     $fecha = date('Y-m-d H:i:s');
-    $accion = "El usuario {$_SESSION['usuario']['email']} ha cerrado sesión.";
-    $log = mysqli_query($db, "INSERT INTO log (fecha, descripcion) VALUES ('$fecha', '$accion')");
+    $accion = "El usuario ha cerrado sesión.";
+    mysqli_query($db, "INSERT INTO logs (fecha, descripcion) VALUES ('$fecha', '$accion')");
     session_unset(); // Eliminar todas las variables de sesión 
 }
 
@@ -21,18 +22,18 @@ if (isset($_POST["iniciar-sesion"])) {
             $_SESSION['usuario'] = $user;
             $fecha = date('Y-m-d H:i:s');
             $accion = "El usuario {$_SESSION['usuario']['email']} ha iniciado sesión.";
-            $log = mysqli_query($db, "INSERT INTO log (fecha, descripcion) VALUES ('$fecha', '$accion')");
+            $log = mysqli_query($db, "INSERT INTO logs (fecha, descripcion) VALUES ('$fecha', '$accion')");
         } else {
             $errorUsuarioClave = true;
             $fecha = date('Y-m-d H:i:s');
             $accion = "Un usuario ha intentado iniciar sesión de manera incorrecta.";
-            $log = mysqli_query($db, "INSERT INTO log (fecha, descripcion) VALUES ($fecha, $accion)");
+            $log = mysqli_query($db, "INSERT INTO logs (fecha, descripcion) VALUES ('$fecha', '$accion')");
         }
     } else {
         $errorUsuarioClave = true;
         $fecha = date('Y-m-d H:i:s');
         $accion = "Un usuario ha intentado iniciar sesión de manera incorrecta.";
-        $log = mysqli_query($db, "INSERT INTO log (fecha, descripcion) VALUES ($fecha, $accion)");
+        $log = mysqli_query($db, "INSERT INTO logs (fecha, descripcion) VALUES ('$fecha', '$accion')");
     }
 }
 

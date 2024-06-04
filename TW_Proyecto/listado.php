@@ -29,11 +29,19 @@ include ("partials/head-html.php");
                 <p>Indique la acción a realizar</p>
                 <ul>
                     <li><a href="registro.php">Añadir nuevo usuario</a></li>
-                    <?php if (isset($_SESSION["usuario"]["rol"]) && ($_SESSION["usuario"]["rol"] === "recepcionista")) { ?>
-                        <li><a href="add-habitacion.php">Añadir nueva habitacion</a></li>
-                    <?php } ?>
-                    <li><a href="listado_hab.php">Listado habitaciones</a></li>
-                    <li><a href="listado_res.php">Listado reservas</a></li>
+                    <?php 
+                    if (isset($_SESSION["usuario"]) && isset($_SESSION["usuario"]["rol"])) {
+                        if ($_SESSION["usuario"]["rol"] === "recepcionista") { ?>
+                            <li><a href="add-habitacion.php">Añadir nueva habitacion</a></li>
+                        <?php } 
+                        if ($_SESSION["usuario"]["rol"] === "recepcionista" || $_SESSION["usuario"]["rol"] === "administrador") { ?>
+                            <li><a href="listado.php">Listado usuarios</a></li>
+                        <?php } 
+                        if ($_SESSION["usuario"]["rol"] !== "administrador") { ?>
+                            <li><a href="listado_res.php">Listado reservas</a></li>
+                        <?php } 
+                    } ?>      
+                    <li><a href="listado_hab.php">Listado Habitaciones</a></li>              
                 </ul>
             </div>
             <?php

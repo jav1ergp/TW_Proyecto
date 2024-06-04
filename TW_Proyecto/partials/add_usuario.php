@@ -43,7 +43,7 @@ if (!$db) {
             insertarEnBD();
             $fecha = date('Y-m-d H:i:s');
             $accion = "Se ha añadido al nuevo usuario {$_SESSION['nombre']} con DNI: {$_SESSION['dni']}.";
-            $log = mysqli_query($db, "INSERT INTO log (fecha, descripcion) VALUES ($fecha, $accion)");
+            $log = mysqli_query($db, "INSERT INTO logs (fecha, descripcion) VALUES ('$fecha', '$accion')");
         }
 
         // Si se ha presionado el botón de limpiar, limpia los campos del formulario.

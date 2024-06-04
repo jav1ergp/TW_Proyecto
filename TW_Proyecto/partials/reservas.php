@@ -97,7 +97,10 @@ function hayErrores3($campo)
 function actualizarVarSesion3()
 {
     global $db;
-    $_SESSION['email_cliente'] = $_POST['email_cliente'];
+    if(isset($_POST['email_cliente'])){
+        $_SESSION['email_cliente'] = $_POST['email_cliente'];
+    }
+    
     $num_huespedes = $_POST['num_huespedes'];
     $numero = AsignarHabitacion($num_huespedes);
     $_SESSION['numero'] = $numero;
@@ -272,27 +275,28 @@ function obtenerClientes() {
                 
                 <label>Número de personas:
                     <input type="number" name="num_huespedes" 
-                        value="<?php 
-                                echo isset($_POST['num_huespedes']) && !empty($_POST['email']) ? $_POST['num_huespedes'] : '';  
-                                if (isset($datosConfirmados) && $datosConfirmados) 
-                                    echo $_SESSION['num_huespedes']; ?>"
+                        value="<?php echo isset($_POST['num_huespedes']) ? $_POST['num_huespedes'] : '';  
+                            if ($datosConfirmados)
+                                echo $_SESSION["num_huespedes"]; ?>"
                         <?php 
                                 if ($enviadoCorrectamente || $datosConfirmados) 
                                     echo 'disabled'; ?>>
                 </label>
-                <?php if (hayErrores3('num_huespedes')) { ?>
+                <?php if (hayErrores3('num_huespedes') && (!$enviadoCorrectamente)) { ?>
                     <p class='error-formulario'>No hay Habitaciones disponibles.</p>
                 <?php } ?>
 
-
                 <label>Comentarios del cliente:
-                    <textarea name="comentarios"><?php echo isset($_POST['comentarios']) ? $_POST['comentarios'] : ""; 
+                    <textarea name="comentarios"
+                    <?php if ($enviadoCorrectamente || $datosConfirmados) echo "disabled"; ?>>
+                        <?php echo isset($_POST['comentarios']) ? $_POST['comentarios'] : ""; 
                         if ($datosConfirmados)
                         echo $_SESSION["comentarios"]; ?>
                         <?php if ($enviadoCorrectamente || $datosConfirmados)
                             echo "disabled"; ?></textarea>
                 </label>
 
+                
                 <label>Día de entrada:
                     <input type="date" name="fecha_entrada"
                         value="<?php echo isset($_POST['fecha_entrada']) ? $_POST['fecha_entrada'] : ""; 

@@ -50,6 +50,9 @@ function borrar1(){
     if (!($query && mysqli_affected_rows($db) > 0)) {
         // La consulta falló o no se eliminó ninguna fila?>
         <p class='error-formulario'>ERROR: No se pudo borrar la reserva de la BBDD.</p> <?php
+        $fecha = date('Y-m-d H:i:s');
+        $accion = "Se ha borrado una habitación";
+        mysqli_query($db, "INSERT INTO logs (fecha, descripcion) VALUES ('$fecha', '$accion')");
     }
 }
 ?>

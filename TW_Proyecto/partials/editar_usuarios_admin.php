@@ -45,7 +45,7 @@ function actualizar_admin($campo){
             // La consulta se ejecutó correctamente y se actualizaron filas en la base de datos
             $fecha = date('Y-m-d H:i:s');
             $accion = "El administrador {$_SESSION['usuario']['email']} ha editado el perfil de {$_SESSION['usuario_editar']['email']}.";
-            //$insercionLog = mysqli_query($db, "INSERT INTO Logs (fecha, accion) VALUES ('$fecha', '$accion')");
+            mysqli_query($db, "INSERT INTO logs (fecha, descripcion) VALUES ('$fecha', '$accion')");
             // Actualiza la variable de sesión con el nuevo valor
             $_SESSION["usuario_editar"]["$campo"] = $_SESSION["$campo"];
 

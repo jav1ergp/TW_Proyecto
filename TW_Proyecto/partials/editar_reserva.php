@@ -83,17 +83,17 @@ function actualizar3($campo) {
             <form action="" method="POST">
                 <label>Email:
                     <input type="email" name="email"
-                        value="<?php echo $_SESSION['reservas_borrar']['email']; ?>" disabled>
+                        value="<?php echo $_SESSION['reserva']['email']; ?>" disabled>
                 </label>
 
                 <label>Numero-Habitacion:
                     <input type="text" name="numero"
-                        value="<?php echo $_SESSION['reservas_borrar']['numero']; ?>" disabled>
+                        value="<?php echo $_SESSION['reserva']['numero']; ?>" disabled>
                 </label>
 
                 <label>Capacidad:
                     <input type="text" name="capacidad" placeholder="Numero"
-                        value="<?php echo $_SESSION['reservas_borrar']['capacidad']; ?>" disabled>
+                        value="<?php echo $_SESSION['reserva']['capacidad']; ?>" disabled>
                 </label>
 
                 <label>Descripción:
@@ -103,12 +103,12 @@ function actualizar3($campo) {
 
                 <label>Día de entrada:
                     <input type="date" name="fecha_entrada"
-                        value="<?php echo $_SESSION['reservas_borrar']['dia_entrada']; ?>" disabled>
+                        value="<?php echo $_SESSION['reserva']['dia_entrada']; ?>" disabled>
                 </label>
 
                 <label>Día de salida:
                     <input type="date" name="fecha_salida"
-                        value="<?php echo $_SESSION['reservas_borrar']['dia_salida']; ?>" disabled>
+                        value="<?php echo $_SESSION['reserva']['dia_salida']; ?>" disabled>
                 </label>
 
                 <?php if (!$enviadoCorrectamente && !$datosConfirmados) { ?>

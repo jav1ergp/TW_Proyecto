@@ -286,10 +286,9 @@ function obtenerClientes() {
 
 
                 <label>Comentarios del cliente:
-                    <textarea name="comentarios" rows="4"
-                        cols="50"><?php echo isset($_POST['comentarios']) ? $_POST['comentarios'] : ""; 
+                    <textarea name="comentarios"><?php echo isset($_POST['comentarios']) ? $_POST['comentarios'] : ""; 
                         if ($datosConfirmados)
-                        echo $_SESSION["comentarios"]; ?>"
+                        echo $_SESSION["comentarios"]; ?>
                         <?php if ($enviadoCorrectamente || $datosConfirmados)
                             echo "disabled"; ?></textarea>
                 </label>
@@ -337,7 +336,7 @@ function obtenerClientes() {
                 <?php } ?>
 
                 <label>
-                    <input type="submit" value="Ver Listado" formaction="listado.php">
+                    <input type="submit" value="Ver Listado" formaction="listado_res.php">
                 </label>
             </form>
         </div>

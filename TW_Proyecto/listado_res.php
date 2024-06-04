@@ -68,8 +68,16 @@ include ("partials/head-html.php");
                 $_SESSION['registros_pag'] = $_POST['registros_pag'];
                 header("Location: " . $_SERVER['PHP_SELF']);
             }
+
+            if (isset($_SESSION["usuario"]["rol"]) && ($_SESSION["usuario"]["rol"] === "recepcionista")) {
                 // Consultar los registros de la página actual
-            $resultado = mysqli_query($db, "SELECT * FROM reserva LIMIT $indice_inicial, $registros_pag");
+                $resultado = mysqli_query($db, "SELECT * FROM reserva LIMIT $indice_inicial, $registros_pag");
+            } elseif (isset($_SESSION["usuario"]["rol"]) && ($_SESSION["usuario"]["rol"] === "cliente")) {
+                // Consultar todos los registros de la página actual
+                $resultado = mysqli_query($db, "SELECT * FROM reserva WHERE email = '" . $_SESSION["usuario"]["email"] . "' LIMIT $indice_inicial, $registros_pag");
+            }
+                // Consultar los registros de la página actual
+            
             
             
             // Verificar si se obtuvieron resultados
@@ -88,28 +96,24 @@ include ("partials/head-html.php");
                         </div>
 
                         <div class="editar-usuario">
-                            <form method="GET" action="datos-hab.php">
+                            <form method="GET" action="datos-res.php">
                                 <input type="hidden" name="numero" value="<?php echo $fila['numero']; ?>">
                                 <input type="submit" value="Ver Datos">
                             </form>
                         </div>
 
                         <div class="editar-usuario">
-                            <?php if (isset($_SESSION["usuario"]["rol"]) && ($_SESSION["usuario"]["rol"] === "recepcionista")) { ?>
                                 <form method="GET" action="editar-res.php">
                                     <input type="hidden" name="numero" value="<?php echo $fila['numero']; ?>">
-                                    <input type="submit" value="Editar">
-                                </form>
-                            <?php } ?>
+                                <input type="submit" value="Editar">
+                            </form>
                         </div>
 
                         <div class="editar-usuario">
-                            <?php if (isset($_SESSION["usuario"]["rol"]) && ($_SESSION["usuario"]["rol"] === "recepcionista")) { ?>
-                                <form method="GET" action="borrar-res.php">
-                                    <input type="hidden" name="numero" value="<?php echo $fila['numero']; ?>">
-                                    <input type="submit" value="Borrar">
-                                </form>
-                            <?php } ?>
+                            <form method="GET" action="borrar-res.php">
+                                <input type="hidden" name="numero" value="<?php echo $fila['numero']; ?>">
+                                <input type="submit" value="Borrar">
+                            </form>
                         </div>
                     </div>
                 <?php }

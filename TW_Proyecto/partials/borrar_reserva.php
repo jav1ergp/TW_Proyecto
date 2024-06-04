@@ -88,38 +88,38 @@ function borrar1(){
             <form action="" method="POST">
                 <label>Email:
                     <input type="email" name="email"
-                        value="<?php echo isset($_POST['email']) && !empty($_POST['email']) ? $_SESSION['email'] : $_SESSION['reserva_borrar']['email']; ?>"
+                        value="<?php echo $_SESSION['reserva_borrar']['email']; ?>"
                         disabled>
                 </label>
 
                 <label>Numero-Habitacion:
                     <input type="text" name="numero"
-                        value="<?php echo isset($_POST['numero']) && !empty($_POST['numero']) ? $_SESSION['numero'] : $_SESSION['reserva_borrar']['numero']; ?>"
+                        value="<?php echo $_SESSION['reserva_borrar']['numero']; ?>"
                         disabled>
                 </label>
 
                 <label>Capacidad:
                     <input type="text" name="capacidad" placeholder="Numero"
-                        value="<?php echo isset($_POST['capacidad']) ? $_SESSION['capacidad'] : $_SESSION['reserva_borrar']['capacidad']; ?>"
+                        value="<?php echo $_SESSION['reserva_borrar']['capacidad']; ?>"
                         disabled>
                 </label>
 
                 <label>Comentarios del cliente:
                     <textarea name="comentarios" rows="4" cols="50" disabled>
-                        <?php echo isset($_POST['comentarios']) ? $_POST['comentarios'] : $_SESSION['reserva_borrar']['comentarios']; ?>
+                        <?php echo $_SESSION['reserva_borrar']['comentarios']; ?>
                     </textarea>
                 </label>
 
 
                 <label>Día de entrada:
                     <input type="date" name="fecha_entrada"
-                        value="<?php echo isset($_POST['fecha_entrada']) ? $_POST['fecha_entrada'] : $_SESSION["fecha_entrada"]; ?>"
+                        value="<?php echo $_SESSION['reserva_borrar']["dia_entrada"]; ?>"
                         disabled>
                 </label>
 
                 <label>Día de salida:
                     <input type="date" name="fecha_salida"
-                        value="<?php echo isset($_POST['fecha_salida']) ? $_POST['fecha_salida'] : $_SESSION["fecha_salida"]; ?>" 
+                        value="<?php echo $_SESSION['reserva_borrar']["dia_salida"]; ?>" 
                         disabled>
                 </label>
 
@@ -134,7 +134,7 @@ function borrar1(){
                 <?php } ?>
 
                 <label>
-                    <input type="submit" value="Ver Listado" formaction="listado_hab.php">
+                    <input type="submit" value="Ver Listado" formaction="listado_res.php">
                 </label>
                 
             </form>            

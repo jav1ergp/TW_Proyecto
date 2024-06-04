@@ -97,6 +97,7 @@ function hayErrores3($campo)
 function actualizarVarSesion3()
 {
     global $db;
+    $_SESSION['email_cliente'] = $_POST['email_cliente'];
     $num_huespedes = $_POST['num_huespedes'];
     $numero = AsignarHabitacion($num_huespedes);
     $_SESSION['numero'] = $numero;
@@ -113,17 +114,22 @@ function actualizarVarSesion3()
         // Guardar los datos del usuario en la sesión
         $_SESSION['habitacion'] = $habitacion; //esto es para que actualizar() de operaciones_db_hab cambie el estado
     }
-    $_SESSION['num_huespedes'] = htmlentities(strip_tags($_POST['num_huespedes']));
-    $_SESSION['comentarios'] = htmlentities(strip_tags($_POST['comentarios']));
-    $_SESSION['fecha_entrada'] = htmlentities(strip_tags($_POST['fecha_entrada']));
-    $_SESSION['fecha_salida'] = htmlentities(strip_tags($_POST['fecha_salida']));
+    $_SESSION['num_huespedes'] = htmlentities($_POST['num_huespedes']);
+    $_SESSION['comentarios'] = htmlentities($_POST['comentarios']);
+    $_SESSION['fecha_entrada'] = htmlentities($_POST['fecha_entrada']);
+    $_SESSION['fecha_salida'] = htmlentities($_POST['fecha_salida']);
     $_SESSION['estado'] = 'Pendiente';
 }
 
 function insertarEnBD3()
 {
     global $db;
-    $email = $_SESSION['reserva']['email'];
+    
+    if (isset($_SESSION["usuario"]["rol"]) && ($_SESSION["usuario"]["rol"] === "recepcionista")) {
+        $email = $_SESSION['email_cliente'];
+    } else {
+        $email = $_SESSION['reserva']['email'];
+    }    
     $numero = $_SESSION['numero'];
     $num_huespedes = $_SESSION["num_huespedes"];
     $comentarios = $_SESSION["comentarios"];
@@ -173,6 +179,31 @@ function AsignarHabitacion($capacidad) {
     return $habitacion ? $habitacion['numero'] : null;
 }
 
+function obtenerClientes() {
+    // Configura los detalles de la base de datos
+    global $db;
+
+    // Consulta para obtener todos los clientes
+    $stmt = $db->prepare("SELECT * FROM usuarios");
+    $stmt->execute();
+
+    // Almacena el resultado de la consulta
+    $resultado = $stmt->get_result();
+
+    // Inicializa un array vacío para almacenar los clientes
+    $clientes = [];
+
+    // Itera sobre los resultados y agrega cada cliente al array
+    while ($cliente = $resultado->fetch_assoc()) {
+        $clientes[] = $cliente;
+    }
+
+    // Cierra el statement y devuelve el array de clientes
+    $stmt->close();
+    return $clientes;
+}
+
+
 ?>
 
 <!DOCTYPE html>
@@ -208,11 +239,29 @@ function AsignarHabitacion($capacidad) {
 
         <div class="formulario-editar">
             <form action="" method="POST">
-                <label>Email:
-                    <input type="email" name="email"
-                        value="<?php echo isset($_POST['email']) && !empty($_POST['email']) ? $_SESSION['email'] : $_SESSION['reserva']['email']; ?>"
-                        disabled>
-                </label>
+            <?php 
+                if (isset($_SESSION["usuario"]["rol"]) && ($_SESSION["usuario"]["rol"] === "recepcionista")): 
+                    // Obtén la lista de clientes de la base de datos
+                    $clientes = obtenerClientes(); // Esta función debe ser definida para obtener los clientes de la base de datos
+                ?>
+                    <label>Email:
+                        <select type="email" name="email_cliente" 
+                        <?php  if ($enviadoCorrectamente || $datosConfirmados)
+                            echo "disabled";?>>
+                            <?php foreach ($clientes as $cliente): ?>
+                                <option value="<?php echo $cliente['email']; ?>">
+                                    <?php echo $cliente['email'] . ' - ' . $cliente['nombre']; ?>
+                                </option>
+                            <?php endforeach; ?>
+                        </select>
+                    </label>
+                <?php else: ?>
+                    <label>Email:
+                        <input type="email" name="email"
+                            value="<?php echo isset($_POST['email']) && !empty($_POST['email']) ? $_SESSION['email'] : $_SESSION['reserva']['email']; ?>"
+                            disabled>
+                    </label>
+                <?php endif; ?>
 
                 <?php if ($enviadoCorrectamente || $datosConfirmados) {
                     echo "<label>Habitación:
@@ -222,24 +271,34 @@ function AsignarHabitacion($capacidad) {
                 
                 
                 <label>Número de personas:
-                    <input type="number" name="num_huespedes" value="<?php echo isset($_POST['num_huespedes']) ? $_POST['num_huespedes'] :  ""; ?>"
-                    <?php if ($enviadoCorrectamente || $datosConfirmados)
-                            echo "disabled"; ?>>
+                    <input type="number" name="num_huespedes" 
+                        value="<?php 
+                                echo isset($_POST['num_huespedes']) && !empty($_POST['email']) ? $_POST['num_huespedes'] : '';  
+                                if (isset($datosConfirmados) && $datosConfirmados) 
+                                    echo $_SESSION['num_huespedes']; ?>"
+                        <?php 
+                                if ($enviadoCorrectamente || $datosConfirmados) 
+                                    echo 'disabled'; ?>>
                 </label>
-                <?php if (hayErrores3("num_huespedes")) { ?>
+                <?php if (hayErrores3('num_huespedes')) { ?>
                     <p class='error-formulario'>No hay Habitaciones disponibles.</p>
                 <?php } ?>
 
+
                 <label>Comentarios del cliente:
                     <textarea name="comentarios" rows="4"
-                        cols="50"><?php echo isset($_POST['comentarios']) ? $_POST['comentarios'] : ""; ?>
+                        cols="50"><?php echo isset($_POST['comentarios']) ? $_POST['comentarios'] : ""; 
+                        if ($datosConfirmados)
+                        echo $_SESSION["comentarios"]; ?>"
                         <?php if ($enviadoCorrectamente || $datosConfirmados)
                             echo "disabled"; ?></textarea>
                 </label>
 
                 <label>Día de entrada:
                     <input type="date" name="fecha_entrada"
-                        value="<?php echo isset($_POST['fecha_entrada']) ? $_POST['fecha_entrada'] : ""; ?>"
+                        value="<?php echo isset($_POST['fecha_entrada']) ? $_POST['fecha_entrada'] : ""; 
+                        if ($datosConfirmados)
+                        echo $_SESSION["fecha_entrada"]; ?>"
                         <?php if ($enviadoCorrectamente || $datosConfirmados)
                             echo "disabled"; ?>>
                 </label>
@@ -249,7 +308,9 @@ function AsignarHabitacion($capacidad) {
 
                 <label>Día de salida:
                     <input type="date" name="fecha_salida"
-                        value="<?php echo isset($_POST['fecha_salida']) ? $_POST['fecha_salida'] : ""; ?>" 
+                        value="<?php echo isset($_POST['fecha_salida']) ? $_POST['fecha_salida'] : ""; 
+                        if ($datosConfirmados)
+                        echo $_SESSION["fecha_salida"]; ?>"
                         <?php if ($enviadoCorrectamente || $datosConfirmados)
                             echo "disabled"; ?>>
                 </label>

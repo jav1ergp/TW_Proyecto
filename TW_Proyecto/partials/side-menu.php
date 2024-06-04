@@ -83,10 +83,44 @@ if (true) {
             ?>
         </div>
 
+        <div class="numero-habitaciones-total">
+            <h3>Número de Habitaciones Libres</h3>
+            <?php
+            $query = "SELECT COUNT(*) AS total_habitaciones_libres FROM habitacion WHERE estado != 'confirmada'";
+            $resultado = mysqli_query($db, $query);
+
+            if ($resultado) {
+                $fila = mysqli_fetch_assoc($resultado);
+                $total_habitaciones_libres = $fila['total_habitaciones_libres'];
+            } else {
+                echo "Error al ejecutar la consulta: " . mysqli_error($db);
+            }
+
+            echo "<p class='fondo-estadisticas'>El número total de habitaciones libres es $total_habitaciones_libres.</p>";
+            ?>
+        </div>
+
+        <div class="numero-habitaciones">
+            <h3>Huespedes alojados</h3>
+            <?php
+            $query = "SELECT SUM(capacidad) AS capacidad_huespedes FROM habitacion";
+            $resultado = mysqli_query($db, $query);
+
+            if ($resultado) {
+                $fila = mysqli_fetch_assoc($resultado);
+                $capacidad_huespedes = $fila['capacidad_huespedes'];
+            } else {
+                echo "Error al ejecutar la consulta: " . mysqli_error($db);
+            }
+
+            echo "<p class='fondo-estadisticas'>Los huespedes que hay alojados son $capacidad_huespedes.</p>";
+            ?>
+        </div>
+
         <div class="numero-habitaciones">
             <h3>Capacidad total</h3>
             <?php
-            $query = "SELECT SUM(capacidad) AS capacidad_total FROM habitacion";
+            $query = "SELECT SUM(capacidad) AS capacidad_total FROM reserva";
             $resultado = mysqli_query($db, $query);
 
             if ($resultado) {
@@ -96,7 +130,7 @@ if (true) {
                 echo "Error al ejecutar la consulta: " . mysqli_error($db);
             }
 
-            //echo "<p class='fondo-estadisticas'>El número de habitaciones libres es $habitaciones_libres.</p>";
+            echo "<p class='fondo-estadisticas'>La capacidad total del hotel es $capacidad_total.</p>";
             ?>
         </div>
 

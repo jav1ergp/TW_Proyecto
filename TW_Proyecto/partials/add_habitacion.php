@@ -41,6 +41,9 @@ if (!$db) {
             <?php
             $datosConfirmados = true;
             insertarEnBD();
+            $fecha = date('Y-m-d H:i:s');
+            $accion = "Se ha añadido nueva habitación.";
+            //$log = mysqli_query($db, "INSERT INTO log (fecha, descripcion) VALUES ($fecha, $accion)");
         }
 
         // Si se ha presionado el botón de limpiar, limpia los campos del formulario.

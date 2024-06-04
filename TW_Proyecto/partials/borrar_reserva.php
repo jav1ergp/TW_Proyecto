@@ -1,5 +1,6 @@
 <?php
 require_once 'db_connection.php';
+require_once 'operaciones_db_hab.php';
 
 
 if (session_status() == PHP_SESSION_NONE) {
@@ -26,16 +27,21 @@ if (isset($_GET['numero'])) {
 <?php 
 //Hacemos una consulta en la tabla de usuarios que tenga el mismo email evitando inyeccion SQL aunque no deberia tener
 $datosUsuarioABorrarDB = mysqli_query($db, "SELECT * FROM reserva WHERE numero='" . mysqli_real_escape_string($db, $numero_borrar) . "'");
+$datoshabitacionABorrarDB = mysqli_query($db, "SELECT * FROM habitacion WHERE numero='" . mysqli_real_escape_string($db, $numero_borrar) . "'");
 
 //array de datos a borrar
 $datosUsuarioABorrar = mysqli_fetch_assoc($datosUsuarioABorrarDB);
+$datoshabitacionABorrarDB = mysqli_fetch_assoc($datosUsuarioABorrarDB);
 
 //Si se ha encontrado, se guardarán los datos del usuario en una variable de sesión, que la usaremos para obtener los datos en el formulario de la BBDD
 if ($datosUsuarioABorrarDB && mysqli_num_rows($datosUsuarioABorrarDB) > 0){
         $_SESSION["reserva_borrar"] = $datosUsuarioABorrar;
 }
+if ($datosUsuarioABorrarDB && mysqli_num_rows($datosUsuarioABorrarDB) > 0){
+    $_SESSION["habitacion"] = $datosUsuarioABorrar;
+}
 
-function borrar(){
+function borrar1(){
     global $db;
     global $numero_borrar;
       // Ejecutar la consulta DELETE
@@ -59,6 +65,9 @@ function borrar(){
         </div>
 
         <?php
+         
+        inicializarVarSesion('estado');
+        $estado = 'operativa';
         $enviadoCorrectamente = false;
         if (isset($_POST["borrar-reserva"])){
             $enviadoCorrectamente = true;
@@ -70,7 +79,9 @@ function borrar(){
             <span class = "confirmacion-datos">Se han borrado los datos del usuario.</span>
             <?php
                 $datosConfirmados = true;
-                borrar();
+                borrar1();
+                $_SESSION['estado'] = $estado;
+                actualizar('estado');
         }?>
 
         <div class="formulario-editar">

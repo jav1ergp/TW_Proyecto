@@ -222,7 +222,7 @@ function AsignarHabitacion($capacidad) {
                 
                 
                 <label>Número de personas:
-                    <input type="number" name="num_huespedes" value="<?php echo isset($_POST['num_huespedes']) ? $_POST['num_huespedes'] :  $_SESSION["num_huespedes"]; ?>"
+                    <input type="number" name="num_huespedes" value="<?php echo isset($_POST['num_huespedes']) ? $_POST['num_huespedes'] :  ""; ?>"
                     <?php if ($enviadoCorrectamente || $datosConfirmados)
                             echo "disabled"; ?>>
                 </label>
@@ -232,14 +232,14 @@ function AsignarHabitacion($capacidad) {
 
                 <label>Comentarios del cliente:
                     <textarea name="comentarios" rows="4"
-                        cols="50"><?php echo isset($_POST['comentarios']) ? $_POST['comentarios'] : $_SESSION["comentarios"]; ?>
+                        cols="50"><?php echo isset($_POST['comentarios']) ? $_POST['comentarios'] : ""; ?>
                         <?php if ($enviadoCorrectamente || $datosConfirmados)
                             echo "disabled"; ?></textarea>
                 </label>
 
                 <label>Día de entrada:
                     <input type="date" name="fecha_entrada"
-                        value="<?php echo isset($_POST['fecha_entrada']) ? $_POST['fecha_entrada'] : $_SESSION["fecha_entrada"]; ?>"
+                        value="<?php echo isset($_POST['fecha_entrada']) ? $_POST['fecha_entrada'] : ""; ?>"
                         <?php if ($enviadoCorrectamente || $datosConfirmados)
                             echo "disabled"; ?>>
                 </label>
@@ -249,7 +249,7 @@ function AsignarHabitacion($capacidad) {
 
                 <label>Día de salida:
                     <input type="date" name="fecha_salida"
-                        value="<?php echo isset($_POST['fecha_salida']) ? $_POST['fecha_salida'] : $_SESSION["fecha_salida"]; ?>" 
+                        value="<?php echo isset($_POST['fecha_salida']) ? $_POST['fecha_salida'] : ""; ?>" 
                         <?php if ($enviadoCorrectamente || $datosConfirmados)
                             echo "disabled"; ?>>
                 </label>

@@ -2,14 +2,14 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color:indianred;
+  background-color: indianred;
   margin-top: 0;
   margin-bottom: 0;
   padding: 20px 0;
   color: white;
 }
 
-.top-header .telefono{
+.top-header .telefono {
   display: flex;
   align-items: center;
   position: absolute;
@@ -18,10 +18,11 @@
 }
 
 .telefono .simbolo::before {
-  content: "\1F4DE"; /*simbolo telefono*/
+  content: "\1F4DE";
+  /*simbolo telefono*/
 }
 
-.separador{
+.separador {
   margin-right: 15px;
 }
 
@@ -51,7 +52,7 @@
   display: flex;
   justify-content: center;
   list-style-type: none;
-  
+
 }
 
 .navi li {
@@ -60,29 +61,31 @@
 
 
 main {
-  flex-grow: 1; /* Permite que el elemento principal (main) crezca y ocupe todo el espacio disponible */
-  padding: 20px; /* Agrega un espacio de relleno para evitar que el contenido se ajuste al borde */
+  flex-grow: 1;
+  /* Permite que el elemento principal (main) crezca y ocupe todo el espacio disponible */
+  padding: 20px;
+  /* Agrega un espacio de relleno para evitar que el contenido se ajuste al borde */
 }
 
-.bienvenida{
+.bienvenida {
   background-color: rgb(161, 211, 231);
   padding: 5px;
 }
 
-.bienvenida h3{
+.bienvenida h3 {
   font-size: xx-large;
   text-align: center;
   font-weight: bold;
 }
 
-.bienvenida p{
+.bienvenida p {
   font-size: x-large;
-  
+
 }
 
 aside h3 {
   background-color: blue;
-  color: white; 
+  color: white;
   padding: 10px;
 }
 
@@ -114,7 +117,8 @@ footer {
 
 .contenedor {
   display: flex;
-  min-height: 50vh; /* Establece el alto mínimo del contenedor al alto total de la ventana */
+  min-height: 50vh;
+  /* Establece el alto mínimo del contenedor al alto total de la ventana */
 }
 
 body {
@@ -140,7 +144,7 @@ main {
 
 aside h3 {
   background-color: blue;
-  color: white; 
+  color: white;
   padding: 10px;
 }
 
@@ -260,27 +264,27 @@ form.registros_pag input[type='submit'] {
   margin: 10px;
 }
 
-.boton-login{
+.boton-login {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 }
 
-.botones-editar-logout{
+.botones-editar-logout {
   display: flex;
   justify-content: center;
   margin: 10px;
 }
 
-.boton-editar{
+.boton-editar {
   margin-right: 10px;
 }
 
-.rol{
+.rol {
   color: blue;
   font-size: small;
-  margin:0;
+  margin: 0;
 }
 
 .autores {
@@ -290,34 +294,34 @@ form.registros_pag input[type='submit'] {
   padding-bottom: 10px;
 }
 
-.autores a:hover{
+.autores a:hover {
   background-color: moccasin;
 }
 
-.fotos{
+.fotos {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
 }
 
-.foto .texto{
+.foto .texto {
   text-align: left;
   font-size: large;
   margin: 3% 20% 1% 20%;
 }
 
-.foto p{
+.foto p {
   text-align: left;
   font-size: large;
   margin: 1% 20%;
   font-weight: bold
 }
 
-.foto h2{
+.foto h2 {
   text-align: center;
 }
 
-.foto img{
+.foto img {
   display: block;
   margin: 0 auto;
 }
@@ -337,13 +341,44 @@ form.registros_pag input[type='submit'] {
   width: calc(33% - 20px);
 }
 
-.imagenes-incidencia{
+.imagenes-incidencia {
   background-color: moccasin;
   display: flex;
   flex-direction: column;
 }
 
-.cada-imagen-incidencia{
+.cada-imagen-incidencia {
   width: 30%;
   margin-bottom: 10px;
+}
+
+.log {
+  width: 20%;
+  background-color: lightcoral;
+}
+
+.log h3 {
+  margin: 10px;
+}
+
+.fila-log:nth-of-type(odd) {
+  background-color: moccasin;
+}
+
+.fila-log:nth-of-type(even) {
+  background-color: lightblue;
+}
+
+.fila-log {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+}
+
+.fecha-log {
+  color: lightskyblue;
+}
+
+.descrip-log {
+  text-decoration: bold;
 }

@@ -1,10 +1,10 @@
 <header>
     <h1 class="top-header">
         <img src="logo.png" height="50" width="50">
-        <p>Zooweb</p>
-        <?php include("partials/login.php");?>
+        <p>Aqua Horizon Resort</p>
+        <?php include ("partials/login.php"); ?>
         <?php
-        
+
         ?>
         <div class="telefono">
             <span class="simbolo"></span>
@@ -15,7 +15,7 @@
                     <input type="hidden" name="email" value="<?php echo $_SESSION["usuario"]["email"]; ?>">
                     <p><input type="submit" id="enviar" value="Reserva ahora" /></p>
                 </form>
-                
+
             <?php else: ?>
                 <form method="GET" action="registro.php">
                     <p><input type="submit" id="enviar" value="Reserva ahora" /></p>
@@ -32,10 +32,14 @@
             <?php if (isset($_SESSION["usuario"]["email"]) && !empty($_SESSION["usuario"]["email"])): ?>
                 <?php if (isset($_SESSION["usuario"]["rol"]) && ($_SESSION["usuario"]["rol"] !== "administrador")): ?>
                     <li><a href="reservas.php?email=<?php echo urlencode($_SESSION["usuario"]["email"]); ?>">RESERVAS</a></li>
-                    <?php endif; ?>
+                <?php endif; ?>
             <?php endif; ?>
             <?php if (isset($_SESSION["usuario"]["rol"]) && ($_SESSION["usuario"]["rol"] === "recepcionista" || $_SESSION["usuario"]["rol"] === "administrador")): ?>
                 <li><a href="listado.php">USUARIOS</a></li>
+            <?php endif; ?>
+
+            <?php if (isset($_SESSION["usuario"]["rol"]) && ($_SESSION["usuario"]["rol"] === "administrador")): ?>
+                <li><a href="logs.php">LOGS</a></li>
             <?php endif; ?>
         </ul>
     </nav>

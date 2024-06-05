@@ -1,6 +1,6 @@
 <header>
     <h1 class="top-header">
-        <img src="logo.png" height="50" width="50">
+        <img src="./fotos/logo.png" height="50" width="50">
         <p>Aqua Horizon Resort</p>
         <?php include ("partials/login.php"); ?>
         <?php

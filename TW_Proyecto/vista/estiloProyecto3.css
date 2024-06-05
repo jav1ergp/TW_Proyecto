@@ -5,7 +5,7 @@
   background-color: rgb(234, 228, 217);
   margin: 0;
   padding: 20px 0;
-  color: black;
+  color: white;
 }
 
 .top-header .telefono {
@@ -27,16 +27,16 @@
 
 #enviar {
   background-color: white;
-  color: black;
+  color: coral;
   padding: 20px;
   font-size: 25px;
-  border: 2px solid rgb(234, 228, 217);
+  border: 2px solid coral;
   border-radius: 5px;
 }
 
 #enviar:hover {
-  background-color: rgb(234, 228, 217);
-  color: black;
+  background-color: coral;
+  color: white;
   cursor: pointer;
 }
 
@@ -45,7 +45,7 @@
   justify-content: center;
   align-items: center;
   padding: 10px;
-  border-bottom: 2px solid rgb(234, 228, 217);
+  border-bottom: 2px solid coral;
 }
 
 .navi ul {
@@ -66,13 +66,13 @@ main {
 .bienvenida {
   background-color: white;
   padding: 20px;
-  border: 2px solid rgb(234, 228, 217);
+  border: 2px solid coral;
   border-radius: 10px;
   text-align: center;
 }
 
 .bienvenida h2 {
-  color: black;
+  color: coral;
   font-size: 2em;
   margin-bottom: 10px;
 }
@@ -88,8 +88,8 @@ main {
 }
 
 .bienvenida ul li {
-  background-color: rgb(234, 228, 217);
-  color: black;
+  background-color: coral;
+  color: white;
   margin: 5px 0;
   padding: 10px;
   border-radius: 5px;
@@ -97,20 +97,20 @@ main {
 }
 
 .bienvenida ul li:hover {
-  background-color: rgb(200, 190, 180);
+  background-color: darksalmon;
   cursor: pointer;
 }
 
 aside h3 {
-  background-color: rgb(234, 228, 217);
-  color: black;
+  background-color: coral;
+  color: white;
   padding: 10px;
 }
 
 aside {
   width: 300px;
   background-color: white;
-  border: 2px solid rgb(234, 228, 217);
+  border: 2px solid coral;
   padding: 10px;
   display: flex;
   flex-direction: column;
@@ -127,8 +127,8 @@ footer {
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  background-color: rgb(234, 228, 217);
-  color: black;
+  background-color: coral;
+  color: white;
   padding: 10px;
 }
 
@@ -140,18 +140,18 @@ footer {
 body {
   height: 100%;
   background-color: white;
-  color: black;
+  color: coral;
   font-family: Arial, sans-serif;
 }
 
 li:hover {
-  background-color: rgb(234, 228, 217);
-  color: black;
+  background-color: coral;
+  color: white;
 }
 
 input[type='submit'] {
-  background-color: rgb(234, 228, 217);
-  color: black;
+  background-color: coral;
+  color: white;
   padding: 10px 20px;
   border: none;
   border-radius: 4px;
@@ -161,15 +161,15 @@ input[type='submit'] {
 
 input[type='submit']:hover {
   background-color: white;
-  color: rgb(234, 228, 217);
-  border: 2px solid rgb(234, 228, 217);
+  color: coral;
+  border: 2px solid coral;
 }
 
 .listado {
   background-color: white;
   padding: 20px;
   margin-top: -10px;
-  border: 2px solid rgb(234, 228, 217);
+  border: 2px solid coral;
   border-radius: 5px;
 }
 
@@ -179,8 +179,8 @@ input[type='submit']:hover {
   background-color: white;
   padding: 8px;
   padding-left: 30px;
-  color: black;
-  border: 2px solid rgb(234, 228, 217);
+  color: coral;
+  border: 2px solid coral;
   border-radius: 5px;
 }
 
@@ -194,12 +194,12 @@ input[type='submit']:hover {
   background-color: white;
   margin: 0;
   padding: 15px;
-  border: 2px solid rgb(234, 228, 217);
+  border: 2px solid coral;
   border-radius: 5px;
 }
 
 a {
-  color: black;
+  color: coral;
   text-decoration: none;
 }
 
@@ -211,7 +211,7 @@ a {
 .accion-a-realizar {
   background-color: white;
   padding: 10px;
-  border: 2px solid rgb(234, 228, 217);
+  border: 2px solid coral;
   border-radius: 5px;
 }
 
@@ -229,13 +229,13 @@ a {
   background-color: white;
   padding: 10px;
   flex: 1;
-  border: 2px solid rgb(234, 228, 217);
+  border: 2px solid coral;
   border-radius: 5px;
 }
 
 .datos-cada-usuario li:hover {
-  background-color: rgb(234, 228, 217);
-  color: black;
+  background-color: coral;
+  color: white;
 }
 
 .datos-cada-usuario li {
@@ -244,7 +244,7 @@ a {
 
 .datos-total {
   background-color: white;
-  border: 3px solid rgb(234, 228, 217);
+  border: 3px solid coral;
   display: flex;
   align-items: center;
 }
@@ -284,7 +284,7 @@ form.registros_pag input[type='submit'] {
 }
 
 .rol {
-  color: black;
+  color: coral;
   font-size: small;
   margin: 0;
 }
@@ -297,8 +297,8 @@ form.registros_pag input[type='submit'] {
 }
 
 .autores a:hover {
-  background-color: rgb(234, 228, 217);
-  color: black;
+  background-color: coral;
+  color: white;
 }
 
 .fotos {
@@ -322,7 +322,7 @@ form.registros_pag input[type='submit'] {
 
 .foto h2 {
   text-align: center;
-  color: black;
+  color: coral;
 }
 
 .foto img {
@@ -337,7 +337,7 @@ form.registros_pag input[type='submit'] {
 }
 
 .res-card {
-  border: 1px solid rgb(234, 228, 217);
+  border: 1px solid coral;
   box-sizing: border-box;
   margin: 10px;
   padding: 10px;
@@ -359,8 +359,8 @@ form.registros_pag input[type='submit'] {
 
 .log {
   width: 50%;
-  background-color: rgb(234, 228, 217);
-  color: black;
+  background-color: coral;
+  color: white;
 }
 
 .log h3 {
@@ -372,7 +372,7 @@ form.registros_pag input[type='submit'] {
 }
 
 .fila-log:nth-of-type(even) {
-  background-color: rgb(234, 228, 217);
+  background-color: lightcoral;
 }
 
 .fila-log {

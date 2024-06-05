@@ -17,7 +17,7 @@ if (!$db) {
 <html>
 <head>
 	<meta charset="utf-8">
-	<title>Ejercicio 15</title>
+	<title>Datos usuarios</title>
     <link rel="stylesheet" href="vista/estiloProyecto.css">
 </head>
 <body>

@@ -42,7 +42,7 @@ if (!$db) {
             $datosConfirmados = true;
             insertarEnBD();
             $fecha = date('Y-m-d H:i:s');
-            $accion = "Se ha añadido al nuevo usuario {$_SESSION['nombre']} con DNI: {$_SESSION['dni']}.";
+            $accion = "Se ha añadido al nuevo usuario {$_SESSION['usuario']['nombre']} con DNI: {$_SESSION['dni']}.";
             $log = mysqli_query($db, "INSERT INTO logs (fecha, descripcion) VALUES ('$fecha', '$accion')");
         }
 

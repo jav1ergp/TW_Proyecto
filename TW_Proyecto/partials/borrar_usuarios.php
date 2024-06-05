@@ -54,7 +54,7 @@ if (!$db) {
             $datosConfirmados = true;
             borrar();
             $fecha = date('Y-m-d H:i:s');
-            $accion = "Se ha borrado un usuario.";
+            $accion = "Se ha borrado al usuario {$_SESSION['usuario_borrar']['nombre']} con DNI {$_SESSION['usuario_borrar']['dni']}.";
             $log = mysqli_query($db, "INSERT INTO log (fecha, descripcion) VALUES ('$fecha', '$accion')");
             ?>
         <?php

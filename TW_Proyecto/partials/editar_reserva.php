@@ -76,6 +76,9 @@ function actualizar3($campo) {
             echo "<span class='confirmacion-datos'>Se han modificado los datos de la reserva.</span>";
             $datosConfirmados = true;
             actualizar3("comentarios");
+            $fecha = date('Y-m-d H:i:s');
+            $accion = "Se ha modificado la reserva de la habitacion {$_SESSION['reserva']['numero']}.";
+            $log = mysqli_query($db, "INSERT INTO log (fecha, descripcion) VALUES ('$fecha', '$accion')");
         }
         ?>
 

@@ -16,9 +16,13 @@ include ("partials/head-html.php");
     <!-- Configuración del login -->
     <?php include ("partials/login.php"); ?>
 
-    <?php include ("partials/log.php"); ?>
-    <?php include ("partials/side-menu.php"); ?>
-    
+    <div class="contenedor">
+        <div class="log">
+            <?php include ("partials/log.php"); ?>
+        </div>
+        <?php include ("partials/side-menu.php"); ?>
+    </div>
+
     <!-- Footer de la web -->
     <?php include ("partials/footer.php"); ?>
 </body>

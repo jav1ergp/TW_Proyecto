@@ -63,6 +63,9 @@ if (isset($_GET['email'])) {
             echo "<span class='confirmacion-datos'>Se han modificado los datos del usuario.</span>";
             $datosConfirmados = true;
             actualizarEnBD();
+            $fecha = date('Y-m-d H:i:s');
+            $accion = "Se han modificado los datos del usuario {$_SESSION['usuario']['nombre']}.";
+            $log = mysqli_query($db, "INSERT INTO logs (fecha, descripcion) VALUES ('$fecha', '$accion')");
         }
 
         inicializarTodasVarSesion();

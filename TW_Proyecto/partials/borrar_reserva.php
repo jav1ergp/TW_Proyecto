@@ -51,7 +51,7 @@ function borrar1(){
         // La consulta falló o no se eliminó ninguna fila?>
         <p class='error-formulario'>ERROR: No se pudo borrar la reserva de la BBDD.</p> <?php
         $fecha = date('Y-m-d H:i:s');
-        $accion = "Se ha borrado una habitación";
+        $accion = "No se ha podido borrar la habitación";
         mysqli_query($db, "INSERT INTO logs (fecha, descripcion) VALUES ('$fecha', '$accion')");
     }
 }
@@ -85,6 +85,9 @@ function borrar1(){
                 borrar1();
                 $_SESSION['estado'] = $estado;
                 actualizar('estado');
+                $fecha = date('Y-m-d H:i:s');
+                $accion = "Se ha borrado la reserva de la habitación {$_SESSION['reserva_borrar']['numero']}.";
+                $log = mysqli_query($db, "INSERT INTO logs (fecha, descripcion) VALUES ('$fecha', '$accion')");
         }?>
 
         <div class="formulario-editar">

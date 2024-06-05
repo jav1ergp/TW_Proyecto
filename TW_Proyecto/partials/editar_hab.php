@@ -63,6 +63,9 @@ if (isset($_GET['numero'])) {
             echo "<span class='confirmacion-datos'>Se han modificado los datos de la habitacion.</span>";
             $datosConfirmados = true;
             actualizarEnBD();
+            $fecha = date('Y-m-d H:i:s');
+            $accion = "Se ha modificado la habitacion {$_SESSION['habitacion']['numero']}.";
+            $log = mysqli_query($db, "INSERT INTO logs (fecha, descripcion) VALUES ('$fecha', '$accion')");
         }
 
         inicializarTodasVarSesion();

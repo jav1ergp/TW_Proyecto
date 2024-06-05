@@ -353,8 +353,8 @@ form.registros_pag input[type='submit'] {
 }
 
 .log {
-  width: 20%;
-  background-color: lightcoral;
+  width: 50%;
+  background-color: red;
 }
 
 .log h3 {

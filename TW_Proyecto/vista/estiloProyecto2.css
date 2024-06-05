@@ -2,8 +2,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: coral;
-  margin: 0;
+  background-color: indianred;
+  margin-top: 0;
+  margin-bottom: 0;
   padding: 20px 0;
   color: white;
 }
@@ -27,16 +28,15 @@
 
 #enviar {
   background-color: white;
-  color: coral;
-  padding: 20px;
+  color: rgb(0, 0, 0);
+  padding: 20px 20px;
   font-size: 25px;
-  border: 2px solid coral;
+  border: none;
   border-radius: 5px;
 }
 
 #enviar:hover {
-  background-color: coral;
-  color: white;
+  background-color: grey;
   cursor: pointer;
 }
 
@@ -45,76 +45,58 @@
   justify-content: center;
   align-items: center;
   padding: 10px;
-  border-bottom: 2px solid coral;
+  border-bottom: black solid 2px;
 }
 
 .navi ul {
   display: flex;
   justify-content: center;
   list-style-type: none;
+
 }
 
 .navi li {
   margin-right: 20%;
 }
 
+
 main {
   flex-grow: 1;
+  /* Permite que el elemento principal (main) crezca y ocupe todo el espacio disponible */
   padding: 20px;
+  /* Agrega un espacio de relleno para evitar que el contenido se ajuste al borde */
 }
 
 .bienvenida {
-  background-color: white;
-  padding: 20px;
-  border: 2px solid coral;
-  border-radius: 10px;
-  text-align: center;
+  background-color: rgb(161, 211, 231);
+  padding: 5px;
 }
 
-.bienvenida h2 {
-  color: coral;
-  font-size: 2em;
-  margin-bottom: 10px;
+.bienvenida h3 {
+  font-size: xx-large;
+  text-align: center;
+  font-weight: bold;
 }
 
 .bienvenida p {
-  font-size: 1.2em;
-  margin: 10px 0;
-}
+  font-size: x-large;
 
-.bienvenida ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-.bienvenida ul li {
-  background-color: coral;
-  color: white;
-  margin: 5px 0;
-  padding: 10px;
-  border-radius: 5px;
-  font-size: 1.1em;
-}
-
-.bienvenida ul li:hover {
-  background-color: darksalmon;
-  cursor: pointer;
 }
 
 aside h3 {
-  background-color: coral;
+  background-color: blue;
   color: white;
   padding: 10px;
 }
 
 aside {
   width: 300px;
-  background-color: white;
-  border: 2px solid coral;
+  background-color: moccasin;
   padding: 10px;
   display: flex;
   flex-direction: column;
 }
+
 
 h3 {
   margin: 0;
@@ -127,30 +109,57 @@ footer {
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  background-color: coral;
+  background-color: indianred;
   color: white;
-  padding: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
 }
 
 .contenedor {
   display: flex;
   min-height: 50vh;
+  /* Establece el alto mínimo del contenedor al alto total de la ventana */
 }
 
 body {
   height: 100%;
-  background-color: white;
-  color: coral;
-  font-family: Arial, sans-serif;
 }
 
 li:hover {
-  background-color: coral;
-  color: white;
+  background-color: indianred;
 }
+
+.contenedor {
+  display: flex;
+  min-height: 50vh;
+  /* Establece el alto mínimo del contenedor al alto total de la ventana */
+}
+
+main {
+  flex-grow: 1;
+  /* Permite que el elemento principal (main) crezca y ocupe todo el espacio disponible */
+  padding: 20px;
+  /* Agrega un espacio de relleno para evitar que el contenido se ajuste al borde */
+}
+
+aside h3 {
+  background-color: blue;
+  color: white;
+  padding: 10px;
+}
+
+aside {
+  width: 300px;
+  background-color: moccasin;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
 
 input[type='submit'] {
   background-color: coral;
+  display: block;
   color: white;
   padding: 10px 20px;
   border: none;
@@ -160,29 +169,24 @@ input[type='submit'] {
 }
 
 input[type='submit']:hover {
-  background-color: white;
-  color: coral;
-  border: 2px solid coral;
+  background-color: indianred;
 }
 
 .listado {
-  background-color: white;
+  background-color: rgb(161, 211, 231);
   padding: 20px;
   margin-top: -10px;
-  border: 2px solid coral;
-  border-radius: 5px;
 }
 
 .formulario-editar label {
   display: flex;
   flex-direction: row;
-  background-color: white;
+  background-color: moccasin;
   padding: 8px;
   padding-left: 30px;
-  color: coral;
-  border: 2px solid coral;
-  border-radius: 5px;
 }
+
+
 
 .formulario-editar .clave input {
   margin-right: 10px;
@@ -191,15 +195,13 @@ input[type='submit']:hover {
 .error-formulario {
   font-size: medium;
   color: red;
-  background-color: white;
+  background-color: moccasin;
   margin: 0;
   padding: 15px;
-  border: 2px solid coral;
-  border-radius: 5px;
 }
 
 a {
-  color: coral;
+  color: black;
   text-decoration: none;
 }
 
@@ -209,10 +211,8 @@ a {
 }
 
 .accion-a-realizar {
-  background-color: white;
+  background-color: moccasin;
   padding: 10px;
-  border: 2px solid coral;
-  border-radius: 5px;
 }
 
 .accion-a-realizar p {
@@ -226,16 +226,14 @@ a {
 
 .datos-cada-usuario,
 .datos-cada-incidencia {
-  background-color: white;
+  background-color: moccasin;
   padding: 10px;
   flex: 1;
-  border: 2px solid coral;
-  border-radius: 5px;
+  /* Permitir que el div ocupe el espacio restante */
 }
 
 .datos-cada-usuario li:hover {
-  background-color: coral;
-  color: white;
+  background-color: moccasin;
 }
 
 .datos-cada-usuario li {
@@ -243,8 +241,8 @@ a {
 }
 
 .datos-total {
-  background-color: white;
-  border: 3px solid coral;
+  background-color: moccasin;
+  border: 3px solid indianred;
   display: flex;
   align-items: center;
 }
@@ -284,7 +282,7 @@ form.registros_pag input[type='submit'] {
 }
 
 .rol {
-  color: coral;
+  color: blue;
   font-size: small;
   margin: 0;
 }
@@ -297,8 +295,7 @@ form.registros_pag input[type='submit'] {
 }
 
 .autores a:hover {
-  background-color: coral;
-  color: white;
+  background-color: moccasin;
 }
 
 .fotos {
@@ -317,12 +314,11 @@ form.registros_pag input[type='submit'] {
   text-align: left;
   font-size: large;
   margin: 1% 20%;
-  font-weight: bold;
+  font-weight: bold
 }
 
 .foto h2 {
   text-align: center;
-  color: coral;
 }
 
 .foto img {
@@ -337,17 +333,16 @@ form.registros_pag input[type='submit'] {
 }
 
 .res-card {
-  border: 1px solid coral;
+  border: 1px solid #ccc;
   box-sizing: border-box;
   margin: 10px;
   padding: 10px;
   border-radius: 5px;
   width: calc(33% - 20px);
-  background-color: white;
 }
 
 .imagenes-incidencia {
-  background-color: white;
+  background-color: moccasin;
   display: flex;
   flex-direction: column;
 }
@@ -359,8 +354,7 @@ form.registros_pag input[type='submit'] {
 
 .log {
   width: 50%;
-  background-color: coral;
-  color: white;
+  background-color: red;
 }
 
 .log h3 {
@@ -368,11 +362,11 @@ form.registros_pag input[type='submit'] {
 }
 
 .fila-log:nth-of-type(odd) {
-  background-color: white;
+  background-color: moccasin;
 }
 
 .fila-log:nth-of-type(even) {
-  background-color: lightcoral;
+  background-color: lightblue;
 }
 
 .fila-log {

@@ -40,6 +40,7 @@
 
             <?php if (isset($_SESSION["usuario"]["rol"]) && ($_SESSION["usuario"]["rol"] === "administrador")): ?>
                 <li><a href="logs.php">LOGS</a></li>
+                <li><a href="administracion.php">ADMINISTRACIÓN</a></li>
             <?php endif; ?>
         </ul>
     </nav>

@@ -21,6 +21,12 @@
   /*simbolo telefono*/
 }
 
+@media (max-width: 1500px) {
+  .telefono .numero {
+    display: none;
+  }
+}
+
 .separador {
   margin-right: 15px;
 }

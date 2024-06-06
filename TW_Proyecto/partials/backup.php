@@ -2,7 +2,7 @@
 require_once 'db_credencials.php';
 require_once 'db_connection.php';
 
-$fichBackup = "../backup.sql";
+$fichBackup = "../backup.txt";
 
 $mysqli = connect_db();
 
@@ -52,6 +52,6 @@ fclose($handle);
 desconectar_db($mysqli);
 
 # Lo enviamos al usuario
-header("Content-disposition: attachment; filename=backup.sql");
+header("Content-disposition: attachment; filename=backup.txt");
 header("Content-type: text/plain");
-readfile("../backup.sql");
+readfile("../backup.txt");

@@ -1,31 +1,54 @@
 <?php
-require_once 'db_credencials.php';
 require_once 'db_connection.php';
 
-// if (isset($_POST['recovery'])) {
-//     $mysqli = connect_db();
+if (isset($_POST['recovery'])) {
+    $archivoSubido = $_FILES['archivoRec'];
 
-//     $sql = file_get_contents($fichBackup);
-//     $resultado = $mysqli->multi_query($sql);
+    if ($archivoSubido['error'] !== UPLOAD_ERR_OK) {
+        echo "Error al subir el archivo: " . $archivoSubido['error'];
+        exit;
+    } else if ($archivoSubido['type'] !== 'text/plain') {
+        echo "Solo se acepta texto plano";
+        exit;
+    }
 
-//     desconectar_db($mysqli);
-// }
+    $sql = file_get_contents($archivoSubido['tmp_name']);
 
-// if (isset($_POST['restart'])) {
-//     $mysqli = connect_db();
+    $mysqli = connect_db();
 
-//     $sql = "SHOW TABLES;";
+    # Ahora, hay que tener en cuenta no droppear la tabla de usuarios entera,
+    # porque nos quedariamos sin usuario administrador.
+    $command = "DROP TABLE IF EXISTS `usuarios`";
 
-//     $resultado = $mysqli->query($sql);
+    # La reemplazamos por un delete de todos los usuarios menos los administradores
+    $sql = str_replace($command, "DELETE FROM `usuarios` WHERE rol != 'administrador'", $sql);
 
-//     while ($fila = $resultado->fetch_assoc()) {
-//         $tableName = $fila["Tables_in_" . DB_NAME];
-//         $sql = "TRUNCATE TABLE " . $tableName . ";";
-//         $accion = $mysqli->query($sql);
-//     }
+    # Como no hemos dropeado la tabla usuarios, no debemos crearla.
+    $command = "CREATE TABLE `usuarios`";
+    $sql = str_replace($command, "CREATE TABLE `usuarios` IF NOT EXISTS", $sql);
 
-//     desconectar_db($mysqli);
-// }
+    # Debe haber un usuario administrador,
+    # por lo que lo borramos del query para que no se inserte
+    // $command = "('Javier', 'Perez', '76067757H', 'administrador@gmail.com', '$2y$10\$FTyu3X4Ozx7tNNGLtj.kSudgu4G4bH..fKXPcSh82xk1P8475i3uu', '1234567891234567', 'administrador'),";
+    // $found = strpos($sql, $command);
+
+    // if ($found) {
+    //     echo "Usuario administrador encontrado, se procede a NO insertarlo.";
+    // } else {
+    //     echo "Usuario administrador no encontrado.";
+    // }
+
+    $resultado = $mysqli->multi_query($sql);
+
+    desconectar_db($mysqli);
+
+    if ($resultado) {
+        echo "Base de datos restaurada correctamente.";
+    } else {
+        echo "Error al restaurar la base de datos.";
+    }
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -38,21 +61,14 @@ require_once 'db_connection.php';
             <button class="adminbbdd" type="submit" name="backup">Generar copia de seguridad.</button>
         </form>
 
-        <form action="./partials/recovery.php" method="post">
+        <form action="administracion.php" method="post" enctype='multipart/form-data'>
             <button class="adminbbdd" type="submit" name="recovery">Recuperar mediante backup.</button>
+            <input type="file" name="archivoRec" id="archivoRec">
         </form>
 
         <form action="./partials/restart.php" method="post">
             <button class="adminbbdd" type="submit" name="restart">Reiniciar la base de datos.</button>
         </form>
-        <?php
-        if (isset($_POST['backup']))
-            echo ("Copia de seguridad generada.\n");
-        if (isset($_POST['recovery']))
-            echo ("Copia de seguridad recuperada.\n");
-        if (isset($_POST['restart']))
-            echo ("Base de datos reiniciada.\n");
-        ?>
     </main>
 </body>
 

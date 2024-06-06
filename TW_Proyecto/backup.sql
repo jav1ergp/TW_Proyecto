@@ -1,3 +1,4 @@
+DROP TABLE IF EXISTS `fotografias`;
 CREATE TABLE `fotografias` (
   `id` int NOT NULL AUTO_INCREMENT,
   `numero_hab` varchar(50) DEFAULT NULL,
@@ -6,10 +7,9 @@ CREATE TABLE `fotografias` (
   PRIMARY KEY (`id`),
   KEY `numero_hab` (`numero_hab`),
   CONSTRAINT `fotografias_ibfk_1` FOREIGN KEY (`numero_hab`) REFERENCES `habitacion` (`numero`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=56 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-
-
+DROP TABLE IF EXISTS `habitacion`;
 CREATE TABLE `habitacion` (
   `numero` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `capacidad` int DEFAULT NULL,
@@ -20,170 +20,194 @@ CREATE TABLE `habitacion` (
   PRIMARY KEY (`numero`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-INSERT INTO habitacion SET numero: '23432', capacidad: '677', precio: '123.00', descripcion: ' QWE                   ', foto: '', estado: 'Pendiente';
-INSERT INTO habitacion SET numero: '34232', capacidad: '566', precio: '1220.00', descripcion: '         asd           ', foto: '', estado: 'Confirmada';
-INSERT INTO habitacion SET numero: '43214', capacidad: '10', precio: '23.00', descripcion: '     123               ', foto: '', estado: 'Pendiente';
-INSERT INTO habitacion SET numero: '500', capacidad: '500', precio: '12.00', descripcion: 'asd                    ', foto: '', estado: 'Confirmada';
-INSERT INTO habitacion SET numero: '5435', capacidad: '3', precio: '2.00', descripcion: '    asd                ', foto: '', estado: 'Confirmada';
-INSERT INTO habitacion SET numero: 'adsad', capacidad: '111', precio: '10.00', descripcion: '        asd            ', foto: '', estado: 'Confirmada';
-INSERT INTO habitacion SET numero: 'asdasd', capacidad: '5656', precio: '123.00', descripcion: '   asd                 ', foto: '', estado: 'operativa';
-INSERT INTO habitacion SET numero: 'asds', capacidad: '51', precio: '10.00', descripcion: '       asd             ', foto: '', estado: 'Pendiente';
-INSERT INTO habitacion SET numero: 'fsdfds', capacidad: '102', precio: '10.00', descripcion: '          asd          ', foto: '', estado: 'Confirmada';
-INSERT INTO habitacion SET numero: 'rewr', capacidad: '67', precio: '234.00', descripcion: '        sad            ', foto: '', estado: 'Confirmada';
+INSERT INTO `habitacion` (`numero`, `capacidad`, `precio`, `descripcion`, `foto`, `estado`) VALUES ('34232', '566', '1220.00', '         asd           ', '', 'Confirmada');
+INSERT INTO `habitacion` (`numero`, `capacidad`, `precio`, `descripcion`, `foto`, `estado`) VALUES ('43214', '10', '23.00', '     123               ', '', 'Pendiente');
+INSERT INTO `habitacion` (`numero`, `capacidad`, `precio`, `descripcion`, `foto`, `estado`) VALUES ('500', '500', '12.00', 'asd                    ', '', 'Confirmada');
+INSERT INTO `habitacion` (`numero`, `capacidad`, `precio`, `descripcion`, `foto`, `estado`) VALUES ('5435', '3', '2.00', '    asd                ', '', 'Confirmada');
+INSERT INTO `habitacion` (`numero`, `capacidad`, `precio`, `descripcion`, `foto`, `estado`) VALUES ('adsad', '111', '10.00', '        asd            ', '', 'Confirmada');
+INSERT INTO `habitacion` (`numero`, `capacidad`, `precio`, `descripcion`, `foto`, `estado`) VALUES ('asdasd', '5656', '123.00', '   asd                 ', '', 'operativa');
+INSERT INTO `habitacion` (`numero`, `capacidad`, `precio`, `descripcion`, `foto`, `estado`) VALUES ('asds', '51', '10.00', '       asd             ', '', 'Pendiente');
+INSERT INTO `habitacion` (`numero`, `capacidad`, `precio`, `descripcion`, `foto`, `estado`) VALUES ('fsdfds', '102', '10.00', '          asd          ', '', 'Confirmada');
+INSERT INTO `habitacion` (`numero`, `capacidad`, `precio`, `descripcion`, `foto`, `estado`) VALUES ('rewr', '67', '234.00', '        sad            ', '', 'Confirmada');
 
-
+DROP TABLE IF EXISTS `logs`;
 CREATE TABLE `logs` (
   `id` int NOT NULL AUTO_INCREMENT,
   `fecha` datetime(6) NOT NULL,
   `descripcion` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=144 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=170 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-INSERT INTO logs SET id: '1', fecha: '2024-06-04 02:28:11.000000', descripcion: 'El usuario recepcionista@gmail.com ha iniciado sesión.';
-INSERT INTO logs SET id: '2', fecha: '2024-06-04 02:28:11.000000', descripcion: 'El usuario recepcionista@gmail.com ha iniciado sesión.';
-INSERT INTO logs SET id: '3', fecha: '2024-06-04 13:02:30.000000', descripcion: 'El usuario recepcionista@gmail.com ha iniciado sesión.';
-INSERT INTO logs SET id: '4', fecha: '2024-06-04 13:02:30.000000', descripcion: 'El usuario recepcionista@gmail.com ha iniciado sesión.';
-INSERT INTO logs SET id: '5', fecha: '2024-06-04 13:05:04.000000', descripcion: 'El usuario recepcionista@gmail.com ha iniciado sesión.';
-INSERT INTO logs SET id: '6', fecha: '2024-06-04 13:05:04.000000', descripcion: 'El usuario recepcionista@gmail.com ha iniciado sesión.';
-INSERT INTO logs SET id: '7', fecha: '2024-06-04 13:05:33.000000', descripcion: 'El usuario recepcionista@gmail.com ha iniciado sesión.';
-INSERT INTO logs SET id: '8', fecha: '2024-06-04 13:05:33.000000', descripcion: 'El usuario recepcionista@gmail.com ha iniciado sesión.';
-INSERT INTO logs SET id: '9', fecha: '2024-06-04 13:07:05.000000', descripcion: 'El usuario recepcionista@gmail.com ha iniciado sesión.';
-INSERT INTO logs SET id: '10', fecha: '2024-06-04 13:07:05.000000', descripcion: 'El usuario recepcionista@gmail.com ha iniciado sesión.';
-INSERT INTO logs SET id: '11', fecha: '2024-06-04 13:10:04.000000', descripcion: 'El usuario recepcionista@gmail.com ha iniciado sesión.';
-INSERT INTO logs SET id: '12', fecha: '2024-06-04 13:10:04.000000', descripcion: 'El usuario recepcionista@gmail.com ha iniciado sesión.';
-INSERT INTO logs SET id: '13', fecha: '2024-06-04 16:19:47.000000', descripcion: 'El usuario recepcionista@gmail.com ha iniciado sesión.';
-INSERT INTO logs SET id: '14', fecha: '2024-06-04 16:19:47.000000', descripcion: 'El usuario recepcionista@gmail.com ha iniciado sesión.';
-INSERT INTO logs SET id: '15', fecha: '2024-06-04 16:20:20.000000', descripcion: 'El usuario recepcionista@gmail.com ha cerrado sesión.';
-INSERT INTO logs SET id: '16', fecha: '2024-06-04 16:20:20.000000', descripcion: 'El usuario  ha cerrado sesión.';
-INSERT INTO logs SET id: '17', fecha: '2024-06-04 16:21:53.000000', descripcion: 'El usuario recepcionista@gmail.com ha iniciado sesión.';
-INSERT INTO logs SET id: '18', fecha: '2024-06-04 16:21:53.000000', descripcion: 'El usuario recepcionista@gmail.com ha iniciado sesión.';
-INSERT INTO logs SET id: '19', fecha: '2024-06-04 16:22:05.000000', descripcion: 'El usuario recepcionista@gmail.com ha cerrado sesión.';
-INSERT INTO logs SET id: '20', fecha: '2024-06-04 16:22:05.000000', descripcion: 'El usuario  ha cerrado sesión.';
-INSERT INTO logs SET id: '21', fecha: '2024-06-04 16:32:01.000000', descripcion: 'El usuario recepcionista@gmail.com ha iniciado sesión.';
-INSERT INTO logs SET id: '22', fecha: '2024-06-04 16:32:02.000000', descripcion: 'El usuario recepcionista@gmail.com ha iniciado sesión.';
-INSERT INTO logs SET id: '23', fecha: '2024-06-04 16:35:11.000000', descripcion: 'El usuario recepcionista@gmail.com ha cerrado sesión.';
-INSERT INTO logs SET id: '24', fecha: '2024-06-04 16:35:11.000000', descripcion: 'El usuario  ha cerrado sesión.';
-INSERT INTO logs SET id: '25', fecha: '2024-06-04 16:35:17.000000', descripcion: 'El usuario cliente@gmail.com ha iniciado sesión.';
-INSERT INTO logs SET id: '26', fecha: '2024-06-04 16:35:17.000000', descripcion: 'El usuario cliente@gmail.com ha iniciado sesión.';
-INSERT INTO logs SET id: '27', fecha: '2024-06-04 16:36:11.000000', descripcion: 'El usuario cliente@gmail.com ha cerrado sesión.';
-INSERT INTO logs SET id: '28', fecha: '2024-06-04 16:36:11.000000', descripcion: 'El usuario  ha cerrado sesión.';
-INSERT INTO logs SET id: '29', fecha: '2024-06-04 16:36:14.000000', descripcion: 'El usuario recepcionista@gmail.com ha iniciado sesión.';
-INSERT INTO logs SET id: '30', fecha: '2024-06-04 16:36:14.000000', descripcion: 'El usuario recepcionista@gmail.com ha iniciado sesión.';
-INSERT INTO logs SET id: '31', fecha: '2024-06-04 16:36:43.000000', descripcion: 'El usuario recepcionista@gmail.com ha cerrado sesión.';
-INSERT INTO logs SET id: '32', fecha: '2024-06-04 16:36:43.000000', descripcion: 'El usuario  ha cerrado sesión.';
-INSERT INTO logs SET id: '33', fecha: '2024-06-04 16:36:45.000000', descripcion: 'El usuario cliente@gmail.com ha iniciado sesión.';
-INSERT INTO logs SET id: '34', fecha: '2024-06-04 16:36:45.000000', descripcion: 'El usuario cliente@gmail.com ha iniciado sesión.';
-INSERT INTO logs SET id: '35', fecha: '2024-06-04 16:38:36.000000', descripcion: 'El usuario cliente@gmail.com ha cerrado sesión.';
-INSERT INTO logs SET id: '36', fecha: '2024-06-04 16:38:36.000000', descripcion: 'El usuario  ha cerrado sesión.';
-INSERT INTO logs SET id: '37', fecha: '2024-06-04 16:38:39.000000', descripcion: 'El usuario recepcionista@gmail.com ha iniciado sesión.';
-INSERT INTO logs SET id: '38', fecha: '2024-06-04 16:38:39.000000', descripcion: 'El usuario recepcionista@gmail.com ha iniciado sesión.';
-INSERT INTO logs SET id: '39', fecha: '2024-06-04 16:39:17.000000', descripcion: 'El usuario recepcionista@gmail.com ha cerrado sesión.';
-INSERT INTO logs SET id: '40', fecha: '2024-06-04 16:39:17.000000', descripcion: 'El usuario  ha cerrado sesión.';
-INSERT INTO logs SET id: '41', fecha: '2024-06-04 16:39:20.000000', descripcion: 'El usuario cliente@gmail.com ha iniciado sesión.';
-INSERT INTO logs SET id: '42', fecha: '2024-06-04 16:39:20.000000', descripcion: 'El usuario cliente@gmail.com ha iniciado sesión.';
-INSERT INTO logs SET id: '43', fecha: '2024-06-04 16:51:31.000000', descripcion: 'El usuario cliente@gmail.com ha cerrado sesión.';
-INSERT INTO logs SET id: '44', fecha: '2024-06-04 16:51:31.000000', descripcion: 'El usuario  ha cerrado sesión.';
-INSERT INTO logs SET id: '45', fecha: '2024-06-04 16:51:34.000000', descripcion: 'El usuario recepcionista@gmail.com ha iniciado sesión.';
-INSERT INTO logs SET id: '46', fecha: '2024-06-04 16:51:34.000000', descripcion: 'El usuario recepcionista@gmail.com ha iniciado sesión.';
-INSERT INTO logs SET id: '47', fecha: '2024-06-04 17:24:37.000000', descripcion: 'El usuario recepcionista@gmail.com ha cerrado sesión.';
-INSERT INTO logs SET id: '48', fecha: '2024-06-04 17:24:37.000000', descripcion: 'El usuario  ha cerrado sesión.';
-INSERT INTO logs SET id: '49', fecha: '2024-06-04 17:24:41.000000', descripcion: 'El usuario cliente@gmail.com ha iniciado sesión.';
-INSERT INTO logs SET id: '50', fecha: '2024-06-04 17:24:41.000000', descripcion: 'El usuario cliente@gmail.com ha iniciado sesión.';
-INSERT INTO logs SET id: '51', fecha: '2024-06-04 17:51:10.000000', descripcion: 'El usuario cliente@gmail.com ha cerrado sesión.';
-INSERT INTO logs SET id: '52', fecha: '2024-06-04 17:51:10.000000', descripcion: 'El usuario  ha cerrado sesión.';
-INSERT INTO logs SET id: '53', fecha: '2024-06-04 18:36:33.000000', descripcion: 'El usuario cliente@gmail.com ha iniciado sesión.';
-INSERT INTO logs SET id: '54', fecha: '2024-06-04 18:36:33.000000', descripcion: 'El usuario cliente@gmail.com ha iniciado sesión.';
-INSERT INTO logs SET id: '55', fecha: '2024-06-04 18:37:53.000000', descripcion: 'El usuario cliente@gmail.com ha cerrado sesión.';
-INSERT INTO logs SET id: '56', fecha: '2024-06-04 18:37:53.000000', descripcion: 'El usuario  ha cerrado sesión.';
-INSERT INTO logs SET id: '57', fecha: '2024-06-04 18:38:00.000000', descripcion: 'El usuario cliente@gmail.com ha iniciado sesión.';
-INSERT INTO logs SET id: '58', fecha: '2024-06-04 18:38:00.000000', descripcion: 'El usuario cliente@gmail.com ha iniciado sesión.';
-INSERT INTO logs SET id: '59', fecha: '2024-06-04 18:47:36.000000', descripcion: 'El usuario cliente@gmail.com ha cerrado sesión.';
-INSERT INTO logs SET id: '60', fecha: '2024-06-04 18:47:36.000000', descripcion: 'El usuario  ha cerrado sesión.';
-INSERT INTO logs SET id: '61', fecha: '2024-06-04 18:47:52.000000', descripcion: 'El usuario cliente@gmail.com ha iniciado sesión.';
-INSERT INTO logs SET id: '62', fecha: '2024-06-04 18:47:52.000000', descripcion: 'El usuario cliente@gmail.com ha iniciado sesión.';
-INSERT INTO logs SET id: '63', fecha: '2024-06-04 18:52:51.000000', descripcion: 'El usuario cliente@gmail.com ha cerrado sesión.';
-INSERT INTO logs SET id: '64', fecha: '2024-06-04 18:52:51.000000', descripcion: 'El usuario  ha cerrado sesión.';
-INSERT INTO logs SET id: '65', fecha: '2024-06-04 18:53:19.000000', descripcion: 'El usuario recepcionista@gmail.com ha iniciado sesión.';
-INSERT INTO logs SET id: '66', fecha: '2024-06-04 18:53:19.000000', descripcion: 'El usuario recepcionista@gmail.com ha iniciado sesión.';
-INSERT INTO logs SET id: '67', fecha: '2024-06-04 19:11:52.000000', descripcion: 'Se ha borrado una habitación';
-INSERT INTO logs SET id: '68', fecha: '2024-06-04 19:14:58.000000', descripcion: 'El usuario recepcionista@gmail.com ha cerrado sesión.';
-INSERT INTO logs SET id: '69', fecha: '2024-06-04 19:14:58.000000', descripcion: 'El usuario  ha cerrado sesión.';
-INSERT INTO logs SET id: '70', fecha: '2024-06-04 19:15:35.000000', descripcion: 'El usuario recepcionista@gmail.com ha iniciado sesión.';
-INSERT INTO logs SET id: '71', fecha: '2024-06-04 19:15:35.000000', descripcion: 'El usuario recepcionista@gmail.com ha iniciado sesión.';
-INSERT INTO logs SET id: '72', fecha: '2024-06-04 19:15:36.000000', descripcion: 'El usuario recepcionista@gmail.com ha cerrado sesión.';
-INSERT INTO logs SET id: '73', fecha: '2024-06-04 19:15:36.000000', descripcion: 'El usuario  ha cerrado sesión.';
-INSERT INTO logs SET id: '74', fecha: '2024-06-04 19:16:28.000000', descripcion: 'El usuario administrador@gmail.com ha iniciado sesión.';
-INSERT INTO logs SET id: '75', fecha: '2024-06-04 19:16:28.000000', descripcion: 'El usuario administrador@gmail.com ha iniciado sesión.';
-INSERT INTO logs SET id: '76', fecha: '2024-06-04 19:17:45.000000', descripcion: 'El administrador administrador@gmail.com ha editado el perfil de 2javiergp23100130@gmail.com.';
-INSERT INTO logs SET id: '77', fecha: '2024-06-04 19:17:45.000000', descripcion: 'El administrador administrador@gmail.com ha editado el perfil de 2javiergp23100130@gmail.com.';
-INSERT INTO logs SET id: '78', fecha: '2024-06-04 19:19:16.000000', descripcion: 'El usuario ha cerrado sesión.';
-INSERT INTO logs SET id: '79', fecha: '2024-06-04 19:19:16.000000', descripcion: 'El usuario ha cerrado sesión.';
-INSERT INTO logs SET id: '80', fecha: '2024-06-04 19:20:10.000000', descripcion: 'El usuario administrador@gmail.com ha iniciado sesión.';
-INSERT INTO logs SET id: '81', fecha: '2024-06-04 19:20:10.000000', descripcion: 'El usuario administrador@gmail.com ha iniciado sesión.';
-INSERT INTO logs SET id: '82', fecha: '2024-06-04 19:25:08.000000', descripcion: 'El usuario ha cerrado sesión.';
-INSERT INTO logs SET id: '83', fecha: '2024-06-04 19:25:08.000000', descripcion: 'El usuario ha cerrado sesión.';
-INSERT INTO logs SET id: '84', fecha: '2024-06-04 19:25:12.000000', descripcion: 'El usuario recepcionista@gmail.com ha iniciado sesión.';
-INSERT INTO logs SET id: '85', fecha: '2024-06-04 19:25:12.000000', descripcion: 'El usuario recepcionista@gmail.com ha iniciado sesión.';
-INSERT INTO logs SET id: '86', fecha: '2024-06-04 19:27:25.000000', descripcion: 'El usuario ha cerrado sesión.';
-INSERT INTO logs SET id: '87', fecha: '2024-06-04 19:27:25.000000', descripcion: 'El usuario ha cerrado sesión.';
-INSERT INTO logs SET id: '88', fecha: '2024-06-04 19:27:29.000000', descripcion: 'El usuario cliente@gmail.com ha iniciado sesión.';
-INSERT INTO logs SET id: '89', fecha: '2024-06-04 19:27:29.000000', descripcion: 'El usuario cliente@gmail.com ha iniciado sesión.';
-INSERT INTO logs SET id: '90', fecha: '2024-06-04 19:27:30.000000', descripcion: 'El usuario ha cerrado sesión.';
-INSERT INTO logs SET id: '91', fecha: '2024-06-04 19:27:30.000000', descripcion: 'El usuario ha cerrado sesión.';
-INSERT INTO logs SET id: '92', fecha: '2024-06-04 19:27:33.000000', descripcion: 'El usuario recepcionista@gmail.com ha iniciado sesión.';
-INSERT INTO logs SET id: '93', fecha: '2024-06-04 19:27:33.000000', descripcion: 'El usuario recepcionista@gmail.com ha iniciado sesión.';
-INSERT INTO logs SET id: '94', fecha: '2024-06-04 19:27:53.000000', descripcion: 'El usuario ha cerrado sesión.';
-INSERT INTO logs SET id: '95', fecha: '2024-06-04 19:27:53.000000', descripcion: 'El usuario ha cerrado sesión.';
-INSERT INTO logs SET id: '96', fecha: '2024-06-04 19:27:56.000000', descripcion: 'El usuario recepcionista@gmail.com ha iniciado sesión.';
-INSERT INTO logs SET id: '97', fecha: '2024-06-04 19:27:56.000000', descripcion: 'El usuario recepcionista@gmail.com ha iniciado sesión.';
-INSERT INTO logs SET id: '98', fecha: '2024-06-04 19:28:03.000000', descripcion: 'El usuario ha cerrado sesión.';
-INSERT INTO logs SET id: '99', fecha: '2024-06-04 19:28:03.000000', descripcion: 'El usuario ha cerrado sesión.';
-INSERT INTO logs SET id: '100', fecha: '2024-06-04 19:28:06.000000', descripcion: 'El usuario recepcionista@gmail.com ha iniciado sesión.';
-INSERT INTO logs SET id: '101', fecha: '2024-06-04 19:28:06.000000', descripcion: 'El usuario recepcionista@gmail.com ha iniciado sesión.';
-INSERT INTO logs SET id: '102', fecha: '2024-06-04 19:29:05.000000', descripcion: 'El usuario ha cerrado sesión.';
-INSERT INTO logs SET id: '103', fecha: '2024-06-04 19:29:05.000000', descripcion: 'El usuario ha cerrado sesión.';
-INSERT INTO logs SET id: '104', fecha: '2024-06-04 19:29:10.000000', descripcion: 'El usuario recepcionista@gmail.com ha iniciado sesión.';
-INSERT INTO logs SET id: '105', fecha: '2024-06-04 19:29:10.000000', descripcion: 'El usuario recepcionista@gmail.com ha iniciado sesión.';
-INSERT INTO logs SET id: '106', fecha: '2024-06-04 19:31:21.000000', descripcion: 'El usuario ha cerrado sesión.';
-INSERT INTO logs SET id: '107', fecha: '2024-06-04 19:31:21.000000', descripcion: 'El usuario ha cerrado sesión.';
-INSERT INTO logs SET id: '108', fecha: '2024-06-04 19:31:24.000000', descripcion: 'El usuario recepcionista@gmail.com ha iniciado sesión.';
-INSERT INTO logs SET id: '109', fecha: '2024-06-04 19:31:24.000000', descripcion: 'El usuario recepcionista@gmail.com ha iniciado sesión.';
-INSERT INTO logs SET id: '110', fecha: '2024-06-05 16:42:09.000000', descripcion: 'El usuario cliente@gmail.com ha iniciado sesión.';
-INSERT INTO logs SET id: '111', fecha: '2024-06-05 16:42:09.000000', descripcion: 'El usuario cliente@gmail.com ha iniciado sesión.';
-INSERT INTO logs SET id: '112', fecha: '2024-06-05 16:42:11.000000', descripcion: 'El usuario ha cerrado sesión.';
-INSERT INTO logs SET id: '113', fecha: '2024-06-05 16:42:11.000000', descripcion: 'El usuario ha cerrado sesión.';
-INSERT INTO logs SET id: '114', fecha: '2024-06-05 16:42:17.000000', descripcion: 'El usuario administrador@gmail.com ha iniciado sesión.';
-INSERT INTO logs SET id: '115', fecha: '2024-06-05 16:42:18.000000', descripcion: 'El usuario administrador@gmail.com ha iniciado sesión.';
-INSERT INTO logs SET id: '116', fecha: '2024-06-05 17:02:36.000000', descripcion: 'El usuario ha cerrado sesión.';
-INSERT INTO logs SET id: '117', fecha: '2024-06-05 17:02:36.000000', descripcion: 'El usuario ha cerrado sesión.';
-INSERT INTO logs SET id: '118', fecha: '2024-06-05 17:02:43.000000', descripcion: 'El usuario administrador@gmail.com ha iniciado sesión.';
-INSERT INTO logs SET id: '119', fecha: '2024-06-05 17:02:43.000000', descripcion: 'El usuario administrador@gmail.com ha iniciado sesión.';
-INSERT INTO logs SET id: '120', fecha: '2024-06-05 17:47:04.000000', descripcion: 'El usuario ha cerrado sesión.';
-INSERT INTO logs SET id: '121', fecha: '2024-06-05 17:47:04.000000', descripcion: 'El usuario ha cerrado sesión.';
-INSERT INTO logs SET id: '122', fecha: '2024-06-05 17:47:08.000000', descripcion: 'El usuario administrador@gmail.com ha iniciado sesión.';
-INSERT INTO logs SET id: '123', fecha: '2024-06-05 17:47:09.000000', descripcion: 'El usuario administrador@gmail.com ha iniciado sesión.';
-INSERT INTO logs SET id: '124', fecha: '2024-06-05 18:07:15.000000', descripcion: 'El usuario ha cerrado sesión.';
-INSERT INTO logs SET id: '125', fecha: '2024-06-05 18:07:15.000000', descripcion: 'El usuario ha cerrado sesión.';
-INSERT INTO logs SET id: '126', fecha: '2024-06-05 18:18:48.000000', descripcion: 'El usuario administrador@gmail.com ha iniciado sesión.';
-INSERT INTO logs SET id: '127', fecha: '2024-06-05 18:18:49.000000', descripcion: 'El usuario administrador@gmail.com ha iniciado sesión.';
-INSERT INTO logs SET id: '128', fecha: '2024-06-05 18:19:09.000000', descripcion: 'El usuario ha cerrado sesión.';
-INSERT INTO logs SET id: '129', fecha: '2024-06-05 18:19:09.000000', descripcion: 'El usuario ha cerrado sesión.';
-INSERT INTO logs SET id: '130', fecha: '2024-06-05 18:23:06.000000', descripcion: 'El usuario cliente@gmail.com ha iniciado sesión.';
-INSERT INTO logs SET id: '131', fecha: '2024-06-05 18:23:06.000000', descripcion: 'El usuario cliente@gmail.com ha iniciado sesión.';
-INSERT INTO logs SET id: '132', fecha: '2024-06-05 18:23:25.000000', descripcion: 'El usuario ha cerrado sesión.';
-INSERT INTO logs SET id: '133', fecha: '2024-06-05 18:23:25.000000', descripcion: 'El usuario ha cerrado sesión.';
-INSERT INTO logs SET id: '134', fecha: '2024-06-05 18:46:31.000000', descripcion: 'El usuario administrador@gmail.com ha iniciado sesión.';
-INSERT INTO logs SET id: '135', fecha: '2024-06-05 18:46:31.000000', descripcion: 'El usuario administrador@gmail.com ha iniciado sesión.';
-INSERT INTO logs SET id: '136', fecha: '2024-06-05 18:53:19.000000', descripcion: 'El usuario ha cerrado sesión.';
-INSERT INTO logs SET id: '137', fecha: '2024-06-05 18:53:19.000000', descripcion: 'El usuario ha cerrado sesión.';
-INSERT INTO logs SET id: '138', fecha: '2024-06-05 18:53:24.000000', descripcion: 'El usuario administrador@gmail.com ha iniciado sesión.';
-INSERT INTO logs SET id: '139', fecha: '2024-06-05 18:53:24.000000', descripcion: 'El usuario administrador@gmail.com ha iniciado sesión.';
-INSERT INTO logs SET id: '140', fecha: '2024-06-05 19:58:55.000000', descripcion: 'El usuario ha cerrado sesión.';
-INSERT INTO logs SET id: '141', fecha: '2024-06-05 19:58:55.000000', descripcion: 'El usuario ha cerrado sesión.';
-INSERT INTO logs SET id: '142', fecha: '2024-06-05 19:59:00.000000', descripcion: 'El usuario administrador@gmail.com ha iniciado sesión.';
-INSERT INTO logs SET id: '143', fecha: '2024-06-05 19:59:00.000000', descripcion: 'El usuario administrador@gmail.com ha iniciado sesión.';
+INSERT INTO `logs` (`id`, `fecha`, `descripcion`) VALUES ('2', '2024-06-04 02:28:11.000000', 'El usuario recepcionista@gmail.com ha iniciado sesión.');
+INSERT INTO `logs` (`id`, `fecha`, `descripcion`) VALUES ('3', '2024-06-04 13:02:30.000000', 'El usuario recepcionista@gmail.com ha iniciado sesión.');
+INSERT INTO `logs` (`id`, `fecha`, `descripcion`) VALUES ('4', '2024-06-04 13:02:30.000000', 'El usuario recepcionista@gmail.com ha iniciado sesión.');
+INSERT INTO `logs` (`id`, `fecha`, `descripcion`) VALUES ('5', '2024-06-04 13:05:04.000000', 'El usuario recepcionista@gmail.com ha iniciado sesión.');
+INSERT INTO `logs` (`id`, `fecha`, `descripcion`) VALUES ('6', '2024-06-04 13:05:04.000000', 'El usuario recepcionista@gmail.com ha iniciado sesión.');
+INSERT INTO `logs` (`id`, `fecha`, `descripcion`) VALUES ('7', '2024-06-04 13:05:33.000000', 'El usuario recepcionista@gmail.com ha iniciado sesión.');
+INSERT INTO `logs` (`id`, `fecha`, `descripcion`) VALUES ('8', '2024-06-04 13:05:33.000000', 'El usuario recepcionista@gmail.com ha iniciado sesión.');
+INSERT INTO `logs` (`id`, `fecha`, `descripcion`) VALUES ('9', '2024-06-04 13:07:05.000000', 'El usuario recepcionista@gmail.com ha iniciado sesión.');
+INSERT INTO `logs` (`id`, `fecha`, `descripcion`) VALUES ('10', '2024-06-04 13:07:05.000000', 'El usuario recepcionista@gmail.com ha iniciado sesión.');
+INSERT INTO `logs` (`id`, `fecha`, `descripcion`) VALUES ('11', '2024-06-04 13:10:04.000000', 'El usuario recepcionista@gmail.com ha iniciado sesión.');
+INSERT INTO `logs` (`id`, `fecha`, `descripcion`) VALUES ('12', '2024-06-04 13:10:04.000000', 'El usuario recepcionista@gmail.com ha iniciado sesión.');
+INSERT INTO `logs` (`id`, `fecha`, `descripcion`) VALUES ('13', '2024-06-04 16:19:47.000000', 'El usuario recepcionista@gmail.com ha iniciado sesión.');
+INSERT INTO `logs` (`id`, `fecha`, `descripcion`) VALUES ('14', '2024-06-04 16:19:47.000000', 'El usuario recepcionista@gmail.com ha iniciado sesión.');
+INSERT INTO `logs` (`id`, `fecha`, `descripcion`) VALUES ('15', '2024-06-04 16:20:20.000000', 'El usuario recepcionista@gmail.com ha cerrado sesión.');
+INSERT INTO `logs` (`id`, `fecha`, `descripcion`) VALUES ('16', '2024-06-04 16:20:20.000000', 'El usuario  ha cerrado sesión.');
+INSERT INTO `logs` (`id`, `fecha`, `descripcion`) VALUES ('17', '2024-06-04 16:21:53.000000', 'El usuario recepcionista@gmail.com ha iniciado sesión.');
+INSERT INTO `logs` (`id`, `fecha`, `descripcion`) VALUES ('18', '2024-06-04 16:21:53.000000', 'El usuario recepcionista@gmail.com ha iniciado sesión.');
+INSERT INTO `logs` (`id`, `fecha`, `descripcion`) VALUES ('19', '2024-06-04 16:22:05.000000', 'El usuario recepcionista@gmail.com ha cerrado sesión.');
+INSERT INTO `logs` (`id`, `fecha`, `descripcion`) VALUES ('20', '2024-06-04 16:22:05.000000', 'El usuario  ha cerrado sesión.');
+INSERT INTO `logs` (`id`, `fecha`, `descripcion`) VALUES ('21', '2024-06-04 16:32:01.000000', 'El usuario recepcionista@gmail.com ha iniciado sesión.');
+INSERT INTO `logs` (`id`, `fecha`, `descripcion`) VALUES ('22', '2024-06-04 16:32:02.000000', 'El usuario recepcionista@gmail.com ha iniciado sesión.');
+INSERT INTO `logs` (`id`, `fecha`, `descripcion`) VALUES ('23', '2024-06-04 16:35:11.000000', 'El usuario recepcionista@gmail.com ha cerrado sesión.');
+INSERT INTO `logs` (`id`, `fecha`, `descripcion`) VALUES ('24', '2024-06-04 16:35:11.000000', 'El usuario  ha cerrado sesión.');
+INSERT INTO `logs` (`id`, `fecha`, `descripcion`) VALUES ('25', '2024-06-04 16:35:17.000000', 'El usuario cliente@gmail.com ha iniciado sesión.');
+INSERT INTO `logs` (`id`, `fecha`, `descripcion`) VALUES ('26', '2024-06-04 16:35:17.000000', 'El usuario cliente@gmail.com ha iniciado sesión.');
+INSERT INTO `logs` (`id`, `fecha`, `descripcion`) VALUES ('27', '2024-06-04 16:36:11.000000', 'El usuario cliente@gmail.com ha cerrado sesión.');
+INSERT INTO `logs` (`id`, `fecha`, `descripcion`) VALUES ('28', '2024-06-04 16:36:11.000000', 'El usuario  ha cerrado sesión.');
+INSERT INTO `logs` (`id`, `fecha`, `descripcion`) VALUES ('29', '2024-06-04 16:36:14.000000', 'El usuario recepcionista@gmail.com ha iniciado sesión.');
+INSERT INTO `logs` (`id`, `fecha`, `descripcion`) VALUES ('30', '2024-06-04 16:36:14.000000', 'El usuario recepcionista@gmail.com ha iniciado sesión.');
+INSERT INTO `logs` (`id`, `fecha`, `descripcion`) VALUES ('31', '2024-06-04 16:36:43.000000', 'El usuario recepcionista@gmail.com ha cerrado sesión.');
+INSERT INTO `logs` (`id`, `fecha`, `descripcion`) VALUES ('32', '2024-06-04 16:36:43.000000', 'El usuario  ha cerrado sesión.');
+INSERT INTO `logs` (`id`, `fecha`, `descripcion`) VALUES ('33', '2024-06-04 16:36:45.000000', 'El usuario cliente@gmail.com ha iniciado sesión.');
+INSERT INTO `logs` (`id`, `fecha`, `descripcion`) VALUES ('34', '2024-06-04 16:36:45.000000', 'El usuario cliente@gmail.com ha iniciado sesión.');
+INSERT INTO `logs` (`id`, `fecha`, `descripcion`) VALUES ('35', '2024-06-04 16:38:36.000000', 'El usuario cliente@gmail.com ha cerrado sesión.');
+INSERT INTO `logs` (`id`, `fecha`, `descripcion`) VALUES ('36', '2024-06-04 16:38:36.000000', 'El usuario  ha cerrado sesión.');
+INSERT INTO `logs` (`id`, `fecha`, `descripcion`) VALUES ('37', '2024-06-04 16:38:39.000000', 'El usuario recepcionista@gmail.com ha iniciado sesión.');
+INSERT INTO `logs` (`id`, `fecha`, `descripcion`) VALUES ('38', '2024-06-04 16:38:39.000000', 'El usuario recepcionista@gmail.com ha iniciado sesión.');
+INSERT INTO `logs` (`id`, `fecha`, `descripcion`) VALUES ('39', '2024-06-04 16:39:17.000000', 'El usuario recepcionista@gmail.com ha cerrado sesión.');
+INSERT INTO `logs` (`id`, `fecha`, `descripcion`) VALUES ('40', '2024-06-04 16:39:17.000000', 'El usuario  ha cerrado sesión.');
+INSERT INTO `logs` (`id`, `fecha`, `descripcion`) VALUES ('41', '2024-06-04 16:39:20.000000', 'El usuario cliente@gmail.com ha iniciado sesión.');
+INSERT INTO `logs` (`id`, `fecha`, `descripcion`) VALUES ('42', '2024-06-04 16:39:20.000000', 'El usuario cliente@gmail.com ha iniciado sesión.');
+INSERT INTO `logs` (`id`, `fecha`, `descripcion`) VALUES ('43', '2024-06-04 16:51:31.000000', 'El usuario cliente@gmail.com ha cerrado sesión.');
+INSERT INTO `logs` (`id`, `fecha`, `descripcion`) VALUES ('44', '2024-06-04 16:51:31.000000', 'El usuario  ha cerrado sesión.');
+INSERT INTO `logs` (`id`, `fecha`, `descripcion`) VALUES ('45', '2024-06-04 16:51:34.000000', 'El usuario recepcionista@gmail.com ha iniciado sesión.');
+INSERT INTO `logs` (`id`, `fecha`, `descripcion`) VALUES ('46', '2024-06-04 16:51:34.000000', 'El usuario recepcionista@gmail.com ha iniciado sesión.');
+INSERT INTO `logs` (`id`, `fecha`, `descripcion`) VALUES ('47', '2024-06-04 17:24:37.000000', 'El usuario recepcionista@gmail.com ha cerrado sesión.');
+INSERT INTO `logs` (`id`, `fecha`, `descripcion`) VALUES ('48', '2024-06-04 17:24:37.000000', 'El usuario  ha cerrado sesión.');
+INSERT INTO `logs` (`id`, `fecha`, `descripcion`) VALUES ('49', '2024-06-04 17:24:41.000000', 'El usuario cliente@gmail.com ha iniciado sesión.');
+INSERT INTO `logs` (`id`, `fecha`, `descripcion`) VALUES ('50', '2024-06-04 17:24:41.000000', 'El usuario cliente@gmail.com ha iniciado sesión.');
+INSERT INTO `logs` (`id`, `fecha`, `descripcion`) VALUES ('51', '2024-06-04 17:51:10.000000', 'El usuario cliente@gmail.com ha cerrado sesión.');
+INSERT INTO `logs` (`id`, `fecha`, `descripcion`) VALUES ('52', '2024-06-04 17:51:10.000000', 'El usuario  ha cerrado sesión.');
+INSERT INTO `logs` (`id`, `fecha`, `descripcion`) VALUES ('53', '2024-06-04 18:36:33.000000', 'El usuario cliente@gmail.com ha iniciado sesión.');
+INSERT INTO `logs` (`id`, `fecha`, `descripcion`) VALUES ('54', '2024-06-04 18:36:33.000000', 'El usuario cliente@gmail.com ha iniciado sesión.');
+INSERT INTO `logs` (`id`, `fecha`, `descripcion`) VALUES ('55', '2024-06-04 18:37:53.000000', 'El usuario cliente@gmail.com ha cerrado sesión.');
+INSERT INTO `logs` (`id`, `fecha`, `descripcion`) VALUES ('56', '2024-06-04 18:37:53.000000', 'El usuario  ha cerrado sesión.');
+INSERT INTO `logs` (`id`, `fecha`, `descripcion`) VALUES ('57', '2024-06-04 18:38:00.000000', 'El usuario cliente@gmail.com ha iniciado sesión.');
+INSERT INTO `logs` (`id`, `fecha`, `descripcion`) VALUES ('58', '2024-06-04 18:38:00.000000', 'El usuario cliente@gmail.com ha iniciado sesión.');
+INSERT INTO `logs` (`id`, `fecha`, `descripcion`) VALUES ('59', '2024-06-04 18:47:36.000000', 'El usuario cliente@gmail.com ha cerrado sesión.');
+INSERT INTO `logs` (`id`, `fecha`, `descripcion`) VALUES ('60', '2024-06-04 18:47:36.000000', 'El usuario  ha cerrado sesión.');
+INSERT INTO `logs` (`id`, `fecha`, `descripcion`) VALUES ('61', '2024-06-04 18:47:52.000000', 'El usuario cliente@gmail.com ha iniciado sesión.');
+INSERT INTO `logs` (`id`, `fecha`, `descripcion`) VALUES ('62', '2024-06-04 18:47:52.000000', 'El usuario cliente@gmail.com ha iniciado sesión.');
+INSERT INTO `logs` (`id`, `fecha`, `descripcion`) VALUES ('63', '2024-06-04 18:52:51.000000', 'El usuario cliente@gmail.com ha cerrado sesión.');
+INSERT INTO `logs` (`id`, `fecha`, `descripcion`) VALUES ('64', '2024-06-04 18:52:51.000000', 'El usuario  ha cerrado sesión.');
+INSERT INTO `logs` (`id`, `fecha`, `descripcion`) VALUES ('65', '2024-06-04 18:53:19.000000', 'El usuario recepcionista@gmail.com ha iniciado sesión.');
+INSERT INTO `logs` (`id`, `fecha`, `descripcion`) VALUES ('66', '2024-06-04 18:53:19.000000', 'El usuario recepcionista@gmail.com ha iniciado sesión.');
+INSERT INTO `logs` (`id`, `fecha`, `descripcion`) VALUES ('67', '2024-06-04 19:11:52.000000', 'Se ha borrado una habitación');
+INSERT INTO `logs` (`id`, `fecha`, `descripcion`) VALUES ('68', '2024-06-04 19:14:58.000000', 'El usuario recepcionista@gmail.com ha cerrado sesión.');
+INSERT INTO `logs` (`id`, `fecha`, `descripcion`) VALUES ('69', '2024-06-04 19:14:58.000000', 'El usuario  ha cerrado sesión.');
+INSERT INTO `logs` (`id`, `fecha`, `descripcion`) VALUES ('70', '2024-06-04 19:15:35.000000', 'El usuario recepcionista@gmail.com ha iniciado sesión.');
+INSERT INTO `logs` (`id`, `fecha`, `descripcion`) VALUES ('71', '2024-06-04 19:15:35.000000', 'El usuario recepcionista@gmail.com ha iniciado sesión.');
+INSERT INTO `logs` (`id`, `fecha`, `descripcion`) VALUES ('72', '2024-06-04 19:15:36.000000', 'El usuario recepcionista@gmail.com ha cerrado sesión.');
+INSERT INTO `logs` (`id`, `fecha`, `descripcion`) VALUES ('73', '2024-06-04 19:15:36.000000', 'El usuario  ha cerrado sesión.');
+INSERT INTO `logs` (`id`, `fecha`, `descripcion`) VALUES ('74', '2024-06-04 19:16:28.000000', 'El usuario administrador@gmail.com ha iniciado sesión.');
+INSERT INTO `logs` (`id`, `fecha`, `descripcion`) VALUES ('75', '2024-06-04 19:16:28.000000', 'El usuario administrador@gmail.com ha iniciado sesión.');
+INSERT INTO `logs` (`id`, `fecha`, `descripcion`) VALUES ('76', '2024-06-04 19:17:45.000000', 'El administrador administrador@gmail.com ha editado el perfil de 2javiergp23100130@gmail.com.');
+INSERT INTO `logs` (`id`, `fecha`, `descripcion`) VALUES ('77', '2024-06-04 19:17:45.000000', 'El administrador administrador@gmail.com ha editado el perfil de 2javiergp23100130@gmail.com.');
+INSERT INTO `logs` (`id`, `fecha`, `descripcion`) VALUES ('78', '2024-06-04 19:19:16.000000', 'El usuario ha cerrado sesión.');
+INSERT INTO `logs` (`id`, `fecha`, `descripcion`) VALUES ('79', '2024-06-04 19:19:16.000000', 'El usuario ha cerrado sesión.');
+INSERT INTO `logs` (`id`, `fecha`, `descripcion`) VALUES ('80', '2024-06-04 19:20:10.000000', 'El usuario administrador@gmail.com ha iniciado sesión.');
+INSERT INTO `logs` (`id`, `fecha`, `descripcion`) VALUES ('81', '2024-06-04 19:20:10.000000', 'El usuario administrador@gmail.com ha iniciado sesión.');
+INSERT INTO `logs` (`id`, `fecha`, `descripcion`) VALUES ('82', '2024-06-04 19:25:08.000000', 'El usuario ha cerrado sesión.');
+INSERT INTO `logs` (`id`, `fecha`, `descripcion`) VALUES ('83', '2024-06-04 19:25:08.000000', 'El usuario ha cerrado sesión.');
+INSERT INTO `logs` (`id`, `fecha`, `descripcion`) VALUES ('84', '2024-06-04 19:25:12.000000', 'El usuario recepcionista@gmail.com ha iniciado sesión.');
+INSERT INTO `logs` (`id`, `fecha`, `descripcion`) VALUES ('85', '2024-06-04 19:25:12.000000', 'El usuario recepcionista@gmail.com ha iniciado sesión.');
+INSERT INTO `logs` (`id`, `fecha`, `descripcion`) VALUES ('86', '2024-06-04 19:27:25.000000', 'El usuario ha cerrado sesión.');
+INSERT INTO `logs` (`id`, `fecha`, `descripcion`) VALUES ('87', '2024-06-04 19:27:25.000000', 'El usuario ha cerrado sesión.');
+INSERT INTO `logs` (`id`, `fecha`, `descripcion`) VALUES ('88', '2024-06-04 19:27:29.000000', 'El usuario cliente@gmail.com ha iniciado sesión.');
+INSERT INTO `logs` (`id`, `fecha`, `descripcion`) VALUES ('89', '2024-06-04 19:27:29.000000', 'El usuario cliente@gmail.com ha iniciado sesión.');
+INSERT INTO `logs` (`id`, `fecha`, `descripcion`) VALUES ('90', '2024-06-04 19:27:30.000000', 'El usuario ha cerrado sesión.');
+INSERT INTO `logs` (`id`, `fecha`, `descripcion`) VALUES ('91', '2024-06-04 19:27:30.000000', 'El usuario ha cerrado sesión.');
+INSERT INTO `logs` (`id`, `fecha`, `descripcion`) VALUES ('92', '2024-06-04 19:27:33.000000', 'El usuario recepcionista@gmail.com ha iniciado sesión.');
+INSERT INTO `logs` (`id`, `fecha`, `descripcion`) VALUES ('93', '2024-06-04 19:27:33.000000', 'El usuario recepcionista@gmail.com ha iniciado sesión.');
+INSERT INTO `logs` (`id`, `fecha`, `descripcion`) VALUES ('94', '2024-06-04 19:27:53.000000', 'El usuario ha cerrado sesión.');
+INSERT INTO `logs` (`id`, `fecha`, `descripcion`) VALUES ('95', '2024-06-04 19:27:53.000000', 'El usuario ha cerrado sesión.');
+INSERT INTO `logs` (`id`, `fecha`, `descripcion`) VALUES ('96', '2024-06-04 19:27:56.000000', 'El usuario recepcionista@gmail.com ha iniciado sesión.');
+INSERT INTO `logs` (`id`, `fecha`, `descripcion`) VALUES ('97', '2024-06-04 19:27:56.000000', 'El usuario recepcionista@gmail.com ha iniciado sesión.');
+INSERT INTO `logs` (`id`, `fecha`, `descripcion`) VALUES ('98', '2024-06-04 19:28:03.000000', 'El usuario ha cerrado sesión.');
+INSERT INTO `logs` (`id`, `fecha`, `descripcion`) VALUES ('99', '2024-06-04 19:28:03.000000', 'El usuario ha cerrado sesión.');
+INSERT INTO `logs` (`id`, `fecha`, `descripcion`) VALUES ('100', '2024-06-04 19:28:06.000000', 'El usuario recepcionista@gmail.com ha iniciado sesión.');
+INSERT INTO `logs` (`id`, `fecha`, `descripcion`) VALUES ('101', '2024-06-04 19:28:06.000000', 'El usuario recepcionista@gmail.com ha iniciado sesión.');
+INSERT INTO `logs` (`id`, `fecha`, `descripcion`) VALUES ('102', '2024-06-04 19:29:05.000000', 'El usuario ha cerrado sesión.');
+INSERT INTO `logs` (`id`, `fecha`, `descripcion`) VALUES ('103', '2024-06-04 19:29:05.000000', 'El usuario ha cerrado sesión.');
+INSERT INTO `logs` (`id`, `fecha`, `descripcion`) VALUES ('104', '2024-06-04 19:29:10.000000', 'El usuario recepcionista@gmail.com ha iniciado sesión.');
+INSERT INTO `logs` (`id`, `fecha`, `descripcion`) VALUES ('105', '2024-06-04 19:29:10.000000', 'El usuario recepcionista@gmail.com ha iniciado sesión.');
+INSERT INTO `logs` (`id`, `fecha`, `descripcion`) VALUES ('106', '2024-06-04 19:31:21.000000', 'El usuario ha cerrado sesión.');
+INSERT INTO `logs` (`id`, `fecha`, `descripcion`) VALUES ('107', '2024-06-04 19:31:21.000000', 'El usuario ha cerrado sesión.');
+INSERT INTO `logs` (`id`, `fecha`, `descripcion`) VALUES ('108', '2024-06-04 19:31:24.000000', 'El usuario recepcionista@gmail.com ha iniciado sesión.');
+INSERT INTO `logs` (`id`, `fecha`, `descripcion`) VALUES ('109', '2024-06-04 19:31:24.000000', 'El usuario recepcionista@gmail.com ha iniciado sesión.');
+INSERT INTO `logs` (`id`, `fecha`, `descripcion`) VALUES ('110', '2024-06-05 16:42:09.000000', 'El usuario cliente@gmail.com ha iniciado sesión.');
+INSERT INTO `logs` (`id`, `fecha`, `descripcion`) VALUES ('111', '2024-06-05 16:42:09.000000', 'El usuario cliente@gmail.com ha iniciado sesión.');
+INSERT INTO `logs` (`id`, `fecha`, `descripcion`) VALUES ('112', '2024-06-05 16:42:11.000000', 'El usuario ha cerrado sesión.');
+INSERT INTO `logs` (`id`, `fecha`, `descripcion`) VALUES ('113', '2024-06-05 16:42:11.000000', 'El usuario ha cerrado sesión.');
+INSERT INTO `logs` (`id`, `fecha`, `descripcion`) VALUES ('114', '2024-06-05 16:42:17.000000', 'El usuario administrador@gmail.com ha iniciado sesión.');
+INSERT INTO `logs` (`id`, `fecha`, `descripcion`) VALUES ('115', '2024-06-05 16:42:18.000000', 'El usuario administrador@gmail.com ha iniciado sesión.');
+INSERT INTO `logs` (`id`, `fecha`, `descripcion`) VALUES ('116', '2024-06-05 17:02:36.000000', 'El usuario ha cerrado sesión.');
+INSERT INTO `logs` (`id`, `fecha`, `descripcion`) VALUES ('117', '2024-06-05 17:02:36.000000', 'El usuario ha cerrado sesión.');
+INSERT INTO `logs` (`id`, `fecha`, `descripcion`) VALUES ('118', '2024-06-05 17:02:43.000000', 'El usuario administrador@gmail.com ha iniciado sesión.');
+INSERT INTO `logs` (`id`, `fecha`, `descripcion`) VALUES ('119', '2024-06-05 17:02:43.000000', 'El usuario administrador@gmail.com ha iniciado sesión.');
+INSERT INTO `logs` (`id`, `fecha`, `descripcion`) VALUES ('120', '2024-06-05 17:47:04.000000', 'El usuario ha cerrado sesión.');
+INSERT INTO `logs` (`id`, `fecha`, `descripcion`) VALUES ('121', '2024-06-05 17:47:04.000000', 'El usuario ha cerrado sesión.');
+INSERT INTO `logs` (`id`, `fecha`, `descripcion`) VALUES ('122', '2024-06-05 17:47:08.000000', 'El usuario administrador@gmail.com ha iniciado sesión.');
+INSERT INTO `logs` (`id`, `fecha`, `descripcion`) VALUES ('123', '2024-06-05 17:47:09.000000', 'El usuario administrador@gmail.com ha iniciado sesión.');
+INSERT INTO `logs` (`id`, `fecha`, `descripcion`) VALUES ('124', '2024-06-05 18:07:15.000000', 'El usuario ha cerrado sesión.');
+INSERT INTO `logs` (`id`, `fecha`, `descripcion`) VALUES ('125', '2024-06-05 18:07:15.000000', 'El usuario ha cerrado sesión.');
+INSERT INTO `logs` (`id`, `fecha`, `descripcion`) VALUES ('126', '2024-06-05 18:18:48.000000', 'El usuario administrador@gmail.com ha iniciado sesión.');
+INSERT INTO `logs` (`id`, `fecha`, `descripcion`) VALUES ('127', '2024-06-05 18:18:49.000000', 'El usuario administrador@gmail.com ha iniciado sesión.');
+INSERT INTO `logs` (`id`, `fecha`, `descripcion`) VALUES ('128', '2024-06-05 18:19:09.000000', 'El usuario ha cerrado sesión.');
+INSERT INTO `logs` (`id`, `fecha`, `descripcion`) VALUES ('129', '2024-06-05 18:19:09.000000', 'El usuario ha cerrado sesión.');
+INSERT INTO `logs` (`id`, `fecha`, `descripcion`) VALUES ('130', '2024-06-05 18:23:06.000000', 'El usuario cliente@gmail.com ha iniciado sesión.');
+INSERT INTO `logs` (`id`, `fecha`, `descripcion`) VALUES ('131', '2024-06-05 18:23:06.000000', 'El usuario cliente@gmail.com ha iniciado sesión.');
+INSERT INTO `logs` (`id`, `fecha`, `descripcion`) VALUES ('132', '2024-06-05 18:23:25.000000', 'El usuario ha cerrado sesión.');
+INSERT INTO `logs` (`id`, `fecha`, `descripcion`) VALUES ('133', '2024-06-05 18:23:25.000000', 'El usuario ha cerrado sesión.');
+INSERT INTO `logs` (`id`, `fecha`, `descripcion`) VALUES ('134', '2024-06-05 18:46:31.000000', 'El usuario administrador@gmail.com ha iniciado sesión.');
+INSERT INTO `logs` (`id`, `fecha`, `descripcion`) VALUES ('135', '2024-06-05 18:46:31.000000', 'El usuario administrador@gmail.com ha iniciado sesión.');
+INSERT INTO `logs` (`id`, `fecha`, `descripcion`) VALUES ('136', '2024-06-05 18:53:19.000000', 'El usuario ha cerrado sesión.');
+INSERT INTO `logs` (`id`, `fecha`, `descripcion`) VALUES ('137', '2024-06-05 18:53:19.000000', 'El usuario ha cerrado sesión.');
+INSERT INTO `logs` (`id`, `fecha`, `descripcion`) VALUES ('138', '2024-06-05 18:53:24.000000', 'El usuario administrador@gmail.com ha iniciado sesión.');
+INSERT INTO `logs` (`id`, `fecha`, `descripcion`) VALUES ('139', '2024-06-05 18:53:24.000000', 'El usuario administrador@gmail.com ha iniciado sesión.');
+INSERT INTO `logs` (`id`, `fecha`, `descripcion`) VALUES ('140', '2024-06-05 19:58:55.000000', 'El usuario ha cerrado sesión.');
+INSERT INTO `logs` (`id`, `fecha`, `descripcion`) VALUES ('141', '2024-06-05 19:58:55.000000', 'El usuario ha cerrado sesión.');
+INSERT INTO `logs` (`id`, `fecha`, `descripcion`) VALUES ('142', '2024-06-05 19:59:00.000000', 'El usuario administrador@gmail.com ha iniciado sesión.');
+INSERT INTO `logs` (`id`, `fecha`, `descripcion`) VALUES ('143', '2024-06-05 19:59:00.000000', 'El usuario administrador@gmail.com ha iniciado sesión.');
+INSERT INTO `logs` (`id`, `fecha`, `descripcion`) VALUES ('144', '2024-06-05 19:59:14.000000', 'El usuario ha cerrado sesión.');
+INSERT INTO `logs` (`id`, `fecha`, `descripcion`) VALUES ('145', '2024-06-05 19:59:14.000000', 'El usuario ha cerrado sesión.');
+INSERT INTO `logs` (`id`, `fecha`, `descripcion`) VALUES ('146', '2024-06-05 20:15:21.000000', 'El usuario administrador@gmail.com ha iniciado sesión.');
+INSERT INTO `logs` (`id`, `fecha`, `descripcion`) VALUES ('147', '2024-06-05 20:15:22.000000', 'El usuario administrador@gmail.com ha iniciado sesión.');
+INSERT INTO `logs` (`id`, `fecha`, `descripcion`) VALUES ('148', '2024-06-05 20:33:09.000000', 'El usuario ha cerrado sesión.');
+INSERT INTO `logs` (`id`, `fecha`, `descripcion`) VALUES ('149', '2024-06-05 20:33:09.000000', 'El usuario ha cerrado sesión.');
+INSERT INTO `logs` (`id`, `fecha`, `descripcion`) VALUES ('150', '2024-06-05 20:33:14.000000', 'El usuario cliente@gmail.com ha iniciado sesión.');
+INSERT INTO `logs` (`id`, `fecha`, `descripcion`) VALUES ('151', '2024-06-05 20:33:14.000000', 'El usuario cliente@gmail.com ha iniciado sesión.');
+INSERT INTO `logs` (`id`, `fecha`, `descripcion`) VALUES ('152', '2024-06-05 20:33:21.000000', 'El usuario ha cerrado sesión.');
+INSERT INTO `logs` (`id`, `fecha`, `descripcion`) VALUES ('153', '2024-06-05 20:33:21.000000', 'El usuario ha cerrado sesión.');
+INSERT INTO `logs` (`id`, `fecha`, `descripcion`) VALUES ('154', '2024-06-06 08:55:13.000000', 'El usuario administrador@gmail.com ha iniciado sesión.');
+INSERT INTO `logs` (`id`, `fecha`, `descripcion`) VALUES ('155', '2024-06-06 08:55:13.000000', 'El usuario administrador@gmail.com ha iniciado sesión.');
+INSERT INTO `logs` (`id`, `fecha`, `descripcion`) VALUES ('156', '2024-06-06 08:57:58.000000', 'El usuario ha cerrado sesión.');
+INSERT INTO `logs` (`id`, `fecha`, `descripcion`) VALUES ('157', '2024-06-06 08:57:58.000000', 'El usuario ha cerrado sesión.');
+INSERT INTO `logs` (`id`, `fecha`, `descripcion`) VALUES ('158', '2024-06-06 08:59:56.000000', 'El usuario administrador@gmail.com ha iniciado sesión.');
+INSERT INTO `logs` (`id`, `fecha`, `descripcion`) VALUES ('159', '2024-06-06 08:59:56.000000', 'El usuario administrador@gmail.com ha iniciado sesión.');
+INSERT INTO `logs` (`id`, `fecha`, `descripcion`) VALUES ('160', '2024-06-06 09:06:26.000000', 'El usuario ha cerrado sesión.');
+INSERT INTO `logs` (`id`, `fecha`, `descripcion`) VALUES ('161', '2024-06-06 09:06:26.000000', 'El usuario ha cerrado sesión.');
+INSERT INTO `logs` (`id`, `fecha`, `descripcion`) VALUES ('162', '2024-06-06 09:06:33.000000', 'El usuario administrador@gmail.com ha iniciado sesión.');
+INSERT INTO `logs` (`id`, `fecha`, `descripcion`) VALUES ('163', '2024-06-06 09:06:33.000000', 'El usuario administrador@gmail.com ha iniciado sesión.');
+INSERT INTO `logs` (`id`, `fecha`, `descripcion`) VALUES ('164', '2024-06-06 10:07:39.000000', 'El usuario ha cerrado sesión.');
+INSERT INTO `logs` (`id`, `fecha`, `descripcion`) VALUES ('165', '2024-06-06 10:07:39.000000', 'El usuario ha cerrado sesión.');
+INSERT INTO `logs` (`id`, `fecha`, `descripcion`) VALUES ('166', '2024-06-06 10:22:59.000000', 'El usuario administrador@gmail.com ha iniciado sesión.');
+INSERT INTO `logs` (`id`, `fecha`, `descripcion`) VALUES ('167', '2024-06-06 10:22:59.000000', 'El usuario administrador@gmail.com ha iniciado sesión.');
+INSERT INTO `logs` (`id`, `fecha`, `descripcion`) VALUES ('168', '2024-06-06 15:40:06.000000', 'El usuario administrador@gmail.com ha iniciado sesión.');
+INSERT INTO `logs` (`id`, `fecha`, `descripcion`) VALUES ('169', '2024-06-06 15:40:06.000000', 'El usuario administrador@gmail.com ha iniciado sesión.');
 
-
+DROP TABLE IF EXISTS `reserva`;
 CREATE TABLE `reserva` (
   `id` int NOT NULL AUTO_INCREMENT,
   `email` varchar(50) NOT NULL,
@@ -201,14 +225,13 @@ CREATE TABLE `reserva` (
   CONSTRAINT `reserva_ibfk_2` FOREIGN KEY (`numero`) REFERENCES `habitacion` (`numero`)
 ) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-INSERT INTO reserva SET id: '21', email: 'recepcionista@gmail.com', numero: 'adsad', capacidad: '110', comentarios: 'A          ', dia_entrada: '2024-06-04', dia_salida: '2024-06-05', estado: 'Confirmada', marca_tiempo: '2024-06-04 00:09:59';
-INSERT INTO reserva SET id: '30', email: 'recepcionista@gmail.com', numero: '5435', capacidad: '2', comentarios: 'sadsad              ', dia_entrada: '2024-06-04', dia_salida: '2024-06-05', estado: 'Confirmada', marca_tiempo: '2024-06-04 13:17:02';
-INSERT INTO reserva SET id: '31', email: '1javiergp23100130@gmail.com', numero: 'adsad', capacidad: '35', comentarios: 'A          ', dia_entrada: '2024-06-04', dia_salida: '2024-06-05', estado: 'Confirmada', marca_tiempo: '2024-06-04 13:23:29';
-INSERT INTO reserva SET id: '32', email: '1javiergp23100130@gmail.com', numero: '500', capacidad: '34', comentarios: 'asd                        ', dia_entrada: '2024-06-04', dia_salida: '2024-06-05', estado: 'Confirmada', marca_tiempo: '2024-06-04 14:23:48';
-INSERT INTO reserva SET id: '33', email: '1javiergp23100130@gmail.com', numero: '34232', capacidad: '34', comentarios: 'asd&quot;
-                        ', dia_entrada: '2024-06-04', dia_salida: '2024-06-05', estado: 'Confirmada', marca_tiempo: '2024-06-04 16:35:08';
+INSERT INTO `reserva` (`id`, `email`, `numero`, `capacidad`, `comentarios`, `dia_entrada`, `dia_salida`, `estado`, `marca_tiempo`) VALUES ('30', 'recepcionista@gmail.com', '5435', '2', 'sadsad              ', '2024-06-04', '2024-06-05', 'Confirmada', '2024-06-04 13:17:02');
+INSERT INTO `reserva` (`id`, `email`, `numero`, `capacidad`, `comentarios`, `dia_entrada`, `dia_salida`, `estado`, `marca_tiempo`) VALUES ('31', '1javiergp23100130@gmail.com', 'adsad', '35', 'A          ', '2024-06-04', '2024-06-05', 'Confirmada', '2024-06-04 13:23:29');
+INSERT INTO `reserva` (`id`, `email`, `numero`, `capacidad`, `comentarios`, `dia_entrada`, `dia_salida`, `estado`, `marca_tiempo`) VALUES ('32', '1javiergp23100130@gmail.com', '500', '34', 'asd                        ', '2024-06-04', '2024-06-05', 'Confirmada', '2024-06-04 14:23:48');
+INSERT INTO `reserva` (`id`, `email`, `numero`, `capacidad`, `comentarios`, `dia_entrada`, `dia_salida`, `estado`, `marca_tiempo`) VALUES ('33', '1javiergp23100130@gmail.com', '34232', '34', 'asd&quot;
+                        ', '2024-06-04', '2024-06-05', 'Confirmada', '2024-06-04 16:35:08');
 
-
+DROP TABLE IF EXISTS `usuarios`;
 CREATE TABLE `usuarios` (
   `nombre` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
   `apellidos` varchar(255) DEFAULT NULL,
@@ -220,11 +243,9 @@ CREATE TABLE `usuarios` (
   PRIMARY KEY (`email`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-INSERT INTO usuarios SET nombre: 'Javier', apellidos: 'Perez', dni: '76067757H', email: '1javiergp23100130@gmail.com', clave: '$2y$10$d1bhuM7/huCu57N3QbXS5.kY5S0UDLvHt/clB1PoGdHxdrPdGP.5a', tarjeta: '1234567891234567', rol: 'administrador';
-INSERT INTO usuarios SET nombre: 'Javier', apellidos: 'Perez', dni: '76067757H', email: '2javiergp23100130@gmail.com', clave: '$2y$10$4WGyXQf5CiCFKRQmwJ.MsuF698CqWSmjLt75jILvEK.mnv8aox2vu', tarjeta: '1234567891234569', rol: 'recepcionista';
-INSERT INTO usuarios SET nombre: 'Javier', apellidos: 'Perez', dni: '76067757H', email: 'administrador@gmail.com', clave: '$2y$10$FTyu3X4Ozx7tNNGLtj.kSudgu4G4bH..fKXPcSh82xk1P8475i3uu', tarjeta: '1234567891234567', rol: 'administrador';
-INSERT INTO usuarios SET nombre: 'Javier', apellidos: 'Perez', dni: '76067757H', email: 'cliente@gmail.com', clave: '$2y$10$bonuqPswSUZXlETODRsOWejQviE9w6eGK3XbemMcZgHwpw3TT60Lq', tarjeta: '1234567891234569', rol: 'cliente';
-INSERT INTO usuarios SET nombre: 'Javier', apellidos: 'Perez', dni: '76067757H', email: 'javiergp23100130@gmail.com', clave: '$2y$10$75z5mt18TJ2HQ4tSCRE3X.P.JJcLFCwrjxtEBgDU41zoFJVVaXvb.', tarjeta: '1234567891234567', rol: 'cliente';
-INSERT INTO usuarios SET nombre: 'Javier', apellidos: 'Perez', dni: '76067757H', email: 'recepcionista@gmail.com', clave: '$2y$10$GiR4Yt2S.BE6CrAyubK2OuW4pB0YSAt4cQT7tjTg54BNThD7r6PAW', tarjeta: '1234567891234567', rol: 'recepcionista';
-
+INSERT INTO `usuarios` (`nombre`, `apellidos`, `dni`, `email`, `clave`, `tarjeta`, `rol`) VALUES ('Javier', 'Perez', '76067757H', '2javiergp23100130@gmail.com', '$2y$10$4WGyXQf5CiCFKRQmwJ.MsuF698CqWSmjLt75jILvEK.mnv8aox2vu', '1234567891234569', 'recepcionista');
+INSERT INTO `usuarios` (`nombre`, `apellidos`, `dni`, `email`, `clave`, `tarjeta`, `rol`) VALUES ('Javier', 'Perez', '76067757H', 'administrador@gmail.com', '$2y$10$FTyu3X4Ozx7tNNGLtj.kSudgu4G4bH..fKXPcSh82xk1P8475i3uu', '1234567891234567', 'administrador');
+INSERT INTO `usuarios` (`nombre`, `apellidos`, `dni`, `email`, `clave`, `tarjeta`, `rol`) VALUES ('Javier', 'Perez', '76067757H', 'cliente@gmail.com', '$2y$10$bonuqPswSUZXlETODRsOWejQviE9w6eGK3XbemMcZgHwpw3TT60Lq', '1234567891234569', 'cliente');
+INSERT INTO `usuarios` (`nombre`, `apellidos`, `dni`, `email`, `clave`, `tarjeta`, `rol`) VALUES ('Javier', 'Perez', '76067757H', 'javiergp23100130@gmail.com', '$2y$10$75z5mt18TJ2HQ4tSCRE3X.P.JJcLFCwrjxtEBgDU41zoFJVVaXvb.', '1234567891234567', 'cliente');
+INSERT INTO `usuarios` (`nombre`, `apellidos`, `dni`, `email`, `clave`, `tarjeta`, `rol`) VALUES ('Javier', 'Perez', '76067757H', 'recepcionista@gmail.com', '$2y$10$GiR4Yt2S.BE6CrAyubK2OuW4pB0YSAt4cQT7tjTg54BNThD7r6PAW', '1234567891234567', 'recepcionista');
 

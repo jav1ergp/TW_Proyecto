@@ -1,47 +1,31 @@
 <?php
-if (isset($_POST['backup'])) {
-    require_once 'db_credencials.php';
-    require_once 'db_connection.php';
+require_once 'db_credencials.php';
+require_once 'db_connection.php';
 
-    $mysqli = connect_db();
+// if (isset($_POST['recovery'])) {
+//     $mysqli = connect_db();
 
-    $nom = "./backup.sql";
+//     $sql = file_get_contents($fichBackup);
+//     $resultado = $mysqli->multi_query($sql);
 
-    // Abrir el archivo para la copia de seguridad
-    $archivo = fopen($nom, "w");
+//     desconectar_db($mysqli);
+// }
 
-    $sql = "SHOW TABLES";
-    $resultado = $mysqli->query($sql);
+// if (isset($_POST['restart'])) {
+//     $mysqli = connect_db();
 
-    while ($fila = $resultado->fetch_assoc()) {
-        $tableName = $fila["Tables_in_" . DB_NAME];
+//     $sql = "SHOW TABLES;";
 
-        $sqlTabla = "SHOW CREATE TABLE " . $tableName;
-        $resultadoTabla = $mysqli->query($sqlTabla);
-        $filaTabla = $resultadoTabla->fetch_assoc();
+//     $resultado = $mysqli->query($sql);
 
-        $estructuraTabla = $filaTabla["Create Table"];
+//     while ($fila = $resultado->fetch_assoc()) {
+//         $tableName = $fila["Tables_in_" . DB_NAME];
+//         $sql = "TRUNCATE TABLE " . $tableName . ";";
+//         $accion = $mysqli->query($sql);
+//     }
 
-        fwrite($archivo, $estructuraTabla . ";\n\n");
-
-        $sqlDatos = "SELECT * FROM " . $tableName;
-        $resultadoDatos = $mysqli->query($sqlDatos);
-        while ($filaDatos = $resultadoDatos->fetch_assoc()) {
-            $datosTabla = "";
-            foreach ($filaDatos as $key => $value) {
-                $datosTabla .= $key . ": '" . $value . "', ";
-            }
-            $datosTabla = rtrim($datosTabla, ", ");
-            fwrite($archivo, "INSERT INTO " . $tableName . " SET " . $datosTabla . ";\n");
-        }
-        fwrite($archivo, "\n\n");
-    }
-
-    // Cerrar el archivo y la conexión
-    fclose($archivo);
-
-    desconectar_db($mysqli);
-}
+//     desconectar_db($mysqli);
+// }
 ?>
 
 <!DOCTYPE html>
@@ -49,14 +33,26 @@ if (isset($_POST['backup'])) {
 
 <body>
     <main>
-        <form action="./administracion.php" method="post">
-            <h3>Obtención de copia de seguridad</h3>
-            <button type="submit" name="backup">Generar copia de seguridad</button>
-            <?php
-            if (isset($_POST['backup']))
-                echo ("Copia de seguridad generada, consultar: $nom.");
-            ?>
+        <h3>Obtención de copia de seguridad</h3>
+        <form action="./partials/backup.php" method="post">
+            <button class="adminbbdd" type="submit" name="backup">Generar copia de seguridad.</button>
         </form>
+
+        <form action="./partials/recovery.php" method="post">
+            <button class="adminbbdd" type="submit" name="recovery">Recuperar mediante backup.</button>
+        </form>
+
+        <form action="./partials/restart.php" method="post">
+            <button class="adminbbdd" type="submit" name="restart">Reiniciar la base de datos.</button>
+        </form>
+        <?php
+        if (isset($_POST['backup']))
+            echo ("Copia de seguridad generada.\n");
+        if (isset($_POST['recovery']))
+            echo ("Copia de seguridad recuperada.\n");
+        if (isset($_POST['restart']))
+            echo ("Base de datos reiniciada.\n");
+        ?>
     </main>
 </body>
 

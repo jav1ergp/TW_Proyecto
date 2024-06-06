@@ -2,7 +2,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: rgb(234, 228, 217);
+  background-color: rgb(138, 228, 255);
   margin: 0;
   padding: 20px 0;
   color: black;
@@ -30,12 +30,12 @@
   color: black;
   padding: 20px;
   font-size: 25px;
-  border: 2px solid rgb(234, 228, 217);
+  border: 2px solid rgb(138, 228, 255);
   border-radius: 5px;
 }
 
 #enviar:hover {
-  background-color: rgb(234, 228, 217);
+  background-color: rgb(0, 195, 255);
   color: black;
   cursor: pointer;
 }
@@ -45,7 +45,7 @@
   justify-content: center;
   align-items: center;
   padding: 10px;
-  border-bottom: 2px solid rgb(234, 228, 217);
+  border-bottom: 2px solid rgb(138, 228, 255);
 }
 
 .navi ul {
@@ -66,7 +66,7 @@ main {
 .bienvenida {
   background-color: white;
   padding: 20px;
-  border: 2px solid rgb(234, 228, 217);
+  border: 2px solid rgb(138, 228, 255);
   border-radius: 10px;
   text-align: center;
 }
@@ -88,7 +88,7 @@ main {
 }
 
 .bienvenida ul li {
-  background-color: rgb(234, 228, 217);
+  background-color: rgb(138, 228, 255);
   color: black;
   margin: 5px 0;
   padding: 10px;
@@ -97,12 +97,12 @@ main {
 }
 
 .bienvenida ul li:hover {
-  background-color: rgb(200, 190, 180);
+  background-color: rgb(0, 195, 255);
   cursor: pointer;
 }
 
 aside h3 {
-  background-color: rgb(234, 228, 217);
+  background-color: rgb(138, 228, 255);
   color: black;
   padding: 10px;
 }
@@ -110,7 +110,7 @@ aside h3 {
 aside {
   width: 300px;
   background-color: white;
-  border: 2px solid rgb(234, 228, 217);
+  border: 2px solid rgb(138, 228, 255);
   padding: 10px;
   display: flex;
   flex-direction: column;
@@ -127,7 +127,7 @@ footer {
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  background-color: rgb(234, 228, 217);
+  background-color: rgb(138, 228, 255);
   color: black;
   padding: 10px;
 }
@@ -145,12 +145,12 @@ body {
 }
 
 li:hover {
-  background-color: rgb(234, 228, 217);
+  background-color: rgb(138, 228, 255);
   color: black;
 }
 
 input[type='submit'] {
-  background-color: rgb(234, 228, 217);
+  background-color: rgb(138, 228, 255);
   color: black;
   padding: 10px 20px;
   border: none;
@@ -161,15 +161,15 @@ input[type='submit'] {
 
 input[type='submit']:hover {
   background-color: white;
-  color: rgb(234, 228, 217);
-  border: 2px solid rgb(234, 228, 217);
+  color: rgb(138, 228, 255);
+  border: 2px solid rgb(0, 195, 255);
 }
 
 .listado {
   background-color: white;
   padding: 20px;
   margin-top: -10px;
-  border: 2px solid rgb(234, 228, 217);
+  border: 2px solid rgb(138, 228, 255);
   border-radius: 5px;
 }
 
@@ -180,7 +180,7 @@ input[type='submit']:hover {
   padding: 8px;
   padding-left: 30px;
   color: black;
-  border: 2px solid rgb(234, 228, 217);
+  border: 2px solid rgb(138, 228, 255);
   border-radius: 5px;
 }
 
@@ -194,7 +194,7 @@ input[type='submit']:hover {
   background-color: white;
   margin: 0;
   padding: 15px;
-  border: 2px solid rgb(234, 228, 217);
+  border: 2px solid rgb(138, 228, 255);
   border-radius: 5px;
 }
 
@@ -211,7 +211,7 @@ a {
 .accion-a-realizar {
   background-color: white;
   padding: 10px;
-  border: 2px solid rgb(234, 228, 217);
+  border: 2px solid rgb(138, 228, 255);
   border-radius: 5px;
 }
 
@@ -229,12 +229,12 @@ a {
   background-color: white;
   padding: 10px;
   flex: 1;
-  border: 2px solid rgb(234, 228, 217);
+  border: 2px solid rgb(138, 228, 255);
   border-radius: 5px;
 }
 
 .datos-cada-usuario li:hover {
-  background-color: rgb(234, 228, 217);
+  background-color: rgb(0, 195, 255);
   color: black;
 }
 
@@ -244,7 +244,7 @@ a {
 
 .datos-total {
   background-color: white;
-  border: 3px solid rgb(234, 228, 217);
+  border: 3px solid rgb(138, 228, 255);
   display: flex;
   align-items: center;
 }
@@ -297,7 +297,7 @@ form.registros_pag input[type='submit'] {
 }
 
 .autores a:hover {
-  background-color: rgb(234, 228, 217);
+  background-color: rgb(0, 195, 255);
   color: black;
 }
 
@@ -337,7 +337,7 @@ form.registros_pag input[type='submit'] {
 }
 
 .res-card {
-  border: 1px solid rgb(234, 228, 217);
+  border: 1px solid rgb(138, 228, 255);
   box-sizing: border-box;
   margin: 10px;
   padding: 10px;
@@ -359,7 +359,7 @@ form.registros_pag input[type='submit'] {
 
 .log {
   width: 50%;
-  background-color: rgb(234, 228, 217);
+  background-color: rgb(138, 228, 255);
   color: black;
 }
 
@@ -372,7 +372,7 @@ form.registros_pag input[type='submit'] {
 }
 
 .fila-log:nth-of-type(even) {
-  background-color: rgb(234, 228, 217);
+  background-color: rgb(138, 228, 255);
 }
 
 .fila-log {
@@ -387,4 +387,12 @@ form.registros_pag input[type='submit'] {
 
 .descrip-log {
   text-decoration: bold;
+}
+
+.adminbbdd {
+  display: block;
+  flex-direction: column;
+  text-align: center;
+  margin: 20px;
+  height: 20px;
 }

@@ -1,5 +1,6 @@
 <?php
 require_once 'db_connection.php';
+require_once 'db_credencials.php';
 
 if (isset($_POST['recovery'])) {
     $archivoSubido = $_FILES['archivoRec'];
@@ -14,8 +15,6 @@ if (isset($_POST['recovery'])) {
 
     $sql = file_get_contents($archivoSubido['tmp_name']);
 
-    $mysqli = connect_db();
-
     # Ahora, hay que tener en cuenta no droppear la tabla de usuarios entera,
     # porque nos quedariamos sin usuario administrador.
     $command = "DROP TABLE IF EXISTS `usuarios`";
@@ -27,26 +26,43 @@ if (isset($_POST['recovery'])) {
     $command = "CREATE TABLE `usuarios`";
     $sql = str_replace($command, "CREATE TABLE `usuarios` IF NOT EXISTS", $sql);
 
-    # Debe haber un usuario administrador,
-    # por lo que lo borramos del query para que no se inserte
-    // $command = "('Javier', 'Perez', '76067757H', 'administrador@gmail.com', '$2y$10\$FTyu3X4Ozx7tNNGLtj.kSudgu4G4bH..fKXPcSh82xk1P8475i3uu', '1234567891234567', 'administrador'),";
-    // $found = strpos($sql, $command);
+    $mysqli = connect_db();
 
-    // if ($found) {
-    //     echo "Usuario administrador encontrado, se procede a NO insertarlo.";
-    // } else {
-    //     echo "Usuario administrador no encontrado.";
-    // }
+    $array = explode(";", $sql);
 
-    $resultado = $mysqli->multi_query($sql);
+    foreach ($array as $value) {
+        $resultado = $mysqli->query($value);
+    }
 
     desconectar_db($mysqli);
 
     if ($resultado) {
-        echo "Base de datos restaurada correctamente.";
+        echo "<p class=\"resAdmin\">Base de datos restaurada correctamente.</p>";
     } else {
         echo "Error al restaurar la base de datos.";
     }
+}
+
+if (isset($_POST['restart'])) {
+    require_once 'db_connection.php';
+
+    $mysqli = connect_db();
+
+    $sql = "SHOW TABLES";
+    $resultado = $mysqli->query($sql);
+    while ($fila = $resultado->fetch_assoc()) {
+        $tableName = "`";
+        $tableName .= $fila["Tables_in_" . DB_NAME];
+        $tableName .= "`";
+        if ($tableName == "`usuarios`") {
+            $sql = "DELETE FROM " . $tableName . " WHERE rol != 'administrador';";
+        } else {
+            $sql = "DELETE FROM " . $tableName . ";";
+        }
+        $accion = $mysqli->query($sql);
+    }
+
+    desconectar_db($mysqli);
 }
 
 ?>
@@ -66,7 +82,7 @@ if (isset($_POST['recovery'])) {
             <input type="file" name="archivoRec" id="archivoRec">
         </form>
 
-        <form action="./partials/restart.php" method="post">
+        <form action="administracion.php" method="post">
             <button class="adminbbdd" type="submit" name="restart">Reiniciar la base de datos.</button>
         </form>
     </main>

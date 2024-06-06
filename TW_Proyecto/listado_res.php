@@ -29,19 +29,19 @@ include ("partials/head-html.php");
                 <p>Indique la acción a realizar</p>
                 <ul>
                     <li><a href="registro.php">Añadir nuevo usuario</a></li>
-                    <?php 
+                    <?php
                     if (isset($_SESSION["usuario"]) && isset($_SESSION["usuario"]["rol"])) {
                         if ($_SESSION["usuario"]["rol"] === "recepcionista") { ?>
                             <li><a href="add-habitacion.php">Añadir nueva habitacion</a></li>
-                        <?php } 
+                        <?php }
                         if ($_SESSION["usuario"]["rol"] === "recepcionista" || $_SESSION["usuario"]["rol"] === "administrador") { ?>
                             <li><a href="listado.php">Listado usuarios</a></li>
-                        <?php } 
+                        <?php }
                         if ($_SESSION["usuario"]["rol"] !== "administrador") { ?>
                             <li><a href="listado_res.php">Listado reservas</a></li>
-                        <?php } 
-                    } ?>      
-                    <li><a href="listado_hab.php">Listado Habitaciones</a></li>              
+                        <?php }
+                    } ?>
+                    <li><a href="listado_hab.php">Listado Habitaciones</a></li>
                 </ul>
             </div>
 
@@ -113,7 +113,8 @@ include ("partials/head-html.php");
             <!-- Formulario para configurar el número de registros por página -->
             <form method="POST" action="" class="registros_pag">
                 <label class="">Registros por página:</label>
-                <input class="" type="number" id="registros_pag" name="registros_pag" value="<?php echo $registros_pag; ?>">
+                <input class="" type="number" id="registros_pag" name="registros_pag"
+                    value="<?php echo $registros_pag; ?>">
                 <input id="enviar" type="submit" value="Actualizar">
             </form>
 
@@ -121,7 +122,8 @@ include ("partials/head-html.php");
             <div class="filtrado">
                 <form method="GET" action="">
                     <label>Buscar en comentarios:</label>
-                    <input type="text" name="filtro_comentarios" value="<?php echo htmlspecialchars($filtro_comentarios); ?>">
+                    <input type="text" name="filtro_comentarios"
+                        value="<?php echo htmlspecialchars($filtro_comentarios); ?>">
 
                     <label>Fecha de entrada desde:</label>
                     <input type="date" name="fecha_inicio" value="<?php echo htmlspecialchars($fecha_inicio); ?>">
@@ -131,8 +133,10 @@ include ("partials/head-html.php");
 
                     <label>Ordenar por:</label>
                     <select name="ordenar_por">
-                        <option value="antiguedad" <?php echo $ordenar_por == 'antiguedad' ? 'selected' : ''; ?>>Antigüedad</option>
-                        <option value="dias_totales" <?php echo $ordenar_por == 'dias_totales' ? 'selected' : ''; ?>>Número total de días</option>
+                        <option value="antiguedad" <?php echo $ordenar_por == 'antiguedad' ? 'selected' : ''; ?>>
+                            Antigüedad</option>
+                        <option value="dias_totales" <?php echo $ordenar_por == 'dias_totales' ? 'selected' : ''; ?>>
+                            Número total de días</option>
                     </select>
 
                     <label>Orden:</label>
@@ -194,15 +198,18 @@ include ("partials/head-html.php");
             <div class="paginacion">
                 <?php if ($total_paginas > 1): ?>
                     <?php if ($pagina_actual > 1): ?>
-                        <a href="?pagina=<?php echo ($pagina_actual - 1); ?>&ordenar_por=<?php echo $ordenar_por; ?>&orden=<?php echo $orden; ?>&filtro_comentarios=<?php echo urlencode($filtro_comentarios); ?>&fecha_inicio=<?php echo $fecha_inicio; ?>&fecha_fin=<?php echo $fecha_fin; ?>">Anterior</a>
+                        <a
+                            href="?pagina=<?php echo ($pagina_actual - 1); ?>&ordenar_por=<?php echo $ordenar_por; ?>&orden=<?php echo $orden; ?>&filtro_comentarios=<?php echo urlencode($filtro_comentarios); ?>&fecha_inicio=<?php echo $fecha_inicio; ?>&fecha_fin=<?php echo $fecha_fin; ?>">Anterior</a>
                     <?php endif; ?>
 
                     <?php for ($i = 1; $i <= $total_paginas; $i++): ?>
-                        <a href="?pagina=<?php echo $i; ?>&ordenar_por=<?php echo $ordenar_por; ?>&orden=<?php echo $orden; ?>&filtro_comentarios=<?php echo urlencode($filtro_comentarios); ?>&fecha_inicio=<?php echo $fecha_inicio; ?>&fecha_fin=<?php echo $fecha_fin; ?>" <?php echo ($pagina_actual == $i) ? 'class="active"' : ''; ?>><?php echo $i; ?></a>
+                        <a href="?pagina=<?php echo $i; ?>&ordenar_por=<?php echo $ordenar_por; ?>&orden=<?php echo $orden; ?>&filtro_comentarios=<?php echo urlencode($filtro_comentarios); ?>&fecha_inicio=<?php echo $fecha_inicio; ?>&fecha_fin=<?php echo $fecha_fin; ?>"
+                            <?php echo ($pagina_actual == $i) ? 'class="active"' : ''; ?>><?php echo $i; ?></a>
                     <?php endfor; ?>
 
                     <?php if ($pagina_actual < $total_paginas): ?>
-                        <a href="?pagina=<?php echo ($pagina_actual + 1); ?>&ordenar_por=<?php echo $ordenar_por; ?>&orden=<?php echo $orden; ?>&filtro_comentarios=<?php echo urlencode($filtro_comentarios); ?>&fecha_inicio=<?php echo $fecha_inicio; ?>&fecha_fin=<?php echo $fecha_fin; ?>">Siguiente</a>
+                        <a
+                            href="?pagina=<?php echo ($pagina_actual + 1); ?>&ordenar_por=<?php echo $ordenar_por; ?>&orden=<?php echo $orden; ?>&filtro_comentarios=<?php echo urlencode($filtro_comentarios); ?>&fecha_inicio=<?php echo $fecha_inicio; ?>&fecha_fin=<?php echo $fecha_fin; ?>">Siguiente</a>
                     <?php endif; ?>
                 <?php endif; ?>
             </div>
@@ -214,4 +221,5 @@ include ("partials/head-html.php");
     <?php include ("partials/footer.php"); ?>
 
 </body>
+
 </html>

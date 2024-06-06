@@ -32,7 +32,7 @@ function campoEsValido($campo)
                 return true;
             }
             break;
-        
+
     }
     return false;
 }
@@ -41,24 +41,24 @@ function campoEsValido2($campo)
 {
     global $db;
     switch ($campo) {
-    case "numero":
-        $numeroRepetido = false;
-        $numDB = mysqli_query($db, "SELECT * FROM habitacion WHERE numero = '" . mysqli_real_escape_string($db, $_POST[$campo]) . "'");
-        if ($numDB) {
-            if ($numDB && mysqli_affected_rows($db) > 0) {
-                $numeroRepetido = true;
+        case "numero":
+            $numeroRepetido = false;
+            $numDB = mysqli_query($db, "SELECT * FROM habitacion WHERE numero = '" . mysqli_real_escape_string($db, $_POST[$campo]) . "'");
+            if ($numDB) {
+                if ($numDB && mysqli_affected_rows($db) > 0) {
+                    $numeroRepetido = true;
+                }
             }
-        }
 
-        if (isset($_POST[$campo]) && !$numeroRepetido) {
-            return true;
-        }
-        break;
+            if (isset($_POST[$campo]) && !$numeroRepetido) {
+                return true;
+            }
+            break;
     }
     return false;
 }
 
- //Función que comprueba si hay errores en un campo.
+//Función que comprueba si hay errores en un campo.
 function hayErrores($campo)
 {
     switch ($campo) {
@@ -69,7 +69,7 @@ function hayErrores($campo)
     }
 }
 
- //Función que inserta el usuario en la base de datos
+//Función que inserta el usuario en la base de datos
 function insertarEnBD()
 {
     global $db;
@@ -97,28 +97,31 @@ function actualizarVarSesion2()
 }
 
 
-function borrar(){
+function borrar()
+{
     global $db;
     global $num_borrar;
-      // Ejecutar la consulta DELETE
+    // Ejecutar la consulta DELETE
     $query2 = mysqli_query($db, "DELETE FROM reserva WHERE numero = '" . mysqli_real_escape_string($db, $num_borrar) . "'");
     $query = mysqli_query($db, "DELETE FROM habitacion WHERE numero = '" . mysqli_real_escape_string($db, $num_borrar) . "'");
-    
-    
+
+
     if (!($query2 && mysqli_affected_rows($db) > 0)) {
-        // La consulta falló o no se eliminó ninguna fila?>
+        // La consulta falló o no se eliminó ninguna fila ?>
         <p class='error-formulario'>ERROR: No se pudo borrar la reserva de la BBDD.</p> <?php
     }
 
     if (!($query && mysqli_affected_rows($db) > 0)) {
-        // La consulta falló o no se eliminó ninguna fila?>
-        <p class='error-formulario'>ERROR: No se pudo borrar la habitacion de la BBDD.</p> <?php
+        // La consulta falló o no se eliminó ninguna fila ?>
+        <p class='error-formulario'>ERROR: No se pudo borrar la habitacion de la BBDD.</p>
+        <?php
     }
-    
+
 
 }
 
-function actualizar($campo) {
+function actualizar($campo)
+{
     global $db;
     // Escapar el campo y el valor para la consulta SQL
     $campo_escapado = mysqli_real_escape_string($db, $campo);
@@ -133,13 +136,15 @@ function actualizar($campo) {
     }
 }
 
-function actualizarEnBD() {
+function actualizarEnBD()
+{
     actualizar("capacidad");
     actualizar("precio");
     actualizar("descripcion");
 }
 
-function inicializarVarSesion($campo) {
+function inicializarVarSesion($campo)
+{
     global $enviadoCorrectamente;
     global $datosConfirmados;
     if (!$datosConfirmados && !$enviadoCorrectamente) {
@@ -147,7 +152,8 @@ function inicializarVarSesion($campo) {
     }
 }
 
-function inicializarTodasVarSesion() {
+function inicializarTodasVarSesion()
+{
     inicializarVarSesion("capacidad");
     inicializarVarSesion("precio");
     inicializarVarSesion("descripcion");

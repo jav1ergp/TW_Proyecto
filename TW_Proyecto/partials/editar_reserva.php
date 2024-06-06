@@ -36,7 +36,8 @@ if (isset($_GET['numero'])) {
     exit;
 }
 
-function actualizar3($campo) {
+function actualizar3($campo)
+{
     global $db;
     // Escapar el campo y el valor para la consulta SQL
     $campo_escapado = mysqli_real_escape_string($db, $campo);
@@ -85,13 +86,11 @@ function actualizar3($campo) {
         <div class="formulario-editar">
             <form action="" method="POST">
                 <label>Email:
-                    <input type="email" name="email"
-                        value="<?php echo $_SESSION['reserva']['email']; ?>" disabled>
+                    <input type="email" name="email" value="<?php echo $_SESSION['reserva']['email']; ?>" disabled>
                 </label>
 
                 <label>Numero-Habitacion:
-                    <input type="text" name="numero"
-                        value="<?php echo $_SESSION['reserva']['numero']; ?>" disabled>
+                    <input type="text" name="numero" value="<?php echo $_SESSION['reserva']['numero']; ?>" disabled>
                 </label>
 
                 <label>Capacidad:
@@ -100,18 +99,19 @@ function actualizar3($campo) {
                 </label>
 
                 <label>Descripción:
-                    <textarea name="comentarios" <?php if ($enviadoCorrectamente || $datosConfirmados) echo "disabled"; ?>>
+                    <textarea name="comentarios" <?php if ($enviadoCorrectamente || $datosConfirmados)
+                        echo "disabled"; ?>>
                     <?php echo isset($_POST['comentarios']) ? $_SESSION['comentarios'] : $_SESSION['reserva']['comentarios']; ?></textarea>
                 </label>
 
                 <label>Día de entrada:
-                    <input type="date" name="fecha_entrada"
-                        value="<?php echo $_SESSION['reserva']['dia_entrada']; ?>" disabled>
+                    <input type="date" name="fecha_entrada" value="<?php echo $_SESSION['reserva']['dia_entrada']; ?>"
+                        disabled>
                 </label>
 
                 <label>Día de salida:
-                    <input type="date" name="fecha_salida"
-                        value="<?php echo $_SESSION['reserva']['dia_salida']; ?>" disabled>
+                    <input type="date" name="fecha_salida" value="<?php echo $_SESSION['reserva']['dia_salida']; ?>"
+                        disabled>
                 </label>
 
                 <?php if (!$enviadoCorrectamente && !$datosConfirmados) { ?>
@@ -127,8 +127,8 @@ function actualizar3($campo) {
                 <label>
                     <input type="submit" value="Ver Listado" formaction="listado_res.php">
                 </label>
-                
-            </form>            
+
+            </form>
         </div>
     </main>
 </body>

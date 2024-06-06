@@ -22,16 +22,19 @@ if (isset($_POST['recovery'])) {
     # La reemplazamos por un delete de todos los usuarios menos los administradores
     $sql = str_replace($command, "DELETE FROM `usuarios` WHERE rol != 'administrador'", $sql);
 
+    $command = "DROP TABLE IF EXISTS `habitacion`";
+    $sql = str_replace($command, "DELETE FROM `habitacion`", $sql);
+
     # Como no hemos dropeado la tabla usuarios, no debemos crearla.
     $command = "CREATE TABLE `usuarios`";
     $sql = str_replace($command, "CREATE TABLE `usuarios` IF NOT EXISTS", $sql);
 
     $mysqli = connect_db();
 
-    $array = explode(";", $sql);
+    $consultas = explode(";", $sql);
 
-    foreach ($array as $value) {
-        $resultado = $mysqli->query($value);
+    foreach ($consultas as $consulta) {
+        $resultado = $mysqli->query($consulta);
     }
 
     desconectar_db($mysqli);

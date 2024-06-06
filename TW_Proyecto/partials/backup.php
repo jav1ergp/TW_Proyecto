@@ -34,6 +34,7 @@ foreach ($tables as $table) {
     // Obtener los datos de la tabla
     $result = $mysqli->query("SELECT * FROM $table");
     if ($result->num_rows > 0) {
+        # Obtenemos los nombres de las columnas
         $columns = array_keys($result->fetch_assoc());
         $columnsList = "`" . implode("`, `", $columns) . "`";
 

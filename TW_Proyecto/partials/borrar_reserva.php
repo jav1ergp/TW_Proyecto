@@ -17,14 +17,14 @@ if (!$db) {
 // Verificar si se ha proporcionado el parámetro de email de usuario en la URL
 if (isset($_GET['numero'])) {
     $numero_borrar = $_GET['numero'];
-} else {?>
-    <p class='error-formulario'>ERROR: No se pudo extraer el usuario a 
+} else { ?>
+    <p class='error-formulario'>ERROR: No se pudo extraer el usuario a
         editar de la BBDD.</p>
 <?php } ?>
 
 
 
-<?php 
+<?php
 //Hacemos una consulta en la tabla de usuarios que tenga el mismo email evitando inyeccion SQL aunque no deberia tener
 $datosUsuarioABorrarDB = mysqli_query($db, "SELECT * FROM reserva WHERE numero='" . mysqli_real_escape_string($db, $numero_borrar) . "'");
 $datoshabitacionABorrarDB = mysqli_query($db, "SELECT * FROM habitacion WHERE numero='" . mysqli_real_escape_string($db, $numero_borrar) . "'");
@@ -34,22 +34,24 @@ $datosUsuarioABorrar = mysqli_fetch_assoc($datosUsuarioABorrarDB);
 $datoshabitacionABorrarDB = mysqli_fetch_assoc($datosUsuarioABorrarDB);
 
 //Si se ha encontrado, se guardarán los datos del usuario en una variable de sesión, que la usaremos para obtener los datos en el formulario de la BBDD
-if ($datosUsuarioABorrarDB && mysqli_num_rows($datosUsuarioABorrarDB) > 0){
-        $_SESSION["reserva_borrar"] = $datosUsuarioABorrar;
+if ($datosUsuarioABorrarDB && mysqli_num_rows($datosUsuarioABorrarDB) > 0) {
+    $_SESSION["reserva_borrar"] = $datosUsuarioABorrar;
 }
-if ($datosUsuarioABorrarDB && mysqli_num_rows($datosUsuarioABorrarDB) > 0){
+if ($datosUsuarioABorrarDB && mysqli_num_rows($datosUsuarioABorrarDB) > 0) {
     $_SESSION["habitacion"] = $datosUsuarioABorrar;
 }
 
-function borrar1(){
+function borrar1()
+{
     global $db;
     global $numero_borrar;
-      // Ejecutar la consulta DELETE
+    // Ejecutar la consulta DELETE
     $query = mysqli_query($db, "DELETE FROM reserva WHERE numero = '" . mysqli_real_escape_string($db, $numero_borrar) . "'");
-    
+
     if (!($query && mysqli_affected_rows($db) > 0)) {
-        // La consulta falló o no se eliminó ninguna fila?>
-        <p class='error-formulario'>ERROR: No se pudo borrar la reserva de la BBDD.</p> <?php
+        // La consulta falló o no se eliminó ninguna fila ?>
+        <p class='error-formulario'>ERROR: No se pudo borrar la reserva de la BBDD.</p>
+        <?php
         $fecha = date('Y-m-d H:i:s');
         $accion = "No se ha podido borrar la habitación";
         mysqli_query($db, "INSERT INTO logs (fecha, descripcion) VALUES ('$fecha', '$accion')");
@@ -68,46 +70,43 @@ function borrar1(){
         </div>
 
         <?php
-         
+
         inicializarVarSesion('estado');
         $estado = 'operativa';
         $enviadoCorrectamente = false;
-        if (isset($_POST["borrar-reserva"])){
+        if (isset($_POST["borrar-reserva"])) {
             $enviadoCorrectamente = true;
         }
 
         $datosConfirmados = false;
 
-        if (isset($_POST['confirmar-borrado'])){?>
-            <span class = "confirmacion-datos">Se han borrado los datos del usuario.</span>
+        if (isset($_POST['confirmar-borrado'])) { ?>
+            <span class="confirmacion-datos">Se han borrado los datos del usuario.</span>
             <?php
-                $datosConfirmados = true;
-                borrar1();
-                $_SESSION['estado'] = $estado;
-                actualizar('estado');
-                $fecha = date('Y-m-d H:i:s');
-                $accion = "Se ha borrado la reserva de la habitación {$_SESSION['reserva_borrar']['numero']}.";
-                $log = mysqli_query($db, "INSERT INTO logs (fecha, descripcion) VALUES ('$fecha', '$accion')");
-        }?>
+            $datosConfirmados = true;
+            borrar1();
+            $_SESSION['estado'] = $estado;
+            actualizar('estado');
+            $fecha = date('Y-m-d H:i:s');
+            $accion = "Se ha borrado la reserva de la habitación {$_SESSION['reserva_borrar']['numero']}.";
+            $log = mysqli_query($db, "INSERT INTO logs (fecha, descripcion) VALUES ('$fecha', '$accion')");
+        } ?>
 
         <div class="formulario-editar">
             <form action="" method="POST">
                 <label>Email:
-                    <input type="email" name="email"
-                        value="<?php echo $_SESSION['reserva_borrar']['email']; ?>"
+                    <input type="email" name="email" value="<?php echo $_SESSION['reserva_borrar']['email']; ?>"
                         disabled>
                 </label>
 
                 <label>Numero-Habitacion:
-                    <input type="text" name="numero"
-                        value="<?php echo $_SESSION['reserva_borrar']['numero']; ?>"
+                    <input type="text" name="numero" value="<?php echo $_SESSION['reserva_borrar']['numero']; ?>"
                         disabled>
                 </label>
 
                 <label>Capacidad:
                     <input type="text" name="capacidad" placeholder="Numero"
-                        value="<?php echo $_SESSION['reserva_borrar']['capacidad']; ?>"
-                        disabled>
+                        value="<?php echo $_SESSION['reserva_borrar']['capacidad']; ?>" disabled>
                 </label>
 
                 <label>Comentarios del cliente:
@@ -119,14 +118,12 @@ function borrar1(){
 
                 <label>Día de entrada:
                     <input type="date" name="fecha_entrada"
-                        value="<?php echo $_SESSION['reserva_borrar']["dia_entrada"]; ?>"
-                        disabled>
+                        value="<?php echo $_SESSION['reserva_borrar']["dia_entrada"]; ?>" disabled>
                 </label>
 
                 <label>Día de salida:
                     <input type="date" name="fecha_salida"
-                        value="<?php echo $_SESSION['reserva_borrar']["dia_salida"]; ?>" 
-                        disabled>
+                        value="<?php echo $_SESSION['reserva_borrar']["dia_salida"]; ?>" disabled>
                 </label>
 
                 <?php if (!$enviadoCorrectamente && !$datosConfirmados) { ?>
@@ -142,8 +139,8 @@ function borrar1(){
                 <label>
                     <input type="submit" value="Ver Listado" formaction="listado_res.php">
                 </label>
-                
-            </form>            
+
+            </form>
         </div>
     </main>
 </body>

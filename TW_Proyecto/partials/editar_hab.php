@@ -106,8 +106,7 @@ if (isset($_GET['numero'])) {
 
 
                 <label>Descripción:
-                    <textarea name="descripcion" rows="4"cols="50"
-                    <?php if ($enviadoCorrectamente || $datosConfirmados)
+                    <textarea name="descripcion" rows="4" cols="50" <?php if ($enviadoCorrectamente || $datosConfirmados)
                         echo "disabled"; ?>>
                     <?php echo isset($_POST['descripcion']) ? $_SESSION['descripcion'] : $_SESSION['habitacion']['descripcion']; ?></textarea>
                 </label>
@@ -130,8 +129,8 @@ if (isset($_GET['numero'])) {
                 <label>
                     <input type="submit" value="Ver Listado" formaction="listado_hab.php">
                 </label>
-                
-            </form>            
+
+            </form>
             <?php
 
             //Configuramos la nomenclatura de los nombres de archivo de las imágenes,
@@ -151,7 +150,7 @@ if (isset($_GET['numero'])) {
                     $fotoValida2 = false;
                 }
 
-                if($fotoValida){
+                if ($fotoValida) {
                     $tipoImagen = exif_imagetype($rutaTemporal);
                     $tiposPermitidos = array(IMAGETYPE_GIF, IMAGETYPE_JPEG, IMAGETYPE_PNG);
                     if (!in_array($tipoImagen, $tiposPermitidos)) {
@@ -160,7 +159,7 @@ if (isset($_GET['numero'])) {
                     }
                 }
 
-                if($fotoValida2){
+                if ($fotoValida2) {
                     $extension = strtolower(pathinfo($nombreArchivo, PATHINFO_EXTENSION));
                     $extensionesPermitidas = array('jpg', 'jpeg', 'png', 'gif');
                     if (!in_array($extension, $extensionesPermitidas)) {
@@ -189,7 +188,7 @@ if (isset($_GET['numero'])) {
                     }
                 }
             }
-            
+
             ?>
             <?php
             if (isset($_POST['borrar-foto'])) {
@@ -219,7 +218,7 @@ if (isset($_GET['numero'])) {
                 }
             }
             ?>
-            
+
             <?php if (!$enviadoCorrectamente) { ?>
                 <form action="#" method="POST" enctype="multipart/form-data">
                     <div class="formulario-editar">
@@ -250,7 +249,7 @@ if (isset($_GET['numero'])) {
                             }
                             ?>
                         </div>
-                        <input type='file' name='subir-imagen' value='Seleccionar archivo' accept=".jpg, .png, .jpeg"/>
+                        <input type='file' name='subir-imagen' value='Seleccionar archivo' accept=".jpg, .png, .jpeg" />
                         <input type="submit" value="Añadir fotografia" name="añadir-foto" />
                     </div>
                 </form>

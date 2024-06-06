@@ -50,7 +50,7 @@ if (isset($_GET['email'])) {
         </div>
 
         <?php
-        
+
         $enviadoCorrectamente = false;
         if (isset($_POST["modificar-usuario"]) && validarTodosLosCampos2()) {
             $enviadoCorrectamente = true;
@@ -75,19 +75,27 @@ if (isset($_GET['email'])) {
         <div class="formulario-editar">
             <form action="" method="POST">
                 <label>Nombre:
-                    <input type="text" name="nombre" value="<?php echo isset($_POST['nombre']) ? $_POST['nombre'] : $_SESSION['usuario']['nombre']; ?>" disabled>
+                    <input type="text" name="nombre"
+                        value="<?php echo isset($_POST['nombre']) ? $_POST['nombre'] : $_SESSION['usuario']['nombre']; ?>"
+                        disabled>
                 </label>
 
                 <label>Apellidos:
-                    <input type="text" name="apellidos" value="<?php echo isset($_POST['apellidos']) && !empty($_POST['apellidos']) ? $_SESSION['apellidos'] : $_SESSION['usuario']['apellidos']; ?>" disabled>
+                    <input type="text" name="apellidos"
+                        value="<?php echo isset($_POST['apellidos']) && !empty($_POST['apellidos']) ? $_SESSION['apellidos'] : $_SESSION['usuario']['apellidos']; ?>"
+                        disabled>
                 </label>
 
                 <label>Dni:
-                    <input type="text" name="dni" value="<?php echo isset($_POST['dni']) && !empty($_POST['dni']) ? $_SESSION['dni'] : $_SESSION['usuario']['dni']; ?>" disabled>
+                    <input type="text" name="dni"
+                        value="<?php echo isset($_POST['dni']) && !empty($_POST['dni']) ? $_SESSION['dni'] : $_SESSION['usuario']['dni']; ?>"
+                        disabled>
                 </label>
 
                 <label>Email:
-                    <input type="email" name="email" value="<?php echo isset($_POST['email']) && !empty($_POST['email']) ? $_SESSION['email'] : $_SESSION['usuario']['email']; ?>" disabled>
+                    <input type="email" name="email"
+                        value="<?php echo isset($_POST['email']) && !empty($_POST['email']) ? $_SESSION['email'] : $_SESSION['usuario']['email']; ?>"
+                        disabled>
                 </label>
                 <?php if (!$enviadoCorrectamente && !$datosConfirmados) { ?>
                     <div class="clave">
@@ -103,15 +111,19 @@ if (isset($_GET['email'])) {
 
 
                 <label>Tarjeta de crédito:
-                    <input type="text" name="tarjeta" value="<?php echo isset($_POST['tarjeta']) ? $_POST['tarjeta'] : $_SESSION['usuario']['tarjeta']; ?>"
-                    <?php if ($enviadoCorrectamente || $datosConfirmados) echo "disabled"; ?>>
+                    <input type="text" name="tarjeta"
+                        value="<?php echo isset($_POST['tarjeta']) ? $_POST['tarjeta'] : $_SESSION['usuario']['tarjeta']; ?>"
+                        <?php if ($enviadoCorrectamente || $datosConfirmados)
+                            echo "disabled"; ?>>
                 </label>
                 <?php if (hayErrores("tarjeta")) { ?>
                     <p class='error-formulario'>El número de tarjeta no es válido.</p>
                 <?php } ?>
-                
+
                 <label>Rol:
-                    <input type='text' name='rol' value='<?php echo isset($_POST['rol']) ? $_POST['rol'] : $_SESSION["usuario"]["rol"];?>' disabled/>
+                    <input type='text' name='rol'
+                        value='<?php echo isset($_POST['rol']) ? $_POST['rol'] : $_SESSION["usuario"]["rol"]; ?>'
+                        disabled />
                 </label>
 
                 <?php if (!$enviadoCorrectamente && !$datosConfirmados) { ?>
@@ -119,17 +131,17 @@ if (isset($_GET['email'])) {
                         <input type='submit' name='modificar-usuario' value='Modificar usuario'>
                     </label>
                 <?php } else if (!$datosConfirmados) { ?>
-                    <label>
-                        <input type='submit' name='confirmar-datos' value='Confirmar datos'/>
-                    </label>
+                        <label>
+                            <input type='submit' name='confirmar-datos' value='Confirmar datos' />
+                        </label>
                 <?php } ?>
 
                 <?php
                 //Si se han confirmado los datos de un usuario, aparecerá un boton para limpiar el formulario
                 if ($datosConfirmados) { ?>
-                <label>
-                    <input type='submit' value="Limpiar" formaction="index.php">
-                </label>
+                    <label>
+                        <input type='submit' value="Limpiar" formaction="index.php">
+                    </label>
                 <?php } ?>
 
                 <label>
@@ -139,4 +151,5 @@ if (isset($_GET['email'])) {
         </div>
     </main>
 </body>
+
 </html>

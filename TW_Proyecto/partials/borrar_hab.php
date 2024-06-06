@@ -57,7 +57,7 @@ if (!$db) {
             $accion = "Se ha borrado una habitación";
             $log = mysqli_query($db, "INSERT INTO logs (fecha, descripcion) VALUES ('$fecha', '$accion')");
             ?>
-        <?php
+            <?php
         }
 
         //Hacemos una consulta en la tabla de usuarios que tenga el mismo email evitando inyeccion SQL aunque no deberia tener

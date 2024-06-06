@@ -29,19 +29,19 @@ include ("partials/head-html.php");
                 <p>Indique la acción a realizar</p>
                 <ul>
                     <li><a href="registro.php">Añadir nuevo usuario</a></li>
-                    <?php 
+                    <?php
                     if (isset($_SESSION["usuario"]) && isset($_SESSION["usuario"]["rol"])) {
                         if ($_SESSION["usuario"]["rol"] === "recepcionista") { ?>
                             <li><a href="add-habitacion.php">Añadir nueva habitacion</a></li>
-                        <?php } 
+                        <?php }
                         if ($_SESSION["usuario"]["rol"] === "recepcionista" || $_SESSION["usuario"]["rol"] === "administrador") { ?>
                             <li><a href="listado.php">Listado usuarios</a></li>
-                        <?php } 
+                        <?php }
                         if ($_SESSION["usuario"]["rol"] !== "administrador") { ?>
                             <li><a href="listado_res.php">Listado reservas</a></li>
-                        <?php } 
-                    } ?>      
-                    <li><a href="listado_hab.php">Listado Habitaciones</a></li>              
+                        <?php }
+                    } ?>
+                    <li><a href="listado_hab.php">Listado Habitaciones</a></li>
                 </ul>
             </div>
             <?php
@@ -84,7 +84,7 @@ include ("partials/head-html.php");
                 // Consultar todos los registros de la página actual
                 $resultado = mysqli_query($db, "SELECT * FROM usuarios LIMIT $indice_inicial, $registros_pag");
             }
-            
+
             // Verificar si se obtuvieron resultados
             if ($resultado && mysqli_num_rows($resultado) > 0) {
                 // Iterar sobre los registros y mostrar la información
@@ -100,12 +100,12 @@ include ("partials/head-html.php");
                         </div>
 
                         <?php if (isset($_SESSION["usuario"]["rol"]) && (($_SESSION["usuario"]["rol"] === "recepcionista") || ($_SESSION["usuario"]["rol"] === "administrador"))) { ?>
-                        <div class="editar-usuario">
-                            <form method="GET" action="datos-usuarios.php">
-                                <input type="hidden" name="email" value="<?php echo $fila['email']; ?>">
-                                <input type="submit" value="Ver Datos">
-                            </form>
-                        </div>
+                            <div class="editar-usuario">
+                                <form method="GET" action="datos-usuarios.php">
+                                    <input type="hidden" name="email" value="<?php echo $fila['email']; ?>">
+                                    <input type="submit" value="Ver Datos">
+                                </form>
+                            </div>
                         <?php } ?>
                         <div class="editar-usuario">
                             <?php if (isset($_SESSION["usuario"]["rol"]) && (($_SESSION["usuario"]["rol"] === "recepcionista") || ($_SESSION["usuario"]["rol"] === "administrador"))) { ?>
@@ -133,7 +133,7 @@ include ("partials/head-html.php");
             } else {
                 echo 'No hay registros para mostrar.';
             }
-            
+
 
             //Barra de navegación para avanzar o retroceder entre las páginas
             ?>
@@ -155,11 +155,11 @@ include ("partials/head-html.php");
 
         </main>
         <?php
-    include ("partials/side-menu.php");
-    ?>
+        include ("partials/side-menu.php");
+        ?>
     </div>
     <!-- Footer de la web -->
-  <?php include ("partials/footer.php"); ?>
+    <?php include ("partials/footer.php"); ?>
 </body>
 
 </html>

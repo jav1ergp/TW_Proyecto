@@ -37,9 +37,10 @@ if (isset($_GET['email'])) {
 }
 
 
-function actualizar_admin($campo){
+function actualizar_admin($campo)
+{
     global $db;
-    if ($_SESSION["$campo"] != $_SESSION["usuario_editar"]["$campo"]){
+    if ($_SESSION["$campo"] != $_SESSION["usuario_editar"]["$campo"]) {
         $query = mysqli_query($db, "UPDATE usuarios SET $campo = '" . mysqli_real_escape_string($db, $_SESSION["$campo"]) . "' WHERE email = '" . mysqli_real_escape_string($db, $_SESSION["usuario_editar"]["email"]) . "'");
         if ($query && mysqli_affected_rows($db) > 0) {
             // La consulta se ejecutó correctamente y se actualizaron filas en la base de datos
@@ -49,7 +50,7 @@ function actualizar_admin($campo){
             // Actualiza la variable de sesión con el nuevo valor
             $_SESSION["usuario_editar"]["$campo"] = $_SESSION["$campo"];
 
-            if ($_SESSION["usuario"]["email"] == $_SESSION["usuario_editar"]["email"]){
+            if ($_SESSION["usuario"]["email"] == $_SESSION["usuario_editar"]["email"]) {
                 $_SESSION["usuario"]["$campo"] = $_SESSION["$campo"];
             }
         } else {
@@ -58,7 +59,8 @@ function actualizar_admin($campo){
     }
 }
 
-function actualizarEnBD_admmin(){
+function actualizarEnBD_admmin()
+{
     actualizar_admin("nombre");
     actualizar_admin("apellidos");
     actualizar_admin("dni");
@@ -67,7 +69,8 @@ function actualizarEnBD_admmin(){
     actualizar_admin("rol");
 }
 
-function actualizarVarSesion_admin(){
+function actualizarVarSesion_admin()
+{
     $_SESSION['nombre'] = htmlentities(strip_tags($_POST['nombre']));
     $_SESSION['apellidos'] = htmlentities(strip_tags($_POST['apellidos']));
     $_SESSION['dni'] = htmlentities(strip_tags($_POST['dni']));
@@ -79,7 +82,8 @@ function actualizarVarSesion_admin(){
     }
 }
 
-function inicializarVarSesion_admin($campo) {
+function inicializarVarSesion_admin($campo)
+{
     global $enviadoCorrectamente;
     global $datosConfirmados;
     if (!$datosConfirmados && !$enviadoCorrectamente) {
@@ -87,7 +91,8 @@ function inicializarVarSesion_admin($campo) {
     }
 }
 
-function inicializarTodasVarSesion_admin(){
+function inicializarTodasVarSesion_admin()
+{
     inicializarVarSesion_admin("nombre");
     inicializarVarSesion_admin("apellidos");
     inicializarVarSesion_admin("dni");
@@ -104,7 +109,7 @@ function validarTodosLosCampos_admin()
     $dniValido = campoEsValido("dni");
     $claveValida = campoEsValido("clave");
     $tarjetaValida = campoEsValido("tarjeta");
-  
+
     return $nombreValido && $apellidosValidos && $dniValido && $claveValida && $tarjetaValida;
 }
 ?>
@@ -120,7 +125,7 @@ function validarTodosLosCampos_admin()
         </div>
 
         <?php
-        
+
         $enviadoCorrectamente = false;
         if (isset($_POST["modificar-usuario"]) && validarTodosLosCampos_admin()) {
             $enviadoCorrectamente = true;
@@ -142,8 +147,10 @@ function validarTodosLosCampos_admin()
         <div class="formulario-editar">
             <form action="" method="POST">
                 <label>Nombre:
-                    <input type="text" name="nombre" value="<?php echo isset($_POST['nombre']) ? $_SESSION['nombre'] : $_SESSION['usuario_editar']['nombre']; ?>" 
-                    <?php if ($enviadoCorrectamente || $datosConfirmados) echo "disabled"; ?>>
+                    <input type="text" name="nombre"
+                        value="<?php echo isset($_POST['nombre']) ? $_SESSION['nombre'] : $_SESSION['usuario_editar']['nombre']; ?>"
+                        <?php if ($enviadoCorrectamente || $datosConfirmados)
+                            echo "disabled"; ?>>
                 </label>
 
                 <?php
@@ -153,8 +160,10 @@ function validarTodosLosCampos_admin()
 
 
                 <label>Apellidos:
-                    <input type="text" name="apellidos" value="<?php echo isset($_POST['apellidos']) && !empty($_POST['apellidos']) ? $_SESSION['apellidos'] : $_SESSION['usuario_editar']['apellidos']; ?>" 
-                    <?php if ($enviadoCorrectamente || $datosConfirmados) echo "disabled"; ?>>
+                    <input type="text" name="apellidos"
+                        value="<?php echo isset($_POST['apellidos']) && !empty($_POST['apellidos']) ? $_SESSION['apellidos'] : $_SESSION['usuario_editar']['apellidos']; ?>"
+                        <?php if ($enviadoCorrectamente || $datosConfirmados)
+                            echo "disabled"; ?>>
                 </label>
 
                 <?php
@@ -164,8 +173,10 @@ function validarTodosLosCampos_admin()
 
 
                 <label>Dni:
-                    <input type="text" name="dni" value="<?php echo isset($_POST['dni']) && !empty($_POST['dni']) ? $_SESSION['dni'] : $_SESSION['usuario_editar']['dni']; ?>" 
-                    <?php if ($enviadoCorrectamente || $datosConfirmados) echo "disabled"; ?>>
+                    <input type="text" name="dni"
+                        value="<?php echo isset($_POST['dni']) && !empty($_POST['dni']) ? $_SESSION['dni'] : $_SESSION['usuario_editar']['dni']; ?>"
+                        <?php if ($enviadoCorrectamente || $datosConfirmados)
+                            echo "disabled"; ?>>
                 </label>
 
                 <?php
@@ -175,7 +186,9 @@ function validarTodosLosCampos_admin()
 
 
                 <label>Email:
-                    <input type="email" name="email" value="<?php echo isset($_POST['email']) && !empty($_POST['email']) ? $_SESSION['email'] : $_SESSION['usuario_editar']['email']; ?>" disabled>
+                    <input type="email" name="email"
+                        value="<?php echo isset($_POST['email']) && !empty($_POST['email']) ? $_SESSION['email'] : $_SESSION['usuario_editar']['email']; ?>"
+                        disabled>
                 </label>
 
 
@@ -193,18 +206,24 @@ function validarTodosLosCampos_admin()
 
 
                 <label>Tarjeta de crédito:
-                    <input type="text" name="tarjeta" value="<?php echo isset($_POST['tarjeta']) ? $_SESSION['tarjeta'] : $_SESSION['usuario_editar']['tarjeta']; ?>"
-                    <?php if ($enviadoCorrectamente || $datosConfirmados) echo "disabled"; ?>>
+                    <input type="text" name="tarjeta"
+                        value="<?php echo isset($_POST['tarjeta']) ? $_SESSION['tarjeta'] : $_SESSION['usuario_editar']['tarjeta']; ?>"
+                        <?php if ($enviadoCorrectamente || $datosConfirmados)
+                            echo "disabled"; ?>>
                 </label>
                 <?php if (hayErrores("tarjeta")) { ?>
                     <p class='error-formulario'>El número de tarjeta no es válido.</p>
                 <?php } ?>
-                
+
                 <label>Rol:
-                    <select name="rol" <?php if ($enviadoCorrectamente || $datosConfirmados || (isset($_SESSION["usuario"]["rol"]) && $_SESSION["usuario"]["rol"] === "recepcionista")) echo "disabled"; ?>>
-                        <option value="cliente" <?php echo (isset($_POST['rol']) ? $_POST['rol'] : ($_SESSION['usuario_editar']['rol'] ?? '')) == 'cliente' ? 'selected' : ''; ?>>Cliente</option>
-                        <option value="recepcionista" <?php echo (isset($_POST['rol']) ? $_POST['rol'] : ($_SESSION['usuario_editar']['rol'] ?? '')) == 'recepcionista' ? 'selected' : ''; ?>>Recepcionista</option>
-                        <option value="administrador" <?php echo (isset($_POST['rol']) ? $_POST['rol'] : ($_SESSION['usuario_editar']['rol'] ?? '')) == 'administrador' ? 'selected' : ''; ?>>Administrador</option>
+                    <select name="rol" <?php if ($enviadoCorrectamente || $datosConfirmados || (isset($_SESSION["usuario"]["rol"]) && $_SESSION["usuario"]["rol"] === "recepcionista"))
+                        echo "disabled"; ?>>
+                        <option value="cliente" <?php echo (isset($_POST['rol']) ? $_POST['rol'] : ($_SESSION['usuario_editar']['rol'] ?? '')) == 'cliente' ? 'selected' : ''; ?>>Cliente
+                        </option>
+                        <option value="recepcionista" <?php echo (isset($_POST['rol']) ? $_POST['rol'] : ($_SESSION['usuario_editar']['rol'] ?? '')) == 'recepcionista' ? 'selected' : ''; ?>>
+                            Recepcionista</option>
+                        <option value="administrador" <?php echo (isset($_POST['rol']) ? $_POST['rol'] : ($_SESSION['usuario_editar']['rol'] ?? '')) == 'administrador' ? 'selected' : ''; ?>>
+                            Administrador</option>
                     </select>
                 </label>
 
@@ -214,17 +233,17 @@ function validarTodosLosCampos_admin()
                         <input type='submit' name='modificar-usuario' value='Modificar usuario'>
                     </label>
                 <?php } else if (!$datosConfirmados) { ?>
-                    <label>
-                        <input type='submit' name='confirmar-datos' value='Confirmar datos'/>
-                    </label>
+                        <label>
+                            <input type='submit' name='confirmar-datos' value='Confirmar datos' />
+                        </label>
                 <?php } ?>
 
                 <?php
                 //Si se han confirmado los datos de un usuario, aparecerá un boton para limpiar el formulario
                 if ($datosConfirmados) { ?>
-                <label>
-                    <input type='submit' value="Limpiar" formaction="index.php">
-                </label>
+                    <label>
+                        <input type='submit' value="Limpiar" formaction="index.php">
+                    </label>
                 <?php } ?>
 
                 <label>
@@ -234,4 +253,5 @@ function validarTodosLosCampos_admin()
         </div>
     </main>
 </body>
+
 </html>

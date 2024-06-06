@@ -14,8 +14,8 @@ if (!$db) {
 ?>
 <!DOCTYPE html>
 <html>
-<?php 
-    include("partials/head-html.php");
+<?php
+include ("partials/head-html.php");
 ?>
 
 <body>
@@ -42,7 +42,7 @@ if (!$db) {
             $datosConfirmados = true;
             insertarEnBD();
             $fecha = date('Y-m-d H:i:s');
-            $accion = "Se ha añadido al nuevo usuario {$_SESSION['usuario']['nombre']} con DNI: {$_SESSION['dni']}.";
+            $accion = "Se ha añadido al nuevo usuario {$_SESSION['nombre']} con DNI: {$_SESSION['dni']}.";
             $log = mysqli_query($db, "INSERT INTO logs (fecha, descripcion) VALUES ('$fecha', '$accion')");
         }
 
@@ -57,7 +57,8 @@ if (!$db) {
                 <label>Nombre:
                     <input type="text" name="nombre" value="<?php echo isset($_POST['nombre']) ? $_POST['nombre'] : "";
                     if ($datosConfirmados)
-                        echo $_SESSION["nombre"]; ?>" <?php if ($enviadoCorrectamente || $datosConfirmados) echo "disabled"; ?>>
+                        echo $_SESSION["nombre"]; ?>" <?php if ($enviadoCorrectamente || $datosConfirmados)
+                              echo "disabled"; ?>>
                 </label>
 
                 <?php
@@ -69,7 +70,8 @@ if (!$db) {
                 <label>Apellidos:
                     <input type="text" name="apellidos" value="<?php echo isset($_POST['apellidos']) ? $_POST['apellidos'] : "";
                     if ($datosConfirmados)
-                        echo $_SESSION["apellidos"]; ?>" <?php if ($enviadoCorrectamente || $datosConfirmados) echo "disabled"; ?>>
+                        echo $_SESSION["apellidos"]; ?>" <?php if ($enviadoCorrectamente || $datosConfirmados)
+                              echo "disabled"; ?>>
                 </label>
 
                 <?php
@@ -80,7 +82,8 @@ if (!$db) {
                 <label>Dni:
                     <input type="text" name="dni" value="<?php echo isset($_POST['dni']) ? $_POST['dni'] : "";
                     if ($datosConfirmados)
-                        echo $_SESSION["dni"]; ?>" <?php if ($enviadoCorrectamente || $datosConfirmados) echo "disabled"; ?>>
+                        echo $_SESSION["dni"]; ?>" <?php if ($enviadoCorrectamente || $datosConfirmados)
+                              echo "disabled"; ?>>
                 </label>
 
                 <?php
@@ -91,13 +94,14 @@ if (!$db) {
                 <label>Email:
                     <input type="email" name="email" value="<?php echo isset($_POST['email']) && !empty($_POST['email']) ? $_POST['email'] : "";
                     if ($datosConfirmados)
-                        echo $_SESSION["email"]; ?>" <?php if ($enviadoCorrectamente || $datosConfirmados) echo "disabled"; ?>>
+                        echo $_SESSION["email"]; ?>" <?php if ($enviadoCorrectamente || $datosConfirmados)
+                              echo "disabled"; ?>>
                 </label>
 
                 <?php
                 if (hayErrores("email")) { ?>
                     <p class='error-formulario'>El email no es válido o ya hay alguien registrado con ese
-                    email.</p>
+                        email.</p>
                 <?php } ?>
 
 
@@ -110,7 +114,7 @@ if (!$db) {
                         </label>
                     </div>
 
-                <?php
+                    <?php
                 }
 
                 if (hayErrores("clave")) { ?>
@@ -120,25 +124,32 @@ if (!$db) {
                 <label>Tarjeta de crédito:
                     <input type="text" name="tarjeta" value="<?php echo isset($_POST['tarjeta']) ? $_POST['tarjeta'] : "";
                     if ($datosConfirmados)
-                        echo $_SESSION["tarjeta"]; ?>" <?php if ($enviadoCorrectamente || $datosConfirmados) echo "disabled"; ?>>
+                        echo $_SESSION["tarjeta"]; ?>" <?php if ($enviadoCorrectamente || $datosConfirmados)
+                              echo "disabled"; ?>>
                 </label>
-                
+
                 <?php if (hayErrores("tarjeta")) { ?>
                     <p class='error-formulario'>La tarjeta de crédito no es válida.</p>
                 <?php } ?>
 
                 <?php if (isset($_SESSION["usuario"]["rol"]) && ($_SESSION["usuario"]["rol"] === "recepcionista")) { ?>
                     <label>Rol:
-                        <select name="rol" <?php if ($enviadoCorrectamente || $datosConfirmados) echo "disabled"; ?>>
-                            <option value="cliente" <?php if (isset($_POST['rol']) && $_POST['rol'] == 'cliente') echo 'selected'; ?>>Cliente</option>
+                        <select name="rol" <?php if ($enviadoCorrectamente || $datosConfirmados)
+                            echo "disabled"; ?>>
+                            <option value="cliente" <?php if (isset($_POST['rol']) && $_POST['rol'] == 'cliente')
+                                echo 'selected'; ?>>Cliente</option>
                         </select>
                     </label>
                 <?php } else { ?>
                     <label>Rol:
-                        <select name="rol" <?php if ($enviadoCorrectamente || $datosConfirmados) echo "disabled"; ?>>
-                            <option value="cliente" <?php if (isset($_POST['rol']) && $_POST['rol'] == 'cliente') echo 'selected'; ?>>Cliente</option>
-                            <option value="recepcionista" <?php if (isset($_POST['rol']) && $_POST['rol'] == 'recepcionista') echo 'selected'; ?>>Recepcionista</option>
-                            <option value="administrador" <?php if (isset($_POST['rol']) && $_POST['rol'] == 'administrador') echo 'selected'; ?>>Administrador</option>
+                        <select name="rol" <?php if ($enviadoCorrectamente || $datosConfirmados)
+                            echo "disabled"; ?>>
+                            <option value="cliente" <?php if (isset($_POST['rol']) && $_POST['rol'] == 'cliente')
+                                echo 'selected'; ?>>Cliente</option>
+                            <option value="recepcionista" <?php if (isset($_POST['rol']) && $_POST['rol'] == 'recepcionista')
+                                echo 'selected'; ?>>Recepcionista</option>
+                            <option value="administrador" <?php if (isset($_POST['rol']) && $_POST['rol'] == 'administrador')
+                                echo 'selected'; ?>>Administrador</option>
                         </select>
                     </label>
                 <?php } ?>
@@ -163,9 +174,9 @@ if (!$db) {
                 <?php
                 //Si se han confirmado, aparecerá un boton para limpiar el formulario y otro para ver el listado de usuarios
                 if ($datosConfirmados) { ?>
-                <label>
-                    <input type='submit' name='limpiar-formulario' value='Limpiar'>
-                </label>
+                    <label>
+                        <input type='submit' name='limpiar-formulario' value='Limpiar'>
+                    </label>
                 <?php } ?>
 
                 <label>

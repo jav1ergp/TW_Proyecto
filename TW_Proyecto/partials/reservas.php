@@ -43,7 +43,7 @@ function validarTodosLosCampos3()
     $f_entradaValida = campoEsValido3("fecha_entrada");
     $f_salidaValida = campoEsValido3("fecha_salida");
 
-    return  $num_huespedesValida && $f_entradaValida && $f_salidaValida;
+    return $num_huespedesValida && $f_entradaValida && $f_salidaValida;
 }
 function campoEsValido3($campo)
 {
@@ -54,7 +54,7 @@ function campoEsValido3($campo)
             if (isset($_POST[$campo]) && is_numeric($_POST[$campo]) && $_POST[$campo] > 0 && AsignarHabitacion($_POST[$campo]) !== null) {
                 return true;
             }
-        break;
+            break;
 
         case "fecha_entrada":
             if (isset($_POST[$campo])) {
@@ -64,8 +64,8 @@ function campoEsValido3($campo)
                     return true;
                 }
             }
-        break;
-    
+            break;
+
         case "fecha_salida":
             if (isset($_POST[$campo])) {
                 $fechaEntrada = isset($_POST['fecha_entrada']) ? strtotime($_POST['fecha_entrada']) : null;
@@ -74,12 +74,12 @@ function campoEsValido3($campo)
                     return true;
                 }
             }
-        break;
+            break;
     }
 
     return false;
 }
- //Función que comprueba si hay errores en un campo.
+//Función que comprueba si hay errores en un campo.
 function hayErrores3($campo)
 {
     switch ($campo) {
@@ -97,10 +97,10 @@ function hayErrores3($campo)
 function actualizarVarSesion3()
 {
     global $db;
-    if(isset($_POST['email_cliente'])){
+    if (isset($_POST['email_cliente'])) {
         $_SESSION['email_cliente'] = $_POST['email_cliente'];
     }
-    
+
     $num_huespedes = $_POST['num_huespedes'];
     $numero = AsignarHabitacion($num_huespedes);
     $_SESSION['numero'] = $numero;
@@ -127,12 +127,12 @@ function actualizarVarSesion3()
 function insertarEnBD3()
 {
     global $db;
-    
+
     if (isset($_SESSION["usuario"]["rol"]) && ($_SESSION["usuario"]["rol"] === "recepcionista")) {
         $email = $_SESSION['email_cliente'];
     } else {
         $email = $_SESSION['reserva']['email'];
-    }    
+    }
     $numero = $_SESSION['numero'];
     $num_huespedes = $_SESSION["num_huespedes"];
     $comentarios = $_SESSION["comentarios"];
@@ -144,7 +144,8 @@ function insertarEnBD3()
         VALUES ('$email', '$numero', '$num_huespedes', '$comentarios', '$fecha_entrada', '$fecha_salida', '$estado')");
 }
 
-function actualizar3($campo) {
+function actualizar3($campo)
+{
     global $db;
     // Escapar el campo y el valor para la consulta SQL
     $campo_escapado = mysqli_real_escape_string($db, $campo);
@@ -159,7 +160,8 @@ function actualizar3($campo) {
     }
 }
 
-function AsignarHabitacion($capacidad) {
+function AsignarHabitacion($capacidad)
+{
     global $db;
     // Consulta para encontrar una habitación operativa con capacidad mayor o igual a la demandada
     $stmt = $db->prepare("
@@ -169,7 +171,7 @@ function AsignarHabitacion($capacidad) {
         ORDER BY h.capacidad ASC
         LIMIT 1
     ");
-    
+
     // Ejecutar la consulta pasando la capacidad como parámetro
     $stmt->bind_param("i", $capacidad);
     $stmt->execute();
@@ -182,7 +184,8 @@ function AsignarHabitacion($capacidad) {
     return $habitacion ? $habitacion['numero'] : null;
 }
 
-function obtenerClientes() {
+function obtenerClientes()
+{
     // Configura los detalles de la base de datos
     global $db;
 
@@ -242,15 +245,14 @@ function obtenerClientes() {
 
         <div class="formulario-editar">
             <form action="" method="POST">
-            <?php 
-                if (isset($_SESSION["usuario"]["rol"]) && ($_SESSION["usuario"]["rol"] === "recepcionista")): 
+                <?php
+                if (isset($_SESSION["usuario"]["rol"]) && ($_SESSION["usuario"]["rol"] === "recepcionista")):
                     // Obtén la lista de clientes de la base de datos
                     $clientes = obtenerClientes(); // Esta función debe ser definida para obtener los clientes de la base de datos
-                ?>
+                    ?>
                     <label>Email:
-                        <select type="email" name="email_cliente" 
-                        <?php  if ($enviadoCorrectamente || $datosConfirmados)
-                            echo "disabled";?>>
+                        <select type="email" name="email_cliente" <?php if ($enviadoCorrectamente || $datosConfirmados)
+                            echo "disabled"; ?>>
                             <?php foreach ($clientes as $cliente): ?>
                                 <option value="<?php echo $cliente['email']; ?>">
                                     <?php echo $cliente['email'] . ' - ' . $cliente['nombre']; ?>
@@ -271,51 +273,45 @@ function obtenerClientes() {
                             <input type='text' name='numero' value='" . $_SESSION['numero'] . "' disabled>
                         </label>";
                 } ?>
-                
-                
+
+
                 <label>Número de personas:
-                    <input type="number" name="num_huespedes" 
-                        value="<?php echo isset($_POST['num_huespedes']) ? $_POST['num_huespedes'] : '';  
-                            if ($datosConfirmados)
-                                echo $_SESSION["num_huespedes"]; ?>"
-                        <?php 
-                                if ($enviadoCorrectamente || $datosConfirmados) 
-                                    echo 'disabled'; ?>>
+                    <input type="number" name="num_huespedes" value="<?php echo isset($_POST['num_huespedes']) ? $_POST['num_huespedes'] : '';
+                    if ($datosConfirmados)
+                        echo $_SESSION["num_huespedes"]; ?>" <?php
+                          if ($enviadoCorrectamente || $datosConfirmados)
+                              echo 'disabled'; ?>>
                 </label>
                 <?php if (hayErrores3('num_huespedes') && (!$enviadoCorrectamente)) { ?>
                     <p class='error-formulario'>No hay Habitaciones disponibles.</p>
                 <?php } ?>
 
                 <label>Comentarios del cliente:
-                    <textarea name="comentarios"
-                    <?php if ($enviadoCorrectamente || $datosConfirmados) echo "disabled"; ?>>
-                        <?php echo isset($_POST['comentarios']) ? $_POST['comentarios'] : ""; 
+                    <textarea name="comentarios" <?php if ($enviadoCorrectamente || $datosConfirmados)
+                        echo "disabled"; ?>>
+                        <?php echo isset($_POST['comentarios']) ? $_POST['comentarios'] : "";
                         if ($datosConfirmados)
-                        echo $_SESSION["comentarios"]; ?>
+                            echo $_SESSION["comentarios"]; ?>
                         <?php if ($enviadoCorrectamente || $datosConfirmados)
                             echo "disabled"; ?></textarea>
                 </label>
 
-                
+
                 <label>Día de entrada:
-                    <input type="date" name="fecha_entrada"
-                        value="<?php echo isset($_POST['fecha_entrada']) ? $_POST['fecha_entrada'] : ""; 
-                        if ($datosConfirmados)
-                        echo $_SESSION["fecha_entrada"]; ?>"
-                        <?php if ($enviadoCorrectamente || $datosConfirmados)
-                            echo "disabled"; ?>>
+                    <input type="date" name="fecha_entrada" value="<?php echo isset($_POST['fecha_entrada']) ? $_POST['fecha_entrada'] : "";
+                    if ($datosConfirmados)
+                        echo $_SESSION["fecha_entrada"]; ?>" <?php if ($enviadoCorrectamente || $datosConfirmados)
+                              echo "disabled"; ?>>
                 </label>
                 <?php if (hayErrores3("fecha_entrada")) { ?>
                     <p class='error-formulario'>Por favor, selecciona una fecha de entrada válida.</p>
                 <?php } ?>
 
                 <label>Día de salida:
-                    <input type="date" name="fecha_salida"
-                        value="<?php echo isset($_POST['fecha_salida']) ? $_POST['fecha_salida'] : ""; 
-                        if ($datosConfirmados)
-                        echo $_SESSION["fecha_salida"]; ?>"
-                        <?php if ($enviadoCorrectamente || $datosConfirmados)
-                            echo "disabled"; ?>>
+                    <input type="date" name="fecha_salida" value="<?php echo isset($_POST['fecha_salida']) ? $_POST['fecha_salida'] : "";
+                    if ($datosConfirmados)
+                        echo $_SESSION["fecha_salida"]; ?>" <?php if ($enviadoCorrectamente || $datosConfirmados)
+                              echo "disabled"; ?>>
                 </label>
                 <?php if (hayErrores3("fecha_salida")) { ?>
                     <p class='error-formulario'>Por favor, selecciona una fecha de salida válida.</p>

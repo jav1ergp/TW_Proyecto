@@ -14,8 +14,8 @@ if (!$db) {
 ?>
 <!DOCTYPE html>
 <html>
-<?php 
-    include("partials/head-html.php");
+<?php
+include ("partials/head-html.php");
 ?>
 
 <body>
@@ -57,19 +57,22 @@ if (!$db) {
                 <label>Numero-Habitacion:
                     <input type="text" name="numero" value="<?php echo isset($_POST['numero']) ? $_POST['numero'] : "";
                     if ($datosConfirmados)
-                        echo $_SESSION["numero"]; ?>" <?php if ($enviadoCorrectamente || $datosConfirmados) echo "disabled"; ?>>
+                        echo $_SESSION["numero"]; ?>" <?php if ($enviadoCorrectamente || $datosConfirmados)
+                              echo "disabled"; ?>>
                 </label>
 
                 <?php
                 if (hayErrores("numero")) { ?>
-                    <p class='error-formulario'>Debe escribir la capacidad de la habitacion o ya hay alguna habitacion registrada con ese numero.</p>
+                    <p class='error-formulario'>Debe escribir la capacidad de la habitacion o ya hay alguna habitacion
+                        registrada con ese numero.</p>
                 <?php } ?>
 
 
                 <label>Capacidad:
                     <input type="text" name="capacidad" placeholder="Numero" value="<?php echo isset($_POST['capacidad']) ? $_POST['capacidad'] : "";
                     if ($datosConfirmados)
-                        echo $_SESSION["capacidad"]; ?>" <?php if ($enviadoCorrectamente || $datosConfirmados) echo "disabled"; ?>>
+                        echo $_SESSION["capacidad"]; ?>" <?php if ($enviadoCorrectamente || $datosConfirmados)
+                              echo "disabled"; ?>>
                 </label>
 
                 <?php
@@ -81,7 +84,8 @@ if (!$db) {
                 <label>Precio:
                     <input type="text" name="precio" placeholder="Numero" value="<?php echo isset($_POST['precio']) ? $_POST['precio'] : "";
                     if ($datosConfirmados)
-                        echo $_SESSION["precio"]; ?>" <?php if ($enviadoCorrectamente || $datosConfirmados) echo "disabled"; ?>>
+                        echo $_SESSION["precio"]; ?>" <?php if ($enviadoCorrectamente || $datosConfirmados)
+                              echo "disabled"; ?>>
                 </label>
 
                 <?php
@@ -90,10 +94,10 @@ if (!$db) {
                 <?php } ?>
 
 
-                
+
                 <label>Descripción:
-                    <textarea name="descripcion" rows="4" cols="50"
-                        <?php if ($enviadoCorrectamente || $datosConfirmados) echo "disabled"; ?>>
+                    <textarea name="descripcion" rows="4" cols="50" <?php if ($enviadoCorrectamente || $datosConfirmados)
+                        echo "disabled"; ?>>
                     <?php echo isset($_POST['descripcion']) ? $_POST['descripcion'] : ""; ?></textarea>
                 </label>
 
@@ -122,9 +126,9 @@ if (!$db) {
                 <?php
                 //Si se han confirmado, aparecerá un boton para limpiar el formulario y otro para ver el listado de usuarios
                 if ($datosConfirmados) { ?>
-                <label>
-                    <input type='submit' name='limpiar-formulario' value='Limpiar'>
-                </label>
+                    <label>
+                        <input type='submit' name='limpiar-formulario' value='Limpiar'>
+                    </label>
                 <?php } ?>
 
                 <label>

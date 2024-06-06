@@ -57,7 +57,7 @@ if (!$db) {
             $accion = "Se ha borrado al usuario {$_SESSION['usuario_borrar']['nombre']} con DNI {$_SESSION['usuario_borrar']['dni']}.";
             $log = mysqli_query($db, "INSERT INTO log (fecha, descripcion) VALUES ('$fecha', '$accion')");
             ?>
-        <?php
+            <?php
         }
 
         //Hacemos una consulta en la tabla de usuarios que tenga el mismo email evitando inyeccion SQL aunque no deberia tener

@@ -4,7 +4,7 @@ require_once 'db_connection.php';
 //Funcion que se encarga de validar todos los campos
 function validarTodosLosCampos()
 {
-    
+
     $nombreValido = campoEsValido("nombre");
     $apellidosValidos = campoEsValido("apellidos");
     $dniValido = campoEsValido("dni");
@@ -14,11 +14,11 @@ function validarTodosLosCampos()
 
 function validarTodosLosCampos2()
 {
-    
+
     $claveValida = campoEsValido("clave");
     $tarjetaValida = campoEsValido("tarjeta");
-    
-    return  $claveValida && $tarjetaValida;
+
+    return $claveValida && $tarjetaValida;
 }
 
 function campoEsValido($campo)
@@ -78,7 +78,7 @@ function campoEsValido2($campo)
 
     return false;
 }
- //Función que comprueba si hay errores en un campo.
+//Función que comprueba si hay errores en un campo.
 function hayErrores($campo)
 {
     switch ($campo) {
@@ -89,7 +89,7 @@ function hayErrores($campo)
     }
 }
 
- //Función que inserta el usuario en la base de datos
+//Función que inserta el usuario en la base de datos
 function insertarEnBD()
 {
     global $db;
@@ -112,7 +112,7 @@ function actualizarVarSesion()
     $_SESSION['nombre'] = htmlentities($_POST['nombre']);
     $_SESSION['apellidos'] = htmlentities($_POST['apellidos']);
     $_SESSION['dni'] = htmlentities($_POST['dni']);
-    
+
     actualizarVarSesion2();
 }
 function actualizarVarSesion2()
@@ -130,19 +130,22 @@ function actualizarVarSesion2()
 
 
 
-function borrar(){
+function borrar()
+{
     global $db;
     global $email_borrar;
-      // Ejecutar la consulta DELETE
+    // Ejecutar la consulta DELETE
     $query = mysqli_query($db, "DELETE FROM usuarios WHERE email = '" . mysqli_real_escape_string($db, $email_borrar) . "'");
-    
+
     if (!($query && mysqli_affected_rows($db) > 0)) {
-        // La consulta falló o no se eliminó ninguna fila?>
-        <p class='error-formulario'>ERROR: No se pudo borrar el usuario de la BBDD.</p> <?php
+        // La consulta falló o no se eliminó ninguna fila ?>
+        <p class='error-formulario'>ERROR: No se pudo borrar el usuario de la BBDD.</p>
+        <?php
     }
 }
 
-function actualizar($campo) {
+function actualizar($campo)
+{
     global $db;
     // Escapar el campo y el valor para la consulta SQL
     $campo_escapado = mysqli_real_escape_string($db, $campo);
@@ -157,13 +160,15 @@ function actualizar($campo) {
     }
 }
 
-function actualizarEnBD() {
+function actualizarEnBD()
+{
     actualizar("email");
     actualizar("clave");
     actualizar("tarjeta");
 }
 
-function inicializarVarSesion($campo) {
+function inicializarVarSesion($campo)
+{
     global $enviadoCorrectamente;
     global $datosConfirmados;
     if (!$datosConfirmados && !$enviadoCorrectamente) {
@@ -171,7 +176,8 @@ function inicializarVarSesion($campo) {
     }
 }
 
-function inicializarTodasVarSesion() {
+function inicializarTodasVarSesion()
+{
     inicializarVarSesion("email");
     inicializarVarSesion("clave");
     inicializarVarSesion("tarjeta");

@@ -338,7 +338,7 @@ function obtenerClientes()
                 //Si se han confirmado los datos de un usuario, aparecerá un boton para limpiar el formulario
                 if ($datosConfirmados) { ?>
                     <label>
-                        <input type='submit' value="Limpiar" formaction="index.php">
+                        <input type='submit' value="Limpiar" formaction="">
                     </label>
                 <?php } ?>
 

@@ -46,7 +46,7 @@ include ("partials/head-html.php");
             </div>
             <?php
             // Establecer el número de registros por página
-            $registros_pag = isset($_SESSION['registros_pag']) ? $_SESSION['registros_pag'] : 3;
+            $registros_pag = isset($_SESSION['registros_pag']) ? $_SESSION['registros_pag'] : 10;
 
             // Obtener el número total de registros
             $total_registros_query = mysqli_query($db, 'SELECT COUNT(*) as total FROM habitacion');

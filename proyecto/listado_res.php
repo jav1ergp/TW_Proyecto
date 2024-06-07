@@ -128,7 +128,7 @@ include ("partials/head-html.php");
                         <label>Fecha de entrada desde:</label>
                         <input type="date" name="fecha_inicio" value="<?php echo htmlspecialchars($fecha_inicio); ?>">
 
-                        <label>Fecha de salida hasta:</label>
+                        <label>Fecha de entrada hasta:</label>
                         <input type="date" name="fecha_fin" value="<?php echo htmlspecialchars($fecha_fin); ?>">
 
                         <label>Ordenar por:</label>

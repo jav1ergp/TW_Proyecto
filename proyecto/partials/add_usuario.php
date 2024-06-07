@@ -132,20 +132,22 @@ include ("partials/head-html.php");
                     <p class='error-formulario'>La tarjeta de crédito no es válida.</p>
                 <?php } ?>
 
-                <?php if (isset($_SESSION["usuario"]["rol"]) && ($_SESSION["usuario"]["rol"] === "recepcionista")) { ?>
+                <?php if (!isset($_SESSION["usuario"]["rol"]) || (isset($_SESSION["usuario"]["rol"]) && (($_SESSION["usuario"]["rol"])=== "recepcionista") || ($_SESSION["usuario"]["rol"])=== "cliente")){ ?>
                     <label>Rol:
                         <select name="rol" <?php if ($enviadoCorrectamente || $datosConfirmados)
                             echo "disabled"; ?>>
                             <option value="cliente" <?php if (isset($_POST['rol']) && $_POST['rol'] == 'cliente')
-                                echo 'selected'; ?>>Cliente</option>
+                                echo 'selected'; ?>>Cliente
+                            </option>
                         </select>
                     </label>
-                <?php } else { ?>
+                <?php } elseif (isset($_SESSION["usuario"]["rol"]) && $_SESSION["usuario"]["rol"] === "administrador") { ?>
                     <label>Rol:
                         <select name="rol" <?php if ($enviadoCorrectamente || $datosConfirmados)
                             echo "disabled"; ?>>
                             <option value="cliente" <?php if (isset($_POST['rol']) && $_POST['rol'] == 'cliente')
-                                echo 'selected'; ?>>Cliente</option>
+                                echo 'selected'; ?>>Cliente
+                            </option>
                             <option value="recepcionista" <?php if (isset($_POST['rol']) && $_POST['rol'] == 'recepcionista')
                                 echo 'selected'; ?>>Recepcionista</option>
                             <option value="administrador" <?php if (isset($_POST['rol']) && $_POST['rol'] == 'administrador')
@@ -153,8 +155,6 @@ include ("partials/head-html.php");
                         </select>
                     </label>
                 <?php } ?>
-
-
                 <?php
                 //Si no se han enviado los datos ni se han confirmado, aparecerá el botón de añadir usuario
                 if (!$enviadoCorrectamente && !$datosConfirmados) { ?>
@@ -179,9 +179,12 @@ include ("partials/head-html.php");
                     </label>
                 <?php } ?>
 
-                <label>
-                    <input type="submit" value="Ver Listado" formaction="listado.php">
-                </label>
+                <?php
+                if (isset($_SESSION["usuario"]) && (isset($_SESSION["usuario"]["rol"]) && ($_SESSION["usuario"]["rol"] === "recepcionista" || $_SESSION["usuario"]["rol"] === "administrador"))) { ?>
+                    <label>
+                        <input type="submit" value="Ver Listado" formaction="listado.php">
+                    </label>
+                <?php } ?>
             </form>
         </div>
     </main>

@@ -42,7 +42,7 @@ function campoEsValido($campo)
             if (
                 (isset($_POST['clave-nueva']) && !empty($_POST['clave-nueva']))
                 && (isset($_POST['confirmar-clave-nueva']) && !empty($_POST['confirmar-clave-nueva']))
-                && ($_POST['clave-nueva'] == $_POST['confirmar-clave-nueva']) && (strlen($_POST['clave-nueva']) >= 5)
+                && ($_POST['clave-nueva'] == $_POST['confirmar-clave-nueva']) && (strlen($_POST['clave-nueva']) >= 3)
             ) {
                 return true;
             }
@@ -100,7 +100,9 @@ function insertarEnBD()
     $dni = $_SESSION["dni"];
     $clave = $_SESSION["clave"];
     $tarjeta = $_SESSION["tarjeta"];
+
     $rol = $_SESSION["rol"];
+    
 
     mysqli_query($db, "INSERT INTO usuarios (nombre, apellidos, dni, email, clave, tarjeta, rol) 
         VALUES ('$nombre', '$apellidos', '$dni', '$email', '$clave', '$tarjeta', '$rol')");
@@ -119,9 +121,8 @@ function actualizarVarSesion2()
 {
     $_SESSION['email'] = htmlentities($_POST['email']);
     $_SESSION['tarjeta'] = htmlentities($_POST['tarjeta']);
-    if (isset($_SESSION["usuario"]["rol"]) && ($_SESSION["usuario"]["rol"] === "recepcionista") || ($_SESSION["usuario"]["rol"] === "administrador")) {
-        $_SESSION['rol'] = htmlentities($_POST['rol']);
-    }
+    $_SESSION['rol'] = htmlentities($_POST['rol']);
+
     if (!empty($_POST['clave-nueva'])) {
         $hash = password_hash(htmlentities($_POST['clave-nueva']), PASSWORD_DEFAULT);
         $_SESSION['clave'] = $hash;

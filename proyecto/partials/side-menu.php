@@ -101,7 +101,7 @@ if (true) {
         </div>
 
         <div class="numero-habitaciones">
-            <h3>Huespedes alojados</h3>
+            <h3>Capacidad total</h3>
             <?php
             $query = "SELECT SUM(capacidad) AS capacidad_huespedes FROM habitacion";
             $resultado = mysqli_query($db, $query);
@@ -112,13 +112,12 @@ if (true) {
             } else {
                 echo "Error al ejecutar la consulta: " . mysqli_error($db);
             }
-
-            echo "<p class='fondo-estadisticas'>Los huespedes que hay alojados son $capacidad_huespedes.</p>";
+            echo "<p class='fondo-estadisticas'>La capacidad total del hotel es $capacidad_huespedes.</p>";
             ?>
         </div>
 
         <div class="numero-habitaciones">
-            <h3>Capacidad total</h3>
+            <h3>Huespedes alojados</h3>
             <?php
             $query = "SELECT SUM(capacidad) AS capacidad_total FROM reserva";
             $resultado = mysqli_query($db, $query);
@@ -130,7 +129,7 @@ if (true) {
                 echo "Error al ejecutar la consulta: " . mysqli_error($db);
             }
 
-            echo "<p class='fondo-estadisticas'>La capacidad total del hotel es $capacidad_total.</p>";
+            echo "<p class='fondo-estadisticas'>Los huespedes que hay alojados son $capacidad_total.</p>";
             ?>
         </div>
 

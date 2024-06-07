@@ -13,12 +13,12 @@
             <?php if (isset($_SESSION["usuario"]["email"]) && !empty($_SESSION["usuario"]["email"])): ?>
                 <form method="GET" action="reservas.php">
                     <input type="hidden" name="email" value="<?php echo $_SESSION["usuario"]["email"]; ?>">
-                    <p><input type="submit" id="enviar" value="Reserva ahora" /></p>
+                    <p><input type="submit" value="Reserva ahora" /></p>
                 </form>
 
             <?php else: ?>
                 <form method="GET" action="registro.php">
-                    <p><input type="submit" id="enviar" value="Reserva ahora" /></p>
+                    <p><input type="submit" value="Reserva ahora" /></p>
                 </form>
             <?php endif; ?>
         </div>

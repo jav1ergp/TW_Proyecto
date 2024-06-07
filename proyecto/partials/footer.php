@@ -3,7 +3,7 @@
     <div class="autores">
         <span>Javier García Pérez</span>
         <span>Miguel Torres Alonso</span>
-        <a href="Documentacion.pdf">Enlace a la documentación</a>
+        <a href="ProyectoTW.pdf">Enlace a la documentación</a>
     </div>
 
     <div class="asignatura">

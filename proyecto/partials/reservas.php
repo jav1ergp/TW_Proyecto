@@ -251,7 +251,7 @@ function obtenerClientes()
         ?>
 
         <div class="formulario-editar">
-            <form action="" method="POST">
+            <form action="" method="POST" novalidate>
                 <?php
                 if (isset($_SESSION["usuario"]["rol"]) && ($_SESSION["usuario"]["rol"] === "recepcionista")):
                     // Obtén la lista de clientes de la base de datos

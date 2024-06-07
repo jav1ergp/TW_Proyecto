@@ -6,7 +6,7 @@ include ("partials/head-html.php");
 ?>
 
 <body>
-    <?php if (isset($_SESSION["usuario"]["rol"]) && (($_SESSION["usuario"]["rol"] === "administrador"))) { ?>
+    <?php if (isset($_SESSION["usuario"]["rol"]) && (($_SESSION["usuario"]["rol"] === "administrador") || ($_SESSION["usuario"]["rol"] === "recepcionista"))) { ?>
         <!---Conexión con la base de datos -->
         <?php include ("partials/db_connection.php"); ?>
 

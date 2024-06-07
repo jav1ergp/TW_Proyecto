@@ -74,7 +74,7 @@ if (!$db) {
         ?>
 
         <div class="formulario-editar">
-            <form action="" method="POST">
+            <form action="" method="POST" novalidate>
                 <label>Numero:
                     <input type="text" name="numero" value="<?php echo $_SESSION['habitacion_borrar']['numero']; ?>"
                         disabled>

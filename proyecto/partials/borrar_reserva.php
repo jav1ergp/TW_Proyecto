@@ -93,7 +93,7 @@ function borrar1()
         } ?>
 
         <div class="formulario-editar">
-            <form action="" method="POST">
+            <form action="" method="POST" novalidate>
                 <label>Email:
                     <input type="email" name="email" value="<?php echo $_SESSION['reserva_borrar']['email']; ?>"
                         disabled>

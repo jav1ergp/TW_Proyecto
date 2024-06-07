@@ -73,7 +73,7 @@ if (isset($_GET['email'])) {
         ?>
 
         <div class="formulario-editar">
-            <form action="" method="POST">
+            <form action="" method="POST" novalidate>
                 <label>Nombre:
                     <input type="text" name="nombre"
                         value="<?php echo isset($_POST['nombre']) ? $_POST['nombre'] : $_SESSION['usuario']['nombre']; ?>"

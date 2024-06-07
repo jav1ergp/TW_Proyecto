@@ -436,7 +436,7 @@ form.registros_pag input[type='submit'] {
 }
 
 .log {
-  width: 80%;
+  width: 100%;
   background-color: rgb(138, 228, 255);
   color: black;
   border-radius: 10px;

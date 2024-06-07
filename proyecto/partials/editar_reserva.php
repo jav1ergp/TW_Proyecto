@@ -84,7 +84,7 @@ function actualizar3($campo)
         ?>
 
         <div class="formulario-editar">
-            <form action="" method="POST">
+            <form action="" method="POST" novalidate>
                 <label>Email:
                     <input type="email" name="email" value="<?php echo $_SESSION['reserva']['email']; ?>" disabled>
                 </label>

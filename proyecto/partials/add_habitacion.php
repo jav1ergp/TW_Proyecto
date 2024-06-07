@@ -53,7 +53,7 @@ include ("partials/head-html.php");
         ?>
 
         <div class="formulario-editar">
-            <form action="" method="POST">
+            <form action="" method="POST" novalidate>
                 <label>Numero-Habitacion:
                     <input type="text" name="numero" value="<?php echo isset($_POST['numero']) ? $_POST['numero'] : "";
                     if ($datosConfirmados)

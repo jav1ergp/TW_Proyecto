@@ -71,11 +71,13 @@ function actualizarEnBD_admmin()
 
 function actualizarVarSesion_admin()
 {
-    $_SESSION['nombre'] = htmlentities(strip_tags($_POST['nombre']));
-    $_SESSION['apellidos'] = htmlentities(strip_tags($_POST['apellidos']));
-    $_SESSION['dni'] = htmlentities(strip_tags($_POST['dni']));
-    $_SESSION['tarjeta'] = htmlentities(strip_tags($_POST['tarjeta']));
-    $_SESSION['rol'] = htmlentities(strip_tags($_POST['rol']));
+    $_SESSION['nombre'] = htmlentities($_POST['nombre']);
+    $_SESSION['apellidos'] = htmlentities($_POST['apellidos']);
+    $_SESSION['dni'] = htmlentities($_POST['dni']);
+    $_SESSION['tarjeta'] = htmlentities($_POST['tarjeta']);
+    if (isset($_SESSION["usuario"]["rol"]) && (($_SESSION["usuario"]["rol"] === "administrador"))) { 
+        $_SESSION['rol'] = htmlentities($_POST['rol']);
+    }
     if (!empty($_POST['clave-nueva'])) {
         $hash = password_hash(htmlentities(strip_tags($_POST['clave-nueva'])), PASSWORD_DEFAULT);
         $_SESSION['clave'] = $hash;
@@ -145,7 +147,7 @@ function validarTodosLosCampos_admin()
         ?>
 
         <div class="formulario-editar">
-            <form action="" method="POST">
+            <form action="" method="POST" novalidate>
                 <label>Nombre:
                     <input type="text" name="nombre"
                         value="<?php echo isset($_POST['nombre']) ? $_SESSION['nombre'] : $_SESSION['usuario_editar']['nombre']; ?>"

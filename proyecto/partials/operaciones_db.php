@@ -24,16 +24,22 @@ function validarTodosLosCampos2()
 function campoEsValido($campo)
 {
     global $db;
+    
+    // Asegurarse de que la entrada POST exista antes de escapar
+    if (isset($_POST[$campo])) {
+        $noSQL = mysqli_real_escape_string($db, $_POST[$campo]);
+    }
+
     switch ($campo) {
         case "nombre":
         case "apellidos":
-            if (!empty($_POST[$campo])) {
+            if (!empty($noSQL)) {
                 return true;
             }
             break;
 
         case "dni":
-            if (isset($_POST[$campo]) && preg_match("/^[0-9]{8}[A-Za-z]$/", $_POST[$campo])) {
+            if (isset($noSQL) && preg_match("/^[0-9]{8}[A-Za-z]$/", $noSQL)) {
                 return true;
             }
             break;
@@ -47,14 +53,16 @@ function campoEsValido($campo)
                 return true;
             }
             break;
+
         case "tarjeta":
-            if (isset($_POST['tarjeta']) && preg_match("/^\d{16}$/", $_POST['tarjeta'])) {
+            if (isset($noSQL) && preg_match("/^\d{16}$/", $noSQL)) {
                 return true;
             }
             break;
     }
     return false;
 }
+
 
 function campoEsValido2($campo)
 {

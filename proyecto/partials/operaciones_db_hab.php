@@ -19,23 +19,29 @@ function validarTodosLosCampos2()
 function campoEsValido($campo)
 {
     global $db;
+
+    if (isset($_POST[$campo])) {
+        // Escapar la entrada del usuario
+        $noSQL = mysqli_real_escape_string($db, $_POST[$campo]);
+    }
+
     switch ($campo) {
         case "capacidad":
         case "precio":
-            if (!empty($_POST[$campo]) && is_numeric($_POST[$campo])) {
+            if (!empty($noSQL) && is_numeric($noSQL)) {
                 return true;
             }
             break;
 
         case "descripcion":
-            if (!empty($_POST[$campo])) {
+            if (!empty($noSQL)) {
                 return true;
             }
             break;
-
     }
     return false;
 }
+
 
 function campoEsValido2($campo)
 {

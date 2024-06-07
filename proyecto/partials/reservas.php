@@ -49,16 +49,21 @@ function campoEsValido3($campo)
 {
     global $db;
 
+    if (isset($_POST[$campo])) {
+        // Escapar la entrada del usuario
+        $noSQL = mysqli_real_escape_string($db, $_POST[$campo]);
+    }
+
     switch ($campo) {
         case "num_huespedes":
-            if (isset($_POST[$campo]) && is_numeric($_POST[$campo]) && $_POST[$campo] > 0 && AsignarHabitacion($_POST[$campo]) !== null) {
+            if (isset($noSQL) && is_numeric($noSQL) && $noSQL > 0 && AsignarHabitacion($noSQL) !== null) {
                 return true;
             }
             break;
 
         case "fecha_entrada":
-            if (isset($_POST[$campo])) {
-                $fechaEntrada = strtotime($_POST[$campo]);
+            if (isset($noSQL)) {
+                $fechaEntrada = strtotime($noSQL);
                 $hoy = strtotime(date("Y-m-d"));
                 if ($fechaEntrada >= $hoy) {
                     return true;
@@ -67,9 +72,10 @@ function campoEsValido3($campo)
             break;
 
         case "fecha_salida":
-            if (isset($_POST[$campo])) {
-                $fechaEntrada = isset($_POST['fecha_entrada']) ? strtotime($_POST['fecha_entrada']) : null;
-                $fechaSalida = strtotime($_POST[$campo]);
+            if (isset($noSQL)) {
+                $fechanoSQL = isset($_POST['fecha_entrada']) ? mysqli_real_escape_string($db, $_POST['fecha_entrada']) : null;
+                $fechaEntrada = $fechanoSQL ? strtotime($fechanoSQL) : null;
+                $fechaSalida = strtotime($noSQL);
                 if ($fechaEntrada && $fechaSalida > $fechaEntrada) {
                     return true;
                 }
@@ -79,6 +85,7 @@ function campoEsValido3($campo)
 
     return false;
 }
+
 //Función que comprueba si hay errores en un campo.
 function hayErrores3($campo)
 {

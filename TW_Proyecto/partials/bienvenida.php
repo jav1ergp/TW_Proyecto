@@ -15,7 +15,7 @@
                 <a href="servicios.php">
                     <li>Paseos en motos de agua</li>
                 </a>
-                <a href="servicios.php">
+                <a href="listado_hab.php">
                     <li>Multitud de habitaciones para elegir</li>
                 </a>
             </ul>

@@ -50,6 +50,7 @@
 }
 
 .navi {
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -58,13 +59,14 @@
 }
 
 .navi ul {
+  width: 100%;
   display: flex;
   justify-content: center;
   list-style-type: none;
 }
 
 .navi li {
-  margin-right: 15%;
+  margin-right: 5%;
   border: 1px solid rgb(138, 228, 255);
   border-radius: 5px;
   padding: 4px;
@@ -136,6 +138,14 @@ h3 {
   margin: 0;
   padding: 0;
   text-align: center;
+}
+
+.numero-habitaciones-total h3 {
+  border-radius: 10px;
+}
+
+.numero-habitaciones h3 {
+  border-radius: 10px;
 }
 
 footer {
@@ -228,6 +238,18 @@ input[type='submit']:hover {
   margin-right: 10px;
 }
 
+.subfoto {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  background-color: white;
+  padding: 10px;
+  border: 2px solid rgb(138, 228, 255);
+  border-radius: 10px;
+
+}
+
 .error-formulario {
   font-size: medium;
   color: red;
@@ -245,7 +267,7 @@ a {
 
 .confirmacion-datos {
   font-size: x-large;
-  background-color: lightgreen;
+  background-color: rgb(138, 228, 255);
 }
 
 .accion-a-realizar {
@@ -383,7 +405,7 @@ form.registros_pag input[type='submit'] {
 .foto img {
   display: block;
   margin: 0 auto;
-  width: 100%;
+  width: 50%;
 }
 
 .reservas {

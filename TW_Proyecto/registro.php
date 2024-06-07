@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
 <?php
-  session_start();
-  include ("partials/head-html.php");
+session_start();
+include ("partials/head-html.php");
 ?>
 
 <body>

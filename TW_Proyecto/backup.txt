@@ -36,7 +36,7 @@ CREATE TABLE `logs` (
   `fecha` datetime(6) NOT NULL,
   `descripcion` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=172 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=178 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 INSERT INTO `logs` (`id`, `fecha`, `descripcion`) VALUES ('2', '2024-06-04 02:28:11.000000', 'El usuario recepcionista@gmail.com ha iniciado sesión.');
 INSERT INTO `logs` (`id`, `fecha`, `descripcion`) VALUES ('3', '2024-06-04 13:02:30.000000', 'El usuario recepcionista@gmail.com ha iniciado sesión.');
@@ -208,6 +208,12 @@ INSERT INTO `logs` (`id`, `fecha`, `descripcion`) VALUES ('168', '2024-06-06 15:
 INSERT INTO `logs` (`id`, `fecha`, `descripcion`) VALUES ('169', '2024-06-06 15:40:06.000000', 'El usuario administrador@gmail.com ha iniciado sesión.');
 INSERT INTO `logs` (`id`, `fecha`, `descripcion`) VALUES ('170', '2024-06-06 16:49:15.000000', 'El usuario ha cerrado sesión.');
 INSERT INTO `logs` (`id`, `fecha`, `descripcion`) VALUES ('171', '2024-06-06 16:49:15.000000', 'El usuario ha cerrado sesión.');
+INSERT INTO `logs` (`id`, `fecha`, `descripcion`) VALUES ('172', '2024-06-07 10:00:04.000000', 'El usuario administrador@gmail.com ha iniciado sesión.');
+INSERT INTO `logs` (`id`, `fecha`, `descripcion`) VALUES ('173', '2024-06-07 10:00:05.000000', 'El usuario administrador@gmail.com ha iniciado sesión.');
+INSERT INTO `logs` (`id`, `fecha`, `descripcion`) VALUES ('174', '2024-06-07 10:12:40.000000', 'El usuario ha cerrado sesión.');
+INSERT INTO `logs` (`id`, `fecha`, `descripcion`) VALUES ('175', '2024-06-07 10:12:40.000000', 'El usuario ha cerrado sesión.');
+INSERT INTO `logs` (`id`, `fecha`, `descripcion`) VALUES ('176', '2024-06-07 10:28:02.000000', 'El usuario administrador@gmail.com ha iniciado sesión.');
+INSERT INTO `logs` (`id`, `fecha`, `descripcion`) VALUES ('177', '2024-06-07 10:28:02.000000', 'El usuario administrador@gmail.com ha iniciado sesión.');
 
 DROP TABLE IF EXISTS `reserva`;
 CREATE TABLE `reserva` (
